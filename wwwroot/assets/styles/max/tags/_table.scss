@@ -1,0 +1,141 @@
+table {
+	border: 1px solid palette(mono, black);
+	border-bottom-style: none;
+	border-collapse: collapse;
+	width: 100%;
+
+	caption {
+		padding-bottom: rem(12);
+		text-align: left;
+	}
+
+	tr {
+		border-bottom: 1px solid palette(mono, black);
+	}
+
+	td, th {
+		padding: rem(5);
+		text-align: left;
+		vertical-align: top;
+
+		&.nowrap {
+			white-space: nowrap;
+		}
+	}
+
+	thead th {
+		background-color: #333;
+		color: #fff;
+		text-align: left;
+		vertical-align: bottom;
+	}
+
+	th {
+		font-weight: bold;
+	}
+
+	tbody {
+		&.searchable-row-hidden {
+			display: none;
+		}
+
+		tr:hover {
+			background-color: palette(yellow);
+		}
+	}
+
+	&.summarized {
+		tbody:not(.clicked) .description {
+			display: none;
+		}
+
+		tbody.clicked {
+			tr.summary {
+				border-bottom-style: none;
+			}
+
+			&:hover tr {
+				background-color: #fff;
+			}
+		}
+
+		.summary td:first-child a {
+			display: inline-block;
+			position: relative;
+			width: 100%;
+		}
+
+		tbody[data-described=no] .summary td:first-child a::after {
+			font-family: FontAwesome;
+			content: '\f0f6';
+			position: absolute;
+			right: 0;
+		}
+
+		.description {
+			footer {
+				display: flex;
+
+				div {
+					flex: 1;
+
+					&.record-controls {
+						bottom: rem(3);
+						position: relative;
+						text-align: right;
+						z-index: 1;
+
+						a {
+							background: #E4E4E4;
+							border: rem(1) solid #D0D0D0;
+							border-radius: rem(3);
+							color: palette(mono);
+							padding: rem(3);
+
+							&:hover, &:focus {
+								background: #F0F0F0;
+								color: palette(mono, text);
+							}
+
+							&.deleter.confirmed {
+								color: palette(blue);
+							}
+						}
+					}
+				}
+			}
+
+			.reference {
+				.page {
+					&::before {
+						content: "p. ";
+					}
+
+					&::after {
+						content: ",";
+					}
+				}
+
+				.book abbr {
+					border-bottom-style: none;
+					text-decoration: none;
+				}
+			}
+		}
+
+		.faded {
+			background-color: #ccc;
+		}
+	}
+
+	&.stat-block {
+		thead th {
+			width: 9.09090909%;
+		}
+
+		thead th,
+		tbody tr:first-child td {
+			text-align: center;
+		}
+	}
+}

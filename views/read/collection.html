@@ -1,0 +1,56 @@
+<div class="controls">
+	<a v-if="capabilities.fixer" class="data-control create button" :href="0 | makeCreateLink">Add {{ singular | capitalize }}</a>
+	<a v-if="nextId && capabilities.fixer" class="data-control edit-next button" :href="nextId | makeUpdateLink">Edit Next {{ singular | capitalize }}</a>
+</div>
+
+<div v-if="searchbar" v-html="searchbar"></div>
+
+<table id="collection" class="searchable summarized">
+<caption v-if="caption" v-html="caption"></caption>
+<thead>
+	<tr>
+		<th v-for="th in table.headers" :class="th.classes" :id="th.id" scope="col">
+			<abbr v-if="th.abbreviation" :title="th.display | capitalize" v-text="th.abbreviation"></abbr>
+			<span v-else>{{ th.display | capitalize }}</span>
+		</th>
+	</tr>
+</thead>
+<tbody v-for="body in table.bodies"
+	:data-id="body.recordId"
+	:data-book="body.bookId"
+	:data-described="body.description.description && capabilities.fixer ? 'yes' : 'no'"
+	class="searchable-row removable"
+>
+	<tr class="data summary">
+		<td v-for="(cell, index) in body.summary"
+			:headers="cell.column"
+			:class="table.headers[index].classes"
+			:data-searchbar-value="cell.searchbarValue"
+			:data-searchbar-value-list="cell.searchbarValueList"
+			v-html="cell.html"
+		></td>
+	</tr>
+	<tr v-if="body.description.description || capabilities.fixer" class="description">
+		<td :colspan="body.summary.length">
+			<p v-html="body.description.description"></p>
+			
+			<footer>
+				<div v-if="body.description.abbreviation" class="reference">
+					<span class="page" v-text="body.description.page"></span>
+					<span class="book" v-html="body.description.abbreviation"></span>
+				</div>
+				<div v-if="capabilities.fixer || capabilities.johnson" class="record-controls">
+					<a v-if="capabilities.fixer" :href="body.recordId | makeUpdateLink" :title="'Update ' + body.summary[0].html | stripTags">
+						<i class="fa fa-fw fa-pencil" aria-hidden="true"></i>
+					</a>
+					<a v-if="capabilities.johnson" :href="body.recordId | makeDeleteLink" class="deleter" :data-id="body.recordId" :title="'Delete ' + body.summary[0].html | stripTags">
+						<i class="fa fa-fw fa-times" aria-hidden="true" title="Delete Record"></i>
+					</a>
+				</div>
+			</footer>
+		</td>
+	</tr>
+</tbody>
+</table>
+		
+		
