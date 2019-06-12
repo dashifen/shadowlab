@@ -1,5 +1,5 @@
 {
-	"license": "MIT",
+	"license": "WTFPL",
 	"name": "dashifen/shadowlab",
 	"description": "an interface to my private shadowrun sixth edition databases.",
 	"authors": [
@@ -18,19 +18,20 @@
 		}
 	},
 	"require": {
-		"dashifen/form": "<=2",
-		"dashifen/database": "^1",
-		"dashifen/session": "^1",
-		"dashifen/exception": "^1",
-		"dashifen/exceptionator": "^1",
-		"dashifen/request": "^1",
-		"dashifen/router": "^3",
-		"dashifen/action": "^2",
-		"dashifen/domain": "^2",
-		"dashifen/response": "^1",
-		"dashifen/searchbar": "^1",
 		"aura/di": "^3.4",
 		"authy/php": "^2.5",
-		"aura/router": "^3.1"
+		"aura/router": "^3.1",
+		"dashifen/action": "^2",
+		"dashifen/database": "^1",
+		"dashifen/domain": "^2",
+		"dashifen/exception": "^1",
+		"dashifen/exceptionator": "^1",
+		"dashifen/form": "<=2",
+		"dashifen/request": "^1",
+		"dashifen/response": "^1",
+		"dashifen/router": "^3",
+		"dashifen/searchbar": "^1",
+		"dashifen/session": "^1",
+		"latitude/latitude": "^3"
 	}
 }
