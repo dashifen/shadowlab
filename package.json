@@ -15,7 +15,7 @@
     "gulp": "^4.0.2",
     "laravel-elixir-gulp-v4-compat": "^6.0.0-19",
     "laravel-elixir-vue-2": "^0.3",
-    "laravel-elixir-webpack-official": "^1.0",
+    "laravel-elixir-webpack-official": "^1.0.10",
     "vue": "^2.5.17",
     "vue-template-compiler": "^2.5.17"
   },
