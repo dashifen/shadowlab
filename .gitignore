@@ -114,10 +114,11 @@ pma
 *test*
 /.npmrc
 
+# we just want to ignore everything in our wwwroot folder.
+# then, we strategically un-ignore the stuff that's ours.
+
 wwwroot/**/*
-!wwwroot/wp-content/plugins/shadowlab
 !wwwroot/wp-content/themes/shadowlab
-
-# this catches
-
-!wwwroot/wp-content/**/index.php
+!wwwroot/wp-content/plugins/shadowlab
+!wwwroot/wp-content/themes/shadowlab/index.php
+!wwwroot/wp-content/plugins/shadowlab/index.php
