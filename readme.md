@@ -4,7 +4,13 @@ With the release of Shadowrun Sixth Edition, I decided to revive my Shadowlab pr
 
 ## WordPress!?
 
-Yup, this all runs within WordPress.  Mostly because I wanted to see what working with it as an application framework felt like instead of treating it like a site CMS as would be more typical.  I didn't bother to commit WordPress Core to this repo, but if you want to try and run all of this yourself, clone it and execute the `wp-install.sh` script to pull WordPress into the folder in the same way that I did.  Once you do that, install WordPress in the normal manner, log in, and enable both the Shadowlab theme and the Shadowlab plugin and you should be good to go.
+Yup, this all runs within WordPress.  Mostly because I wanted to see what working with it as an application framework felt like instead of treating it like a site CMS as would be more typical.  Plus, it means that I can leverage all that WordPress has to offer with respect to database, custom post types, user roles and capabilities, etc. when building the Shadowlab.
+
+## Installation
+
+Bad news:  I rely on some of the things that I've purchased for my own use (FontAwesome, ACF, etc.) that require licenses.  Theoretically, if you had licenses for all that stuff, too, you could install this, install them, and run all my code in your own environment.  But, since that may not be the case, I don't suggest trying to get this going on your own; you'll need to re-program all the stuff that relies on those features.  
+
+If you really want to try it, get in touch with me and we'll see if we can work it out.  
 
 ## Legal Stuff
 

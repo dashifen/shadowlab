@@ -1,23 +1,62 @@
 {
-	"license": "WTFPL",
-	"name": "dashifen/shadowlab",
-	"description": "an interface to my private shadowrun sixth edition databases.",
-	"authors": [
-		{
-			"name": "David Dashifen Kees",
-			"email": "dashifen@dashifen.com",
-			"homepage": "https://dashifen.com",
-			"role": "developer"
-		}
-	],
-	"minimum-stability": "dev",
-	"version": "0.0.1",
-	"autoload": {
-		"psr-4": {
-			"Shadowlab\\": "src/"
-		}
-	},
-	"require": {
-
-	}
+  "license": "WTFPL",
+  "name": "dashifen/shadowlab",
+  "description": "an interface to my private shadowrun sixth edition databases.",
+  "authors": [
+    {
+      "name": "David Dashifen Kees",
+      "email": "dashifen@dashifen.com",
+      "homepage": "https://dashifen.com",
+      "role": "developer"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packagist.org/"
+    },
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.8.1",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%ACF_PRO_KEY}&t={%version}"
+        },
+        "require": {
+          "composer/installers": "^1.4",
+          "ffraenz/private-composer-installer": "^2.0"
+        }
+      }
+    }
+  ],
+  "minimum-stability": "dev",
+  "version": "0.0.1",
+  "autoload": {
+    "psr-4": {
+      "Shadowlab\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.2",
+    "advanced-custom-fields/advanced-custom-fields-pro": "*",
+    "wpackagist-plugin/timber-library": "^1",
+    "dashifen/wp-handler": "2.0.*",
+    "dashifen/wp-templates": "1.0.*",
+    "dashifen/containers": "1.1.*",
+    "dashifen/exception": "1.1.*"
+  },
+  "extra": {
+    "installer-paths": {
+      "wwwroot/wp-content/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ]
+    }
+  }
 }

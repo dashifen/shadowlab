@@ -114,12 +114,10 @@ pma
 *test*
 /.npmrc
 
-wwwroot/wp-admin
-wwwroot/wp-includes
-wwwroot/wp-content/uploads
-wwwroot/license.txt
-wwwroot/readme.html
-wwwroot/**/index.php
-!wwwroot/wp-content/**/index.php
-wwwroot/*.php
+wwwroot/**/*
+!wwwroot/wp-content/plugins/shadowlab
+!wwwroot/wp-content/themes/shadowlab
 
+# this catches
+
+!wwwroot/wp-content/**/index.php
