@@ -1,0 +1,23 @@
+{
+	"license": "WTFPL",
+	"name": "dashifen/shadowlab",
+	"description": "an interface to my private shadowrun sixth edition databases.",
+	"authors": [
+		{
+			"name": "David Dashifen Kees",
+			"email": "dashifen@dashifen.com",
+			"homepage": "https://dashifen.com",
+			"role": "developer"
+		}
+	],
+	"minimum-stability": "dev",
+	"version": "0.0.1",
+	"autoload": {
+		"psr-4": {
+			"Shadowlab\\": "src/"
+		}
+	},
+	"require": {
+
+	}
+}

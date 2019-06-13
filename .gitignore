@@ -107,16 +107,19 @@ $RECYCLE.BIN/
 
 ### Composer template
 composer.phar
-
-# Commit your application's lock file http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
+/vendor
 
 pma
 .idea
 *test*
 /.npmrc
 
-wwwroot
-!wwwroot/wp-content/plugins/shadowlab*
-!wwwroot/wp-content/themes/shadowlab*
+wwwroot/wp-admin
+wwwroot/wp-includes
+wwwroot/wp-content/uploads
+wwwroot/license.txt
+wwwroot/readme.html
+wwwroot/**/index.php
+!wwwroot/wp-content/**/index.php
+wwwroot/*.php
+
