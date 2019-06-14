@@ -1,7 +1,9 @@
 {
   "license": "WTFPL",
+  "version": "0.0.1",
   "name": "dashifen/shadowlab",
   "description": "an interface to my private shadowrun sixth edition databases.",
+  "type": "project",
   "authors": [
     {
       "name": "David Dashifen Kees",
@@ -10,6 +12,9 @@
       "role": "developer"
     }
   ],
+  "config": {
+    "sort-packages": true
+  },
   "repositories": [
     {
       "type": "composer",
@@ -36,8 +41,6 @@
       }
     }
   ],
-  "minimum-stability": "dev",
-  "version": "0.0.1",
   "autoload": {
     "psr-4": {
       "Shadowlab\\": "src/"
@@ -56,7 +59,7 @@
   },
   "extra": {
     "installer-paths": {
-      "wwwroot/wp-content/plugins/{$name}/": [
+      "docroot/wp-content/plugins/{$name}/": [
         "type:wordpress-plugin"
       ]
     }

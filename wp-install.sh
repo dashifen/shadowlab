@@ -10,13 +10,13 @@ curl -O https://wordpress.org/latest.tar.gz
 tar -zxvf latest.tar.gz
 
 # 3. copy wordpress files into the www root of our site
-rsync -aq wordpress/ wwwroot
+rsync -aq wordpress/ docroot
 
 # 4. remove the wordpress directory and archive
 rm -rf wordpress
 rm -f latest.tar.gz
 
 # 5. remove the "extra" themes and plugins
-rm -rf wwwroot/wp-content/themes/twenty*
-rm -rf wwwroot/wp-content/plugins/akismet
-rm -f wwwroot/wp-content/plugins/hello.php
+rm -rf docroot/wp-content/themes/twenty*
+rm -rf docroot/wp-content/plugins/akismet
+rm -f docroot/wp-content/plugins/hello.php

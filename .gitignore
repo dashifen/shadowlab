@@ -114,11 +114,27 @@ pma
 *test*
 /.npmrc
 
-# we just want to ignore everything in our wwwroot folder.
-# then, we strategically un-ignore the stuff that's ours.
+### WordPress Stuff
 
-wwwroot/**/*
-!wwwroot/wp-content/themes/shadowlab
-!wwwroot/wp-content/plugins/shadowlab
-!wwwroot/wp-content/themes/shadowlab/index.php
-!wwwroot/wp-content/plugins/shadowlab/index.php
+# first, we ignore the stuff at the root of our wordpress installation
+
+docroot/*.php
+docroot/license.txt
+docroot/readme.html
+
+# then, we can ignore sub-folders of our wordpress root that are not
+# ours.
+
+wp-admin
+wp-includes
+advanced-custom-fields-pro
+custom-post-type-ui
+timber-library
+
+# finally, there are three index.php files that the above rules don't
+# catch that are a part of wordpress core.  we'll block those explicitly
+# now
+
+docroot/wp-content/index.php
+docroot/wp-content/plugins/index.php
+docroot/wp-content/themes/index.php
