@@ -4,6 +4,8 @@
   "name": "dashifen/shadowlab",
   "description": "an interface to my private shadowrun sixth edition databases.",
   "type": "project",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "authors": [
     {
       "name": "David Dashifen Kees",
@@ -48,13 +50,17 @@
   },
   "_comment": "ACF's version below means nothing; the version above is installed",
   "require": {
-    "php": ">=7.2",
-    "advanced-custom-fields/advanced-custom-fields-pro": "^5",
-    "wpackagist-plugin/timber-library": "^1",
+    "php": "7.3.*",
+    "advanced-custom-fields/advanced-custom-fields-pro": "5.8.*",
+    "aura/router": "3.1.*",
+    "dashifen/action": "3.0.*",
+    "dashifen/containers": "1.1.*",
+    "dashifen/exceptionator": "1.1.*",
+    "dashifen/router": "3.1.*",
+    "dashifen/searchbar": "1.3.*",
     "dashifen/wp-handler": "2.0.*",
     "dashifen/wp-templates": "1.0.*",
-    "dashifen/containers": "1.1.*",
-    "dashifen/exception": "1.1.*"
+    "wpackagist-plugin/timber-library": "1.10.*"
   },
   "extra": {
     "installer-paths": {
