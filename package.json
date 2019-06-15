@@ -3,7 +3,7 @@
   "repository": "https://github.com/dashifen/shadowlab",
   "description": "an interface to my private shadowrun sixth edition databases.",
   "author": "David Dashifen Kees <dashifen@dashifen.com>",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "WTFPL",
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "1.*",
