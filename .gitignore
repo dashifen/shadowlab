@@ -138,3 +138,8 @@ timber-library
 docroot/wp-content/index.php
 docroot/wp-content/plugins/index.php
 docroot/wp-content/themes/index.php
+
+# laravel valet makes .rnd files in its root folders.  that doesn't need
+# to go to the repo.
+
+.rnd

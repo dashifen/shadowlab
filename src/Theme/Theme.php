@@ -22,7 +22,6 @@ class Theme extends AbstractHandler {
     $this->addAction("after_setup_theme", "addThemeFeatures");
   }
 
-
   /**
    * addTwigFilters
    *
