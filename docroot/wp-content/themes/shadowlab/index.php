@@ -18,7 +18,9 @@ use Dashifen\Router\RouterException;
 try {
   $cb = new ContainerBuilder();
   $shadowlab = $cb->newConfiguredInstance([
-
+    'Shadowlab\Config\Containers\Database',
+    'Shadowlab\Config\Containers\Exceptionator',
+    'Shadowlab\Config\Containers\Request',
   ]);
 
   // we'll set up our exceptionator class as the handler of last resort for
@@ -42,10 +44,10 @@ try {
 
   // there's one type of Exception we want to handle with care: a 404 page.
   // everything else just gets dumped to the screen.  notice that we have a
-  // nested try/catch block here; that's a bad code smell.  but, it's
-  // because, when an exception is thrown, we still need to construct our
-  // response.  that may, in turn, throw new exceptions.  but, we can
-  // safely ignore them (see below).
+  // nested try/catch block here; that's a bad code smell.  but, it's because,
+  // when an exception is thrown, we still need to construct our response.
+  // that may, in turn, throw new exceptions.  but, we can safely ignore them
+  // (see below).
 
   try {
     $response = $shadowlab->newInstance('Shadowlab\Framework\Response\Response');
@@ -60,7 +62,6 @@ try {
       $message = $exception->getMessage();
       $message = substr($message, strpos($message, ":") + 1);
       $response->setDatum("route", $message);
-      $response->setTemplate();
     } else {
 
       // otherwise, we'll let our exceptionator give us a pretty print out
@@ -68,8 +69,9 @@ try {
 
       $message = $exceptionator->exceptionHandler($exception, false);
       $response->handleError($message);
-      $response->setTemplate();
     }
+
+    $response->setTemplate();
   } catch (ResponseException | ViewException $exception) {
 
     // these should never happen; they would indicate a change to either

@@ -110,6 +110,8 @@ docroot/readme.html
 
 wp-admin
 wp-includes
+upgrade
+uploads
 advanced-custom-fields-pro
 custom-post-type-ui
 timber-library
@@ -126,3 +128,8 @@ docroot/wp-content/themes/index.php
 # to go to the repo.
 
 .rnd
+
+# finally, we don't want to store any credentials in the repo.  they might
+# be different from install-to-install anyway.
+
+src/Config/Credentials/*

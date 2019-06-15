@@ -64,7 +64,7 @@ class Response extends BaselineAbstractResponse {
     // remember to fill it with nothing whenever there hasn't been an error,
     // we'll just set it to be blank by default; we can always change it later.
 
-    $this->setDatum("error", "");
+    $this->setDatum("errorMessage", "");
   }
 
   /**
@@ -254,7 +254,7 @@ class Response extends BaselineAbstractResponse {
    * @return bool
    */
   private function hasErrorMessage (): bool {
-    return isset($data["errorMessage"]) && !empty($data["errorMessage"]);
+    return isset($data["errorMessage"]) && !empty($data["errorMessages"]);
   }
 
   /**
