@@ -17,9 +17,24 @@ class Theme extends AbstractHandler {
    * @throws HookException
    */
   public function initialize (): void {
+    $this->addAction("init", "startSession");
     $this->addFilter("timber/twig", "addTwigFilters");
     $this->addAction("wp_enqueue_scripts", "addAssets");
     $this->addAction("after_setup_theme", "addThemeFeatures");
+    $this->addAction("template_redirect", "forceAuthentication");
+  }
+
+  /**
+   * startSession
+   *
+   * If the PHP session hasn't already been started, we start it now.
+   *
+   * @return void
+   */
+  protected function startSession (): void {
+    if(session_status() !== PHP_SESSION_ACTIVE) {
+      session_start();
+    }
   }
 
   /**
@@ -64,18 +79,21 @@ class Theme extends AbstractHandler {
    *
    * @return void
    */
-  protected function addThemeFeatures () {
-    register_nav_menus([
-      "main"   => "Main Menu",
-      "footer" => "Footer",
-    ]);
+  protected function addThemeFeatures (): void {
 
-    // for twitter and facebook sharing, we need some extra image sizes.
-    // of course, they can't agree on one size for both platforms so that
-    // means we need two.  the true flags mean we crop to these exact
-    // dimensions.
+  }
 
-    add_image_size("twImage", 1200, 675, true);
-    add_image_size("fbImage", 1200, 630, true);
+  /**
+   * forceAuthentication
+   *
+   * If the current session is not authentic, we redirect to the login
+   * form and make it so.
+   *
+   * @return void
+   */
+  protected function forceAuthentication (): void {
+    if (get_current_user_id() === 0) {
+      wp_safe_redirect(wp_login_url(get_permalink()));
+    }
   }
 }

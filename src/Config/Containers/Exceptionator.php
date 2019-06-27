@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Config\ContainerConfig;
+namespace Shadowlab\Config\Containers;
 
 use Aura\Di\Container;
 use Aura\Di\ContainerConfig;
