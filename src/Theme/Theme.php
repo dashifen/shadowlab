@@ -5,9 +5,15 @@ namespace Shadowlab\Theme;
 use Twig_Environment;
 use Twig_SimpleFilter;
 use Dashifen\WPHandler\Hooks\HookException;
-use Dashifen\WPHandler\Handlers\AbstractHandler;
+use Shadowlab\Framework\Response\ResponseInterface;
+use Dashifen\WPHandler\Handlers\Themes\AbstractThemeHandler;
 
-class Theme extends AbstractHandler {
+class Theme extends AbstractThemeHandler implements ThemeInterface {
+  /**
+   * @var ResponseInterface
+   */
+  protected $response;
+
   /**
    * initialize
    *
@@ -32,7 +38,7 @@ class Theme extends AbstractHandler {
    * @return void
    */
   protected function startSession (): void {
-    if(session_status() !== PHP_SESSION_ACTIVE) {
+    if (session_status() !== PHP_SESSION_ACTIVE) {
       session_start();
     }
   }
@@ -95,5 +101,30 @@ class Theme extends AbstractHandler {
     if (get_current_user_id() === 0) {
       wp_safe_redirect(wp_login_url(get_permalink()));
     }
+  }
+
+  /**
+   * setResponse
+   *
+   * Informs the Theme object of the response that we're going to display
+   * based on the request made of the server.
+   *
+   * @param ResponseInterface $response
+   *
+   * @return void
+   */
+  public function setResponse (ResponseInterface $response): void {
+    $this->response = $response;
+  }
+
+  /**
+   * sendResponse
+   *
+   * Sends the response to the client as HTML for display in a browser.
+   *
+   * @return void
+   */
+  public function sendResponse (): void {
+    $this->response->send();
   }
 }
