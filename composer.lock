@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fcfb1a52e6292359fa4e58fa484ab551",
+    "content-hash": "ed0591f8bdc0648082ad69ef815fbbcb",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -18,59 +18,6 @@
                 "ffraenz/private-composer-installer": "^2.0"
             },
             "type": "wordpress-plugin"
-        },
-        {
-            "name": "aura/sql",
-            "version": "3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/auraphp/Aura.Sql.git",
-                "reference": "2be02d5dfd9fdee6df199de1a19572aa490bb744"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/auraphp/Aura.Sql/zipball/2be02d5dfd9fdee6df199de1a19572aa490bb744",
-                "reference": "2be02d5dfd9fdee6df199de1a19572aa490bb744",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0",
-                "psr/log": "^1.0"
-            },
-            "require-dev": {
-                "pds/skeleton": "~1.0",
-                "phpunit/phpunit": "~5.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Aura\\Sql\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aura.Sql Contributors",
-                    "homepage": "https://github.com/auraphp/Aura.Sql/contributors"
-                }
-            ],
-            "description": "A PDO extension that provides lazy connections, array quoting, query profiling, value binding, and convenience methods for common fetch styles. Because it extends PDO, existing code that uses PDO can use this without any changes to the existing code.",
-            "homepage": "https://github.com/auraphp/Aura.Sql",
-            "keywords": [
-                "mysql",
-                "pdo",
-                "pgsql",
-                "postgres",
-                "postgresql",
-                "sql server",
-                "sqlite",
-                "sqlserver",
-                "sqlsrv"
-            ],
-            "time": "2018-06-11T12:57:42+00:00"
         },
         {
             "name": "composer/installers",
@@ -193,137 +140,6 @@
             "time": "2018-08-27T06:10:37+00:00"
         },
         {
-            "name": "dashifen/action",
-            "version": "3.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dashifen/action.git",
-                "reference": "3c390e0469c46ba42a08394114bc057d324d16c2"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/action/zipball/3c390e0469c46ba42a08394114bc057d324d16c2",
-                "reference": "3c390e0469c46ba42a08394114bc057d324d16c2",
-                "shasum": ""
-            },
-            "require": {
-                "dashifen/domain": "^2.1",
-                "dashifen/request": "^1.3",
-                "dashifen/response": "^2.0",
-                "php": "7.3.*",
-                "psr/container": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Dashifen\\Action\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "an action object that handles a web request, interacts with a domain, and helps to emit a response",
-            "time": "2019-07-06T14:05:03+00:00"
-        },
-        {
-            "name": "dashifen/database",
-            "version": "1.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dashifen/database.git",
-                "reference": "4231fcb76359fa4b7ed70841ea3cfaed4a34bdf6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/database/zipball/4231fcb76359fa4b7ed70841ea3cfaed4a34bdf6",
-                "reference": "4231fcb76359fa4b7ed70841ea3cfaed4a34bdf6",
-                "shasum": ""
-            },
-            "require": {
-                "aura/sql": "3.0.*",
-                "dashifen/exception": "1.1.*",
-                "php": "7.3.*"
-            },
-            "require-dev": {
-                "league/booboo": "^1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Dashifen\\Database\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "A wrapper around the extended PDO object from Aura/SQL using the interface that Dash prefers.",
-            "keywords": [
-                "aura",
-                "auraphp",
-                "database",
-                "pdo"
-            ],
-            "time": "2019-06-15T02:46:05+00:00"
-        },
-        {
-            "name": "dashifen/domain",
-            "version": "2.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dashifen/domain.git",
-                "reference": "6a029a0dea8a64e24b0eb935544cdda2da9bbaba"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/domain/zipball/6a029a0dea8a64e24b0eb935544cdda2da9bbaba",
-                "reference": "6a029a0dea8a64e24b0eb935544cdda2da9bbaba",
-                "shasum": ""
-            },
-            "require": {
-                "dashifen/database": "1.4.*",
-                "dashifen/session": "1.2.*",
-                "php": "7.3.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Dashifen\\Domain\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "interfaces and implementation for domains and payload delivery",
-            "time": "2019-06-15T02:53:54+00:00"
-        },
-        {
             "name": "dashifen/exception",
             "version": "1.1.1",
             "source": {
@@ -360,46 +176,6 @@
             ],
             "description": "a base class for exceptions in Dashifen's other work",
             "time": "2019-06-15T02:55:25+00:00"
-        },
-        {
-            "name": "dashifen/exceptionator",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dashifen/exceptionator.git",
-                "reference": "ef5418258c00791416a8b7f748b42ba3001a29d0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/exceptionator/zipball/ef5418258c00791416a8b7f748b42ba3001a29d0",
-                "reference": "ef5418258c00791416a8b7f748b42ba3001a29d0",
-                "shasum": ""
-            },
-            "require": {
-                "dashifen/database": "1.4.*",
-                "dashifen/request": "1.3.*",
-                "php": "7.3.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Dashifen\\Exceptionator\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "an error/exception handler that works just the way I like it",
-            "time": "2019-06-15T11:47:09+00:00"
         },
         {
             "name": "dashifen/repository",
@@ -481,47 +257,6 @@
             "time": "2019-06-15T02:59:00+00:00"
         },
         {
-            "name": "dashifen/response",
-            "version": "2.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dashifen/response.git",
-                "reference": "7042062944b13c358016d7ec97a00398bd9900f5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/response/zipball/7042062944b13c358016d7ec97a00398bd9900f5",
-                "reference": "7042062944b13c358016d7ec97a00398bd9900f5",
-                "shasum": ""
-            },
-            "require": {
-                "dashifen/exception": "1.1.*",
-                "php": "7.3.*",
-                "zendframework/zend-diactoros": "2.1.*",
-                "zendframework/zend-httphandlerrunner": "1.0.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Dashifen\\Response\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "an encapsulation of a HTTP response",
-            "time": "2019-06-15T13:30:27+00:00"
-        },
-        {
             "name": "dashifen/router",
             "version": "4.1.1",
             "source": {
@@ -561,45 +296,6 @@
             ],
             "description": "a PHP routing object",
             "time": "2019-07-04T15:34:30+00:00"
-        },
-        {
-            "name": "dashifen/searchbar",
-            "version": "1.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dashifen/searchbar.git",
-                "reference": "6981d34ecdabb7281d6ca4502e041bcef9f075fe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/searchbar/zipball/6981d34ecdabb7281d6ca4502e041bcef9f075fe",
-                "reference": "6981d34ecdabb7281d6ca4502e041bcef9f075fe",
-                "shasum": ""
-            },
-            "require": {
-                "dashifen/exception": "1.1.*",
-                "php": "7.3.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Dashifen\\Searchbar\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com",
-                    "role": "developer"
-                }
-            ],
-            "description": "a class which produces a search bar to search within on-screen data",
-            "time": "2019-06-15T03:12:29+00:00"
         },
         {
             "name": "dashifen/session",
@@ -645,16 +341,16 @@
         },
         {
             "name": "dashifen/wp-handler",
-            "version": "3.1.2",
+            "version": "3.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/wp-handler.git",
-                "reference": "cef35f6b3272e7e6f3323f7ef821f0ce7f385d8d"
+                "reference": "1314c652810efbdf7878d4b7f9fc33c3988c4627"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/cef35f6b3272e7e6f3323f7ef821f0ce7f385d8d",
-                "reference": "cef35f6b3272e7e6f3323f7ef821f0ce7f385d8d",
+                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/1314c652810efbdf7878d4b7f9fc33c3988c4627",
+                "reference": "1314c652810efbdf7878d4b7f9fc33c3988c4627",
                 "shasum": ""
             },
             "require": {
@@ -680,7 +376,7 @@
                 }
             ],
             "description": "An object to define handlers for various WordPress action and filter hooks using protected methods. ",
-            "time": "2019-07-04T15:44:06+00:00"
+            "time": "2019-07-07T15:18:20+00:00"
         },
         {
             "name": "dashifen/wp-templates",
@@ -818,72 +514,6 @@
             "time": "2019-05-25T17:27:37+00:00"
         },
         {
-            "name": "league/container",
-            "version": "3.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/thephpleague/container.git",
-                "reference": "235cc528636833fbf0d771ad0e2410d345e1096e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/container/zipball/235cc528636833fbf0d771ad0e2410d345e1096e",
-                "reference": "235cc528636833fbf0d771ad0e2410d345e1096e",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.0",
-                "psr/container": "^1.0"
-            },
-            "provide": {
-                "psr/container-implementation": "^1.0"
-            },
-            "replace": {
-                "orno/di": "~2.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^6.0",
-                "squizlabs/php_codesniffer": "^3.3"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-3.x": "3.x-dev",
-                    "dev-2.x": "2.x-dev",
-                    "dev-1.x": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "League\\Container\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Phil Bennett",
-                    "email": "philipobenito@gmail.com",
-                    "homepage": "http://www.philipobenito.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A fast and intuitive dependency injection container.",
-            "homepage": "https://github.com/thephpleague/container",
-            "keywords": [
-                "container",
-                "dependency",
-                "di",
-                "injection",
-                "league",
-                "provider",
-                "service"
-            ],
-            "time": "2019-06-30T10:51:38+00:00"
-        },
-        {
             "name": "phpoption/phpoption",
             "version": "1.5.0",
             "source": {
@@ -932,55 +562,6 @@
                 "type"
             ],
             "time": "2015-07-25T16:39:46+00:00"
-        },
-        {
-            "name": "psr/container",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/container.git",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/container/zipball/b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
-                "reference": "b7ce3b176482dbbc1245ebf52b181af44c2cf55f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Container\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common Container Interface (PHP FIG PSR-11)",
-            "homepage": "https://github.com/php-fig/container",
-            "keywords": [
-                "PSR-11",
-                "container",
-                "container-interface",
-                "container-interop",
-                "psr"
-            ],
-            "time": "2017-02-14T16:28:37+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -1083,106 +664,6 @@
                 "response"
             ],
             "time": "2016-08-06T14:39:51+00:00"
-        },
-        {
-            "name": "psr/http-server-handler",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/http-server-handler.git",
-                "reference": "aff2f80e33b7f026ec96bb42f63242dc50ffcae7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-server-handler/zipball/aff2f80e33b7f026ec96bb42f63242dc50ffcae7",
-                "reference": "aff2f80e33b7f026ec96bb42f63242dc50ffcae7",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.0",
-                "psr/http-message": "^1.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Http\\Server\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for HTTP server-side request handler",
-            "keywords": [
-                "handler",
-                "http",
-                "http-interop",
-                "psr",
-                "psr-15",
-                "psr-7",
-                "request",
-                "response",
-                "server"
-            ],
-            "time": "2018-10-30T16:46:14+00:00"
-        },
-        {
-            "name": "psr/log",
-            "version": "1.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/php-fig/log.git",
-                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
-                "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Psr\\Log\\": "Psr/Log/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
-                }
-            ],
-            "description": "Common interface for logging libraries",
-            "homepage": "https://github.com/php-fig/log",
-            "keywords": [
-                "log",
-                "psr",
-                "psr-3"
-            ],
-            "time": "2018-11-20T15:27:04+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -1436,60 +917,6 @@
                 "psr-7"
             ],
             "time": "2019-04-29T21:11:00+00:00"
-        },
-        {
-            "name": "zendframework/zend-httphandlerrunner",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-httphandlerrunner.git",
-                "reference": "21cb0b45802a97107febbb502d4c42dc63478e15"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-httphandlerrunner/zipball/21cb0b45802a97107febbb502d4c42dc63478e15",
-                "reference": "21cb0b45802a97107febbb502d4c42dc63478e15",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1",
-                "psr/http-message": "^1.0",
-                "psr/http-message-implementation": "^1.0",
-                "psr/http-server-handler": "^1.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^7.0.2",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-diactoros": "^1.7"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                },
-                "zf": {
-                    "config-provider": "Zend\\HttpHandlerRunner\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\HttpHandlerRunner\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "Execute PSR-15 RequestHandlerInterface instances and emit responses they generate.",
-            "keywords": [
-                "ZendFramework",
-                "components",
-                "expressive",
-                "psr-15",
-                "psr-7",
-                "zf"
-            ],
-            "time": "2019-02-19T17:57:43+00:00"
         }
     ],
     "packages-dev": [],

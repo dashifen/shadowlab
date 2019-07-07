@@ -1,5 +1,39 @@
-<?php
+<!doctype html>
+<!--suppress HtmlRequiredLangAttribute -->
+<html class="no-js" <?php language_attributes() ?>>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Shadowlab</title>
 
-use Shadowlab\Theme\Theme;
+  <?php wp_head() ?>
+</head>
+<body <?php body_class() ?>>
+  <a href="#content" class="jump-link visually-hidden">
+    <span>Skip to<br>Content</span>
+  </a>
+
+  <header role="banner" id="banner" aria-labelledby="site-title">
+    <?php if (is_home()) { ?>
+      <h1 class="site-title">Shadowlab</h1>
+    <?php } else { ?>
+      <p class="site-title">Shadowlab</p>
+    <?php } ?>
+  </header>
+
+  <main id="content" class="container" aria-labelledby="entry-title">
+  </main>
+
+  <footer role="contentinfo" id="footer">
+    <div class="container">
+      <p><a href="http://www.topps.com/">The Topps Company, Inc.</a> has sole ownership of the names, logo, artwork, marks, photographs, sounds, audio, video and/or any proprietary material used in connection with the game <a href="https://www.shadowrunsixthworld.com/">Shadowrun</a>. The Topps Company, Inc. has granted permission to me to use such names, logos, artwork, marks and/or any proprietary materials for promotional and informational purposes within the Shadowlab but does not endorse, and is not affiliated with the Shadowlab or with Dash in any official capacity whatsoever.</p>
+      <p>&copy; <?= date("Y") ?> David Dashifen Kees unless held by others.</p>
+      <p>Proudly powered by <a href="https://wordpress.org">WordPress</a></p>
+    </div>
+  </footer>
 
 
+<?php wp_footer() ?>
+</body>
+</html>

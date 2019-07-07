@@ -12,3 +12,13 @@ gulp.task('bump', function (complete) {
   gulp.src('./package.json').pipe(bump()).pipe(gulp.dest('./'));
   complete();
 });
+
+const folder = "./docroot/wp-content/themes/shadowlab/assets/";
+const elixir = require("laravel-elixir");
+require("laravel-elixir-webpack-official");
+require("laravel-elixir-vue-2");
+
+elixir((mix) => {
+  mix.sass(folder + "styles/dashifen.scss", folder + "dashifen.css");
+  mix.webpack(folder + "scripts/dashifen.js", folder + "dashifen.js");
+});

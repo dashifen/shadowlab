@@ -2,12 +2,9 @@
 
 namespace Shadowlab\Theme;
 
-use Dashifen\WPHandler\Services\AbstractThemeService;
 use Twig_Environment;
 use Twig_SimpleFilter;
-use Dashifen\Response\ResponseInterface;
 use Dashifen\WPHandler\Hooks\HookException;
-use Shadowlab\Theme\Services\ACFModifications;
 use Dashifen\WPHandler\Handlers\Themes\AbstractThemeHandler;
 
 class Theme extends AbstractThemeHandler {

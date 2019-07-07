@@ -35,11 +35,8 @@ class TypeRegistration extends AbstractPluginService {
   protected function registerTypes (): void {
 
     // before we register the individual types for each entry stored in our
-    // configuration, we register the cheat-sheet type itself. even though
-    // this one is a type, it's separated from the rest of them because it
-    // serves as collection type rather than one that's editable from the
-    // admin Dashboard.  then, we can loop over the set of post types in our
-    // configuration and register each of them.
+    // configuration, we register the cheat-sheet type itself.  then, we can
+    // loop over the post types in our configuration to register all of those.
 
     $this->registerSheetType();
     foreach ($this->handler->getConfig()->postTypes as $postType) {
@@ -47,7 +44,7 @@ class TypeRegistration extends AbstractPluginService {
     }
   }
 
-  protected function registerSheetType () {
+  private function registerSheetType () {
     $labels = [
       'name'                  => 'Cheat Sheets',
       'singular_name'         => 'Cheat Sheet',

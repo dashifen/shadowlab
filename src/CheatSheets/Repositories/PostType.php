@@ -3,15 +3,16 @@
 namespace Shadowlab\CheatSheets\Repositories;
 
 use Dashifen\Repository\Repository;
+use Shadowlab\CheatSheets\CheatSheetsPlugin;
 
 /**
  * Class PostType
  *
  * @package Shadowlab\CheatSheets\Repositories
- * @property string $type
- * @property string $singular
- * @property string $plural
- * @property int    $sheetId
+ * @property string     $type
+ * @property string     $singular
+ * @property string     $plural
+ * @property CheatSheet $sheet
  */
 class PostType extends Repository {
   /**
@@ -30,9 +31,9 @@ class PostType extends Repository {
   protected $plural = "";
 
   /**
-   * @var int
+   * @var CheatSheet
    */
-  protected $sheetId = 0;
+  protected $sheet;
 
   /**
    * setType
@@ -78,12 +79,12 @@ class PostType extends Repository {
    *
    * Sets the sheet ID property
    *
-   * @param int $sheetId
+   * @param CheatSheet $sheet
    *
    * @return void
    */
-  protected function setSheetId (int $sheetId): void {
-    $this->sheetId = $sheetId;
+  protected function setSheet (CheatSheet $sheet): void {
+    $this->sheet = $sheet;
   }
 
   /**
@@ -130,6 +131,7 @@ class PostType extends Repository {
       "labels"              => $labels,
       "label"               => $this->type,
       "supports"            => ["title", "editor"],
+      "rewrite"             => ["slug" => $this->getPostTypeSlug()],
       "capability_type"     => "post",
       "hierarchical"        => false,
       "exclude_from_search" => false,
@@ -145,5 +147,25 @@ class PostType extends Repository {
     ];
 
     register_post_type($this->type, $args);
+  }
+
+  /**
+   * getPostTypeSlug
+   *
+   * To keep the code clean above, this function simply constructs and returns
+   * the slug we want to use for this post type.
+   *
+   * @return string
+   */
+  private function getPostTypeSlug (): string {
+
+    // we want our post type archives/entries to put the name of the sheet
+    // on which they are shown prior to their slug.  since it's possible that
+    // sheet names or plural type names have spaces in them, we'll make them
+    // url-friendly before we use them.
+
+    return sprintf("%s/%s",
+      CheatSheetsPlugin::sanitizeUrlSlug($this->sheet->title),
+      CheatSheetsPlugin::sanitizeUrlSlug($this->plural));
   }
 }

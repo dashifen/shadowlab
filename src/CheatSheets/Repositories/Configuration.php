@@ -94,13 +94,28 @@ class Configuration extends Repository {
    * @return int
    */
   public function getSheetId (string $title): int {
+    $sheet = $this->getSheet($title);
+    return is_null($sheet) ? 0 : $sheet->sheetId;
+  }
+
+  /**
+   * getSheet
+   *
+   * Given a sheet's title, returns the CheatSheet object stored within the
+   * sheets property for it or null if we can't find it.
+   *
+   * @param string $title
+   *
+   * @return CheatSheet|null
+   */
+  public function getSheet (string $title): ?CheatSheet {
     foreach ($this->sheets as $sheet) {
       if ($sheet->title === $title) {
-        return $sheet->sheetId;
+        return $sheet;
       }
     }
 
-    return 0;
+    return null;
   }
 
   /**
@@ -128,7 +143,7 @@ class Configuration extends Repository {
 
         $this->postTypes[] = new PostType([
           "type"     => $type,
-          "sheetId"  => $this->getSheetId($sheetTitle),
+          "sheet"    => $this->getSheet($sheetTitle),
           "singular" => $data["singular"],
           "plural"   => $data["plural"],
         ]);
