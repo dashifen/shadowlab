@@ -1,0 +1,8 @@
+sheets:
+  Character:
+    status:
+      singular: Status
+      plural: Statuses
+    quality:
+      singular: Quality
+      plural: Qualities

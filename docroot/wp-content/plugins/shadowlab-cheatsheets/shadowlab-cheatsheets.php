@@ -6,3 +6,10 @@ Author: David Dashifen Kees
 Author URI: https://dashifen.com
 Version: 0.0.3
 */
+
+use Shadowlab\CheatSheets\CheatSheetsPlugin;
+
+require ABSPATH . "../vendor/autoload.php";
+
+$cheatSheets = new CheatSheetsPlugin();
+$cheatSheets->initialize();
