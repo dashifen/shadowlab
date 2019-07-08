@@ -1,0 +1,103 @@
+#banner {
+  background: $black;
+  position: relative;
+  width: 100%;
+
+  &::after {
+    background: url("images/footer-background-tear.png") top left repeat-x;
+    content: '';
+    display: block;
+    height: 100px;
+    left: 0;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+  }
+
+  .container {
+    align-items: center;
+    display: flex;
+  }
+}
+
+#site-title {
+  color: $white;
+  font-family: $headerFont;
+  font-size: 200%;
+  margin: 0;
+  padding: rem(20px) 0;
+}
+
+#main-menu {
+  display: flex;
+  flex-grow: 1;
+
+  a {
+    border: 1px solid $black;
+    color: lighten($highlight, 10%);
+    padding: rem(5px) rem(10px);
+    text-decoration: none;
+
+    &:hover, &:focus, &:active {
+      border-color: $highlight;
+      border-bottom-color: darken($highlight, 25%);
+      background: darken($highlight, 25%);
+      color: $hover;
+      position: relative;
+      z-index: 15;
+    }
+  }
+
+  .menu {
+    display: inline-block;
+    text-align: right;
+    width: 100%;
+
+    & > li {
+      display: inline-block;
+      margin-left: rem(20px);
+      position: relative;
+
+      &:hover .submenu {
+        display: block;
+      }
+    }
+  }
+
+
+  .submenu {
+    display: none;
+    position: absolute;
+    text-align: left;
+    width: 200%;
+    z-index: 10;
+    top: 26px;
+
+    &.rightward {
+      right: 24px;
+    }
+
+    a {
+      background: darken($highlight, 25%);
+      border: solid $highlight;
+      border-width: 0 1px;
+      color: lighten($highlight, 10%);
+      display: inline-block;
+      padding: rem(10px) rem(10px);
+      white-space: nowrap;
+      width: 100%;
+
+      &:hover, &:focus, &:active {
+        color: $hover;
+      }
+    }
+
+    li:first-child a {
+      border-top-width: 1px;
+    }
+
+    li:last-child a {
+      border-bottom-width: 1px;
+    }
+  }
+}

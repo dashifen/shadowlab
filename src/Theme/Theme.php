@@ -73,8 +73,8 @@ class Theme extends AbstractThemeHandler {
    */
   protected function addAssets (): void {
     $this->enqueue("//fonts.googleapis.com/css?family=Iceland:400,700|Droid+Sans:400,700|Droid+Serif:400italic,700italic");
-//    $this->enqueue( "assets/dashifen.css" );
-//    $this->enqueue( "assets/dashifen.js" );
+    $this->enqueue("assets/dashifen.css");
+    $this->enqueue("assets/dashifen.js");
   }
 
   /**

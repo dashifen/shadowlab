@@ -1,0 +1,27 @@
+/*!
+  _________.__                .___            .__        ___.
+ /   _____/|  |__ _____     __| _/______  _  _|  | _____ \_ |__
+ \_____  \ |  |  \\__  \   / __ |/  _ \ \/ \/ /  | \__  \ | __ \
+ /        \|   Y  \/ __ \_/ /_/ (  <_> )     /|  |__/ __ \| \_\ \
+/_______  /|___|  (____  /\____ |\____/ \/\_/ |____(____  /___  /
+        \/      \/     \/      \/                       \/    \/
+*/
+
+// setup:  these files create a foundation of styles on which we
+// build the rest of our styles.
+
+@import "mixins";
+@import "variables";
+@import "../../../../../../node_modules/normalize-scss/sass/normalize";
+@import "base";
+
+// sections:  these files target specific parts of our site based on the
+// name of the file, e.g. the header for sections/_header.scss
+
+@import "sections/header";
+@import "sections/main";
+
+// finally, we add the core WordPress styles re-arranged to work within
+// this setup.
+
+@import "wordpress";

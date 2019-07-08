@@ -1,0 +1,34 @@
+html {
+  background: url("images/background-light.jpg") top left;
+  font: rem(18px)/1.15 $sansSerifFont;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: underline;
+
+  &:link, &:visited {
+    color: $highlight;
+  }
+
+  &:active, &:focus, &:hover {
+    color: $hover;
+  }
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin: 0 auto;
+  width: 97%;
+}

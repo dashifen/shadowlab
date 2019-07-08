@@ -10,19 +10,75 @@
   <?php wp_head() ?>
 </head>
 <body <?php body_class() ?>>
+<div id="vue-root">
   <a href="#content" class="jump-link visually-hidden">
     <span>Skip to<br>Content</span>
   </a>
 
   <header role="banner" id="banner" aria-labelledby="site-title">
-    <?php if (is_home()) { ?>
-      <h1 class="site-title">Shadowlab</h1>
-    <?php } else { ?>
-      <p class="site-title">Shadowlab</p>
-    <?php } ?>
+    <div class="container">
+      <img src="/wp-content/themes/shadowlab/assets/images/shadowrun-logo-totem.png" alt="the shadowrun logo" width="150">
+
+      <?php if (is_home()) { ?>
+        <h1 id="site-title">Shadowlab</h1>
+      <?php } else { ?>
+        <p id="site-title">Shadowlab</p>
+      <?php } ?>
+
+      <nav id="main-menu" aria-labelledby="main-menu-label">
+        <h2 class="visually-hidden" id="main-menu-label">Main Menu</h2>
+
+        <ul class="menu">
+          <li class="active">
+            <a href="#">Character</a>
+            <ul class="submenu">
+              <li><a href="#">Statuses</a></li>
+              <li><a href="#">Qualities</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Combat</a>
+            <ul class="submenu">
+              <li><a href="#">Martial Arts</a></li>
+              <li><a href="#">Something Else</a></li>
+              <li><a href="#">A third thing</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Gear</a>
+            <ul class="submenu">
+              <li><a href="#">Guns</a></li>
+              <li><a href="#">Electronics</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Magic</a>
+            <ul class="rightward submenu">
+              <li><a href="#">Mentor Spirits</a></li>
+              <li><a href="#">Powers</a></li>
+              <li><a href="#">Spells</a></li>
+              <li><a href="#">Spirits</a></li>
+              <li><a href="#">Traditions</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Matrix</a>
+            <ul class="rightward submenu">
+              <li><a href="#">Complex Forms</a></li>
+              <li><a href="#">Matrix Actions</a></li>
+              <li><a href="#">Sprites</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <main id="content" class="container" aria-labelledby="entry-title">
+  <main id="content" aria-labelledby="entry-title">
+    <div class="container">
+
+
+    </div>
   </main>
 
   <footer role="contentinfo" id="footer">
@@ -32,7 +88,7 @@
       <p>Proudly powered by <a href="https://wordpress.org">WordPress</a></p>
     </div>
   </footer>
-
+</div>
 
 <?php wp_footer() ?>
 </body>

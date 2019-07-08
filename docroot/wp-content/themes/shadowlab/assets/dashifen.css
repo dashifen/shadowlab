@@ -1,2 +1,256 @@
+/*!
+  _________.__                .___            .__        ___.
+ /   _____/|  |__ _____     __| _/______  _  _|  | _____ \_ |__
+ \_____  \ |  |  \\__  \   / __ |/  _ \ \/ \/ /  | \__  \ | __ \
+ /        \|   Y  \/ __ \_/ /_/ (  <_> )     /|  |__/ __ \| \_\ \
+/_______  /|___|  (____  /\____ |\____/ \/\_/ |____(____  /___  /
+        \/      \/     \/      \/                       \/    \/
+*/
+.visually-hidden, .screen-reader-text {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.visually-hidden:focus,
+.visually-hidden:active {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+  white-space: inherit;
+}
+
+html {
+  background: url("images/background-light.jpg") top left;
+  font: 1.125rem/1.15 "Droid Sans", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: underline;
+}
+
+a:link, a:visited {
+  color: #95116f;
+}
+
+a:active, a:focus, a:hover {
+  color: #5ac6d1;
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin: 0 auto;
+  width: 97%;
+}
+
+#banner {
+  background: #121212;
+  position: relative;
+  width: 100%;
+}
+
+#banner::after {
+  background: url("images/footer-background-tear.png") top left repeat-x;
+  content: '';
+  display: block;
+  height: 100px;
+  left: 0;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+}
+
+#banner .container {
+  align-items: center;
+  display: flex;
+}
+
+#site-title {
+  color: #ffffff;
+  font-family: "Iceland", sans-serif;
+  font-size: 200%;
+  margin: 0;
+  padding: 1.25rem 0;
+}
+
+#main-menu {
+  display: flex;
+  flex-grow: 1;
+}
+
+#main-menu a {
+  border: 1px solid #121212;
+  color: #c31691;
+  padding: 0.3125rem 0.625rem;
+  text-decoration: none;
+}
+
+#main-menu a:hover, #main-menu a:focus, #main-menu a:active {
+  border-color: #95116f;
+  border-bottom-color: #23041a;
+  background: #23041a;
+  color: #5ac6d1;
+  position: relative;
+  z-index: 15;
+}
+
+#main-menu .menu {
+  display: inline-block;
+  text-align: right;
+  width: 100%;
+}
+
+#main-menu .menu > li {
+  display: inline-block;
+  margin-left: 1.25rem;
+  position: relative;
+}
+
+#main-menu .menu > li:hover .submenu {
+  display: block;
+}
+
+#main-menu .submenu {
+  display: none;
+  position: absolute;
+  text-align: left;
+  width: 200%;
+  z-index: 10;
+  top: 26px;
+}
+
+#main-menu .submenu.rightward {
+  right: 24px;
+}
+
+#main-menu .submenu a {
+  background: #23041a;
+  border: solid #95116f;
+  border-width: 0 1px;
+  color: #c31691;
+  display: inline-block;
+  padding: 0.625rem 0.625rem;
+  white-space: nowrap;
+  width: 100%;
+}
+
+#main-menu .submenu a:hover, #main-menu .submenu a:focus, #main-menu .submenu a:active {
+  color: #5ac6d1;
+}
+
+#main-menu .submenu li:first-child a {
+  border-top-width: 1px;
+}
+
+#main-menu .submenu li:last-child a {
+  border-bottom-width: 1px;
+}
+
+#content {
+  margin-top: 100px;
+}
+
+/*!
+ * WP Core CSS
+ * ===========
+ * Use with _mixins.scss imported prior to this file
+ */
+.alignnone {
+  margin: 0 1.25rem 1.25rem 0;
+}
+
+.aligncenter {
+  clear: both;
+  display: block;
+  margin: 0.3125rem auto;
+}
+
+.alignright {
+  float: right;
+  margin: 0.3125rem 0 1.25rem 1.25rem;
+}
+
+.alignleft {
+  float: left;
+  margin: 0.3125rem 1.25rem 1.25rem 0;
+}
+
+a img.alignright {
+  float: right;
+  margin: 0.3125rem 0 1.25rem 20px;
+}
+
+a img.alignnone {
+  margin: 0.3125rem 1.25rem 1.25rem 0;
+}
+
+a img.alignleft {
+  float: left;
+  margin: 0.3125rem 1.25rem 1.25rem 0;
+}
+
+a img.aligncenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.wp-caption {
+  background: #fff;
+  border: 1px solid #f0f0f0;
+  max-width: 96%;
+  /* Image does not overflow the content area */
+  padding: 0.3125rem 3px 10px;
+  text-align: center;
+}
+
+.wp-caption.alignnone {
+  margin: 0.3125rem 1.25rem 1.25rem 0;
+}
+
+.wp-caption.alignleft {
+  margin: 0.3125rem 1.25rem 1.25rem 0;
+}
+
+.wp-caption.alignright {
+  margin: 0.3125rem 0 1.25rem 1.25rem;
+}
+
+.wp-caption img {
+  border: 0 none;
+  height: auto;
+  margin: 0;
+  max-width: 98.5%;
+  padding: 0;
+  width: auto;
+}
+
+.wp-caption p.wp-caption-text {
+  font-size: 0.6875rem;
+  line-height: 1.0625rem;
+  margin: 0;
+  padding: 0 0.25rem 0.3125rem;
+}
 
 /*# sourceMappingURL=dashifen.css.map */
