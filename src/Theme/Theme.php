@@ -98,6 +98,11 @@ class Theme extends AbstractThemeHandler {
    */
   protected function forceAuthentication (): void {
     if (get_current_user_id() === 0) {
+
+      // if we're not logged in, this simply redirects us to the login page
+      // and passes the address of the current page over to that one so we can
+      // be brought back here after authentication.
+
       wp_safe_redirect(wp_login_url(get_permalink()));
     }
   }

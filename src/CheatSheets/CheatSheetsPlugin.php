@@ -3,6 +3,7 @@
 namespace Shadowlab\CheatSheets;
 
 use Exception;
+use WP_Admin_Bar;
 use Symfony\Component\Yaml\Yaml;
 use Shadowlab\ShadowlabException;
 use HaydenPierce\ClassFinder\ClassFinder;
@@ -13,7 +14,6 @@ use Symfony\Component\Yaml\Exception\ParseException;
 use Shadowlab\CheatSheets\Repositories\Configuration;
 use Dashifen\WPHandler\Services\AbstractPluginService;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
-use WP_Admin_Bar;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
 
@@ -45,7 +45,9 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
       // to help other parts of this plugin "know" what's to be found in our
       // configuration, we'll create a repository out of it and store that.
       // notice that we pass the same set of information to the setters for
-      // bot sheets and postTypes; that's intentional.
+      // bot sheets and postTypes; that's intentional.  we simply extract
+      // different information from that array for each of our Configuration's
+      // properties.
 
       $yaml = Yaml::parseFile($configFile);
       $this->config = new Configuration([
@@ -107,8 +109,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
 
     return "shadowlab-cheatsheets";
   }
-
-
 
   /**
    * initialize
@@ -177,7 +177,8 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
 
       // if there were any problems, we'll just skip the initialization of
       // services by setting an empty array.  then the loop below never
-      // iterates at all.
+      // iterates at all.  this will probably cause all sorts of havoc
+      // elsewhere, though.
 
       $services = [];
     }
@@ -289,7 +290,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    *
    * @return void
    */
-  protected function flush ():void {
+  protected function flush (): void {
     if (self::isDebug()) {
       flush_rewrite_rules();
     }
