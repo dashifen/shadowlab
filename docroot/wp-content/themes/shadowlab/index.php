@@ -29,44 +29,44 @@
         <h2 class="visually-hidden" id="main-menu-label">Main Menu</h2>
 
         <ul class="menu">
-          <li class="active">
+          <li class="active item">
             <a href="#">Character</a>
             <ul class="submenu">
-              <li><a href="#">Statuses</a></li>
-              <li><a href="#">Qualities</a></li>
+              <li class="item"><a href="#">Statuses</a></li>
+              <li class="item"><a href="#">Qualities</a></li>
             </ul>
           </li>
-          <li>
+          <li class="item">
             <a href="#">Combat</a>
             <ul class="submenu">
-              <li><a href="#">Martial Arts</a></li>
-              <li><a href="#">Something Else</a></li>
-              <li><a href="#">A third thing</a></li>
+              <li class="item"><a href="#">Martial Arts</a></li>
+              <li class="item"><a href="#">Something Else</a></li>
+              <li class="item"><a href="#">A third thing</a></li>
             </ul>
           </li>
-          <li>
+          <li class="item">
             <a href="#">Gear</a>
             <ul class="submenu">
-              <li><a href="#">Guns</a></li>
-              <li><a href="#">Electronics</a></li>
+              <li class="item"><a href="#">Guns</a></li>
+              <li class="item"><a href="#">Electronics</a></li>
             </ul>
           </li>
-          <li>
+          <li class="item">
             <a href="#">Magic</a>
             <ul class="rightward submenu">
-              <li><a href="#">Mentor Spirits</a></li>
-              <li><a href="#">Powers</a></li>
-              <li><a href="#">Spells</a></li>
-              <li><a href="#">Spirits</a></li>
-              <li><a href="#">Traditions</a></li>
+              <li class="item"><a href="#">Mentor Spirits</a></li>
+              <li class="item"><a href="#">Powers</a></li>
+              <li class="item"><a href="#">Spells</a></li>
+              <li class="item"><a href="#">Spirits</a></li>
+              <li class="item"><a href="#">Traditions</a></li>
             </ul>
           </li>
-          <li>
+          <li class="item">
             <a href="#">Matrix</a>
             <ul class="rightward submenu">
-              <li><a href="#">Complex Forms</a></li>
-              <li><a href="#">Matrix Actions</a></li>
-              <li><a href="#">Sprites</a></li>
+              <li class="item"><a href="#">Complex Forms</a></li>
+              <li class="item"><a href="#">Matrix Actions</a></li>
+              <li class="item"><a href="#">Sprites</a></li>
             </ul>
           </li>
         </ul>

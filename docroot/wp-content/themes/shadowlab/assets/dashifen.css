@@ -29,6 +29,12 @@
   white-space: inherit;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   background: url("images/background-light.jpg") top left;
   font: 1.125rem/1.15 "Droid Sans", sans-serif;
@@ -95,76 +101,65 @@ nav ul {
 }
 
 #main-menu {
-  display: flex;
   flex-grow: 1;
 }
 
-#main-menu a {
-  border: 1px solid #121212;
-  color: #c31691;
-  padding: 0.3125rem 0.625rem;
-  text-decoration: none;
-}
-
-#main-menu a:hover, #main-menu a:focus, #main-menu a:active {
-  border-color: #95116f;
-  border-bottom-color: #23041a;
-  background: #23041a;
-  color: #5ac6d1;
-  position: relative;
-  z-index: 15;
-}
-
 #main-menu .menu {
-  display: inline-block;
   text-align: right;
-  width: 100%;
 }
 
-#main-menu .menu > li {
-  display: inline-block;
-  margin-left: 1.25rem;
+#main-menu .menu > .item {
+  border: 1px solid #121212;
+  margin: 0 0 0 0.15625rem;
   position: relative;
+  z-index: 10;
 }
 
-#main-menu .menu > li:hover .submenu {
+#main-menu .menu > .item:hover {
+  background-color: #39072b;
+  border-color: #e626af;
+}
+
+#main-menu .menu > .item:hover .submenu {
   display: block;
 }
 
-#main-menu .submenu {
-  display: none;
-  position: absolute;
-  text-align: left;
-  width: 200%;
-  z-index: 10;
-  top: 26px;
-}
-
-#main-menu .submenu.rightward {
-  right: 24px;
-}
-
-#main-menu .submenu a {
-  background: #23041a;
-  border: solid #95116f;
-  border-width: 0 1px;
-  color: #c31691;
-  display: inline-block;
-  padding: 0.625rem 0.625rem;
-  white-space: nowrap;
-  width: 100%;
-}
-
-#main-menu .submenu a:hover, #main-menu .submenu a:focus, #main-menu .submenu a:active {
+#main-menu .menu > .item a:active, #main-menu .menu > .item a:focus, #main-menu .menu > .item a:hover {
   color: #5ac6d1;
 }
 
-#main-menu .submenu li:first-child a {
-  border-top-width: 1px;
+#main-menu .submenu {
+  background-color: #39072b;
+  border: 1px solid #e626af;
+  border-top-width: 0;
+  display: none;
+  left: -0.5px;
+  min-width: calc(100% + 1px);
+  position: absolute;
+  text-align: left;
+  top: 100%;
 }
 
-#main-menu .submenu li:last-child a {
-  border-bottom-width: 1px;
+#main-menu .submenu .item:first-child a {
+  border-top-color: #e626af;
+}
+
+#main-menu .submenu .item:hover a {
+  color: #5ac6d1;
+}
+
+#main-menu .item {
+  display: inline-block;
+  height: 1.875rem;
+  line-height: 1.875rem;
+  padding: 0 0.46875rem;
+}
+
+#main-menu a {
+  color: #e626af;
+  display: inline-block;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 #content {
