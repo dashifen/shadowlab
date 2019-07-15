@@ -29,66 +29,86 @@
 }
 
 #main-menu {
+  background: url("images/nav-divider-body.png") bottom right no-repeat;
+  background-size: 1092px 12px;
+  bottom: 12px;
   flex-grow: 1;
+  margin-left: rem(80px);
+  padding-bottom: rem(18px);
+  position: relative;
+  width: 100%;
 
-  .menu {
-    text-align: right;
-
-    & > .item {
-      border: 1px solid $black;
-      margin: 0 0 0 rem(2.5px);
-      position: relative;
-      z-index: 10;
-
-      &:hover {
-        background-color: darken($highlight, 20%);
-        border-color: lighten($highlight, 20%);
-
-        .submenu {
-          display: block;
-        }
-      }
-
-      a:active, a:focus, a:hover {
-        color: $hover;
-      }
-    }
-  }
-
-  .submenu {
-    background-color: darken($highlight, 20%);
-    border: 1px solid lighten($highlight, 20%);
-    border-top-width: 0;
-    display: none;
-    left: -0.5px;
-    min-width: calc(100% + 1px);
+  &::before {
+    background: url("images/nav-divider-left.png") top left no-repeat;
+    background-size: 15px 12px;
+    bottom: 0;
+    content: "";
+    height: 12px;
+    left: -15px;
     position: absolute;
-    text-align: left;
-    top: 100%;
-
-    .item {
-      &:first-child a {
-        border-top-color: lighten($highlight, 20%);
-      }
-
-      &:hover a {
-        color: $hover;
-      }
-    }
+    width: 15px;
   }
 
   .item {
     display: inline-block;
-    height: rem(30px);
-    line-height: rem(30px);
-    padding: 0 rem(7.5px);
+    margin-left: rem(20px);
+
+    a {
+      position: relative;
+    }
+
+    &.with-submenu > a::before {
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;;
+      border-left: 5px solid lighten($highlight, 20%);
+      display: block;
+      content: "";
+      height: 0;
+      left: -10px;
+      position: absolute;
+      top: 5px;
+      transition: all 150ms;
+      width: 0;
+    }
+
+    &.with-submenu.clicked > a::before {
+      border-left-color: $hover;
+      transform: rotate(90deg);
+    }
+
+    &.clicked {
+      > a {
+        color: $hover;
+      }
+
+      .submenu {
+        display: flex;
+      }
+    }
   }
 
   a {
     color: lighten($highlight, 20%);
-    display: inline-block;
     text-decoration: none;
-    white-space: nowrap;
+    outline: none;
+  }
+
+  .submenu {
+    display: none;
+    position: absolute;
+    left: 0;
+    margin-left: rem(20px);
+    top: 50px;
+
+    .item {
+      margin-left: 0;
+      margin-right: rem(20px);
+      white-space: nowrap;
+    }
+
+    a:hover, a:focus, a:active {
+      color: $hover;
+    }
   }
 }
 

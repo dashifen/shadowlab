@@ -101,65 +101,85 @@ nav ul {
 }
 
 #main-menu {
+  background: url("images/nav-divider-body.png") bottom right no-repeat;
+  background-size: 1092px 12px;
+  bottom: 12px;
   flex-grow: 1;
-}
-
-#main-menu .menu {
-  text-align: right;
-}
-
-#main-menu .menu > .item {
-  border: 1px solid #121212;
-  margin: 0 0 0 0.15625rem;
+  margin-left: 5rem;
+  padding-bottom: 1.125rem;
   position: relative;
-  z-index: 10;
+  width: 100%;
 }
 
-#main-menu .menu > .item:hover {
-  background-color: #39072b;
-  border-color: #e626af;
-}
-
-#main-menu .menu > .item:hover .submenu {
-  display: block;
-}
-
-#main-menu .menu > .item a:active, #main-menu .menu > .item a:focus, #main-menu .menu > .item a:hover {
-  color: #5ac6d1;
-}
-
-#main-menu .submenu {
-  background-color: #39072b;
-  border: 1px solid #e626af;
-  border-top-width: 0;
-  display: none;
-  left: -0.5px;
-  min-width: calc(100% + 1px);
+#main-menu::before {
+  background: url("images/nav-divider-left.png") top left no-repeat;
+  background-size: 15px 12px;
+  bottom: 0;
+  content: "";
+  height: 12px;
+  left: -15px;
   position: absolute;
-  text-align: left;
-  top: 100%;
-}
-
-#main-menu .submenu .item:first-child a {
-  border-top-color: #e626af;
-}
-
-#main-menu .submenu .item:hover a {
-  color: #5ac6d1;
+  width: 15px;
 }
 
 #main-menu .item {
   display: inline-block;
-  height: 1.875rem;
-  line-height: 1.875rem;
-  padding: 0 0.46875rem;
+  margin-left: 1.25rem;
+}
+
+#main-menu .item a {
+  position: relative;
+}
+
+#main-menu .item.with-submenu > a::before {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #e626af;
+  display: block;
+  content: "";
+  height: 0;
+  left: -10px;
+  position: absolute;
+  top: 5px;
+  transition: all 150ms;
+  width: 0;
+}
+
+#main-menu .item.with-submenu.clicked > a::before {
+  border-left-color: #5ac6d1;
+  transform: rotate(90deg);
+}
+
+#main-menu .item.clicked > a {
+  color: #5ac6d1;
+}
+
+#main-menu .item.clicked .submenu {
+  display: flex;
 }
 
 #main-menu a {
   color: #e626af;
-  display: inline-block;
   text-decoration: none;
+  outline: none;
+}
+
+#main-menu .submenu {
+  display: none;
+  position: absolute;
+  left: 0;
+  margin-left: 1.25rem;
+  top: 50px;
+}
+
+#main-menu .submenu .item {
+  margin-left: 0;
+  margin-right: 1.25rem;
   white-space: nowrap;
+}
+
+#main-menu .submenu a:hover, #main-menu .submenu a:focus, #main-menu .submenu a:active {
+  color: #5ac6d1;
 }
 
 #content {
