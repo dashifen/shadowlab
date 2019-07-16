@@ -2,6 +2,7 @@
 
 require ABSPATH . "../vendor/autoload.php";
 
+use Shadowlab\Controller;
 use Shadowlab\Theme\Theme;
 use Dashifen\Exception\Exception;
 
@@ -10,7 +11,8 @@ try {
   // here we initialize our theme object and let it add the necessary
   // behaviors we need from it to the overall WordPress ecosystem.
 
-  $theme = new Theme();
+  $controller = new Controller();
+  $theme = new Theme($controller);
   $theme->initialize();
 } catch (Exception $e) {
 

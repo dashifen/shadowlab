@@ -39,7 +39,8 @@ class TypeRegistration extends AbstractPluginService {
     // loop over the post types in our configuration to register all of those.
 
     $this->registerSheetType();
-    foreach ($this->handler->getConfig()->postTypes as $postType) {
+    $postTypes = $this->handler->getController()->getConfig()->postTypes;
+    foreach ($postTypes as $postType) {
       $postType->registerPostType();
     }
   }

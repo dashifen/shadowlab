@@ -7,9 +7,16 @@ Author URI: https://dashifen.com
 Version: 0.0.3
 */
 
+use Shadowlab\Controller;
+use Dashifen\WPHandler\Hooks\HookException;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
 
 require ABSPATH . "../vendor/autoload.php";
 
-$cheatSheets = new CheatSheetsPlugin();
-$cheatSheets->initialize();
+try {
+  $controller = new Controller();
+  $cheatSheets = new CheatSheetsPlugin($controller);
+  $cheatSheets->initialize();
+} catch (HookException $exception) {
+  CheatSheetsPlugin::catcher($exception);
+}

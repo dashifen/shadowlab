@@ -3,76 +3,40 @@
 namespace Shadowlab\CheatSheets;
 
 use Exception;
+use Shadowlab\ControllerInterface;
 use WP_Admin_Bar;
-use Symfony\Component\Yaml\Yaml;
 use Shadowlab\ShadowlabException;
+use Shadowlab\Repositories\CheatSheet;
 use HaydenPierce\ClassFinder\ClassFinder;
 use Dashifen\WPHandler\Hooks\HookException;
-use Dashifen\Repository\RepositoryException;
-use Shadowlab\CheatSheets\Repositories\CheatSheet;
-use Symfony\Component\Yaml\Exception\ParseException;
-use Shadowlab\CheatSheets\Repositories\Configuration;
 use Dashifen\WPHandler\Services\AbstractPluginService;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
-
   /**
-   * @var Configuration
+   * @var ControllerInterface 
    */
-  protected $config;
+  protected $controller;
 
   /**
-   * CheatSheets constructor.
+   * CheatSheetsPlugin constructor.
    *
-   * @throws ShadowlabException
-   * @throws RepositoryException
+   * @param ControllerInterface $controller
    */
-  public function __construct () {
+  public function __construct (ControllerInterface $controller) {
+    $this->controller = $controller;
     parent::__construct();
-
-    $configFile = ABSPATH . "../config.yaml";
-
-    if (!is_file($configFile)) {
-      throw new ShadowlabException("Unable to find config.yaml",
-        ShadowlabException::CONFIG_FILE_NOT_FOUND);
-    }
-
-    try {
-
-      // YAML is easy to hand type than JSON, but PHP doesn't have a core
-      // YAML parser.  so, we'll rely on the one from symfony instead.  then,
-      // to help other parts of this plugin "know" what's to be found in our
-      // configuration, we'll create a repository out of it and store that.
-      // notice that we pass the same set of information to the setters for
-      // bot sheets and postTypes; that's intentional.  we simply extract
-      // different information from that array for each of our Configuration's
-      // properties.
-
-      $yaml = Yaml::parseFile($configFile);
-      $this->config = new Configuration([
-        "sheets"    => $yaml["sheets"],
-        "postTypes" => $yaml["sheets"],
-      ]);
-    } catch (ParseException $e) {
-
-      // rather than throw symfony's exception, we'll throw ours.  so, here
-      // we convert the former to the latter.
-
-      throw new ShadowlabException("Unable to parse config.yaml",
-        ShadowlabException::CONFIG_FILE_INVALID);
-    }
   }
 
   /**
-   * getConfig
+   * getController
    *
-   * Returns the config property.
+   * Returns the controller property.
    *
-   * @return Configuration
+   * @return ControllerInterface
    */
-  public function getConfig (): Configuration {
-    return $this->config;
+  public function getController (): ControllerInterface {
+    return $this->controller;
   }
 
   /**
@@ -146,7 +110,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
     // appear.  this loop registers a series of save_post_{$postType} hooks,
     // one per type, that does that work for us.
 
-    foreach ($this->config->postTypes as $postType) {
+    foreach ($this->controller->getConfig()->postTypes as $postType) {
       if ($postType->type !== "cheat-sheet") {
         $this->addAction("save_post_" . $postType->type, "addEntryToSheet");
       }
@@ -221,7 +185,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    * @throws ShadowlabException
    */
   protected function createSheets (): void {
-    foreach ($this->config->sheets as $sheet) {
+    foreach ($this->controller->getConfig()->sheets as $sheet) {
       if ($sheet->sheetId === 0) {
         $sheetId = $this->createSheet($sheet);
         $sheet->setSheetId($sheetId);
@@ -270,7 +234,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    * @return void
    */
   protected function registerSheetSlugs (): void {
-    foreach ($this->config->sheets as $sheet) {
+    foreach ($this->controller->getConfig()->sheets as $sheet) {
       $slug = CheatSheetsPlugin::sanitizeUrlSlug($sheet->title);
 
       // the pattern we build here is one in which the URL begins with our
@@ -387,7 +351,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
     // first we need to get this post's type and then use that to identify the
     // sheet ID to which we add it.
 
-    $postType = $this->config->getPostType(get_post_type($postId));
+    $postType = $this->controller->getConfig()->getPostType(get_post_type($postId));
     update_post_meta($postId, "_cheat-sheet-id", $postType->sheetId);
   }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\CheatSheets\Repositories;
+namespace Shadowlab\Repositories;
 
 use Dashifen\Repository\Repository;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
@@ -12,6 +12,7 @@ use Shadowlab\CheatSheets\CheatSheetsPlugin;
  * @property string     $type
  * @property string     $singular
  * @property string     $plural
+ * @property int        $sheetId
  * @property CheatSheet $sheet
  */
 class PostType extends Repository {

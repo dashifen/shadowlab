@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\CheatSheets\Repositories;
+namespace Shadowlab\Repositories;
 
 use Dashifen\Repository\Repository;
 use Dashifen\Repository\RepositoryException;

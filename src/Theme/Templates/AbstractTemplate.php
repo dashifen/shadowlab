@@ -2,8 +2,11 @@
 
 namespace Shadowlab\Theme\Templates;
 
-use Dashifen\WPTemplates\Templates\AbstractTimberTemplate;
+use Shadowlab\Repositories\Configuration;
 use Shadowlab\Theme\Theme;
+use Shadowlab\Repositories\MenuItem;
+use Dashifen\WPTemplates\Templates\AbstractTimberTemplate;
+use WP_Post;
 
 class AbstractTemplate extends AbstractTimberTemplate {
   /**
@@ -41,7 +44,7 @@ class AbstractTemplate extends AbstractTimberTemplate {
       "template"  => str_replace("/", "-", strtolower(get_called_class())),
       "siteName"  => ($siteName = get_bloginfo("name")),
       "siteTitle" => $this->getSiteTitle($siteName),
-      "menu"      => $this->getMainMenu(),
+      "menu"      => $this->getMenu(),
     ];
   }
 
@@ -54,10 +57,8 @@ class AbstractTemplate extends AbstractTimberTemplate {
    *
    * @return string
    */
-  private function getSiteTitle (string $siteName): string {
-    $logo = $this->getLogo();
-    $header = $this->getHeader($siteName);
-    return $logo . $header;
+  private function getSiteTitle (?string $siteName): string {
+    return $this->getLogo() . $this->getHeader($siteName);
   }
 
   /**
@@ -83,16 +84,57 @@ class AbstractTemplate extends AbstractTimberTemplate {
    * @return string
    */
   private function getHeader (string $siteName): string {
-    $oTag = is_home() ? "<h1" : "<span";
-    $cTag = str_replace("<", "</", $oTag);
-    return sprintf('%s id="site-title">%s%s>', $oTag, $siteName, $cTag);
+    $tag = is_home() ? "h1" : "span";
+    return sprintf('<%s id="site-title">%s</%s>', $tag, $siteName, $tag);
   }
 
   /**
-   * @return string
+   * getMenu
+   *
+   * Returns an array of MenuItem objects that we can use elsewhere to
+   * print the menu on-screen.
+   *
+   * @return MenuItem[]
    */
-  private function getMenu(): string {
+  private function getMenu (): array {
 
+    // unlike a "normal" theme, we aren't using the WordPress navigation menu
+    // features here.  instead, our main menu is based on our Cheat Sheets
+    // post type.  each menu is comprised of a sheet at the top and then the
+    // post types that are linked to those sheets as a submenu.  we'll
+    // construct that structure here using our config.yaml file to tell us
+    // about the structure of that menu.
+
+    $topLevel = $this->getCheatSheets();
+    $config = $this->theme->getController()->getConfig();
+
+
+
+
+
+
+
+
+
+
+  }
+
+  /**
+   * getCheatSheets
+   *
+   * Returns an array of registered cheat sheet titles.
+   *
+   * @return array
+   */
+  private function getCheatSheets (): array {
+    $posts = get_posts(["post_type" => "cheat-sheet"]);
+
+    // all our calling scope wants is the titles, so we'll use array_map()
+    // to make a new array containing only those.
+
+    return array_map(function(WP_Post $post) {
+      return $post->post_title;
+    }, $posts);
   }
 
 }
