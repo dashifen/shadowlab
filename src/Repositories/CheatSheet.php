@@ -2,14 +2,16 @@
 
 namespace Shadowlab\Repositories;
 
-use Dashifen\Repository\Repository;
+use Shadowlab\Controller;
 use Shadowlab\ShadowlabException;
+use Dashifen\Repository\Repository;
 
 /**
  * Class CheatSheet
  *
  * @package Shadowlab\CheatSheets\Repositories
  * @property string $title
+ * @property string $slug
  * @property array  $entries
  * @property int    $sheetId
  */
@@ -18,6 +20,11 @@ class CheatSheet extends Repository {
    * @var string
    */
   protected $title = "";
+
+  /**
+   * @var string
+   */
+  protected $slug = "";
 
   /**
    * @var array
@@ -32,14 +39,28 @@ class CheatSheet extends Repository {
   /**
    * setTitle
    *
-   * Sets the title property
+   * Sets the title and slug properties
    *
    * @param string $title
    *
    * @return void
    */
   protected function setTitle (string $title): void {
+    $this->setSlug($title);
     $this->title = $title;
+  }
+
+  /**
+   * setSlug
+   *
+   * Sets the slug property
+   *
+   * @param string $slug
+   *
+   * @return void
+   */
+  protected function setSlug (string $slug): void {
+    $this->slug = Controller::sanitizeUrlSlug($slug);
   }
 
   /**
@@ -52,6 +73,12 @@ class CheatSheet extends Repository {
    * @return void
    */
   protected function setEntries (array $entries): void {
+
+    // just in case our entries are not alphabetical, we'll sort them here.
+    // we could just manually sort them in the config.yaml file, but that
+    // relies on me remembering to do so; this doesn't.
+
+    sort($entries);
     $this->entries = $entries;
   }
 

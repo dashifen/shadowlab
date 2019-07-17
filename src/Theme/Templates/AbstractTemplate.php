@@ -2,12 +2,13 @@
 
 namespace Shadowlab\Theme\Templates;
 
+use WP_Post;
+use Shadowlab\Controller;
+use Shadowlab\Theme\Theme;
+use Shadowlab\Repositories\PostType;
+use Shadowlab\Repositories\MenuItem;
 use Shadowlab\Repositories\CheatSheet;
 use Shadowlab\Repositories\Configuration;
-use Shadowlab\Repositories\PostType;
-use WP_Post;
-use Shadowlab\Theme\Theme;
-use Shadowlab\Repositories\MenuItem;
 use Dashifen\Repository\RepositoryException;
 use Dashifen\WPTemplates\Templates\AbstractTimberTemplate;
 
@@ -39,6 +40,7 @@ class AbstractTemplate extends AbstractTimberTemplate {
    * @param array $context
    *
    * @return void
+   * @throws RepositoryException
    */
   public function setContext (array $context = []): void {
     $this->context = [
@@ -112,13 +114,17 @@ class AbstractTemplate extends AbstractTimberTemplate {
     $config = $this->theme->getController()->getConfig();
     foreach ($sheets as $sheetTitle) {
       $sheet = $config->getSheet($sheetTitle);
-
-      // we define a $submenu array here into which we put MenuItems for
-      // the entries within the current sheet.  by defining it here, we
-      // clear out prior iteration's list of such items.
-
       $submenu = $this->getSubMenu($sheet, $config);
+
+      $menu[] = new MenuItem([
+        "label"   => $sheetTitle,
+        "url"     => home_url($sheet->slug),
+        "classes" => sizeof($submenu) > 0 ? "item with-submenu" : "item",
+        "current" => $this->isCurrentSheet($sheet),
+      ]);
     }
+
+    return $menu ?? [];
   }
 
   /**
@@ -142,7 +148,7 @@ class AbstractTemplate extends AbstractTimberTemplate {
   /**
    * getSubMenu
    *
-   * Given a CheatSheet, an array of MenuItems representing the submene for
+   * Given a CheatSheet, an array of MenuItems representing the submenu for
    * it's menu item.
    *
    * @param CheatSheet    $sheet
@@ -157,8 +163,8 @@ class AbstractTemplate extends AbstractTimberTemplate {
 
       $submenu[] = new MenuItem([
         "label"   => $postType->plural,
-        "url"     => trailingslashit(home_url()) . $postType->getPostTypeSlug(),
-        "current" => $this->isCurrent($postType),
+        "url"     => home_url($postType->slug),
+        "current" => $this->isCurrentPostType($postType),
         "classes" => "submenu-item item",
       ]);
     }
@@ -167,7 +173,7 @@ class AbstractTemplate extends AbstractTimberTemplate {
   }
 
   /**
-   * isCurrent
+   * isCurrentPostType
    *
    * Returns true if this post type is the one we're currently displaying.
    *
@@ -175,12 +181,26 @@ class AbstractTemplate extends AbstractTimberTemplate {
    *
    * @return bool
    */
-  private function isCurrent (PostType $postType): bool {
+  private function isCurrentPostType (PostType $postType): bool {
 
     // using the global $wp object, we can get at the current WordPress
     // request.  then, if our post type's slug is found within it, this one
     // is current.
 
-    return strpos($GLOBALS["wp"]->request, $postType->getPostTypeSlug()) !== false;
+    return strpos($GLOBALS["wp"]->request, $postType->slug) !== false;
+  }
+
+  /**
+   * isCurrentSheet
+   *
+   * Returns true if this sheet or one of it's entries is currently being
+   * shown.
+   *
+   * @param CheatSheet $sheet
+   *
+   * @return bool
+   */
+  private function isCurrentSheet (CheatSheet $sheet): bool {
+    return strpos($GLOBALS["wp"]->request, $sheet->slug) !== false;
   }
 }

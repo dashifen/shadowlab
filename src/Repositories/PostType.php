@@ -12,6 +12,7 @@ use Dashifen\Repository\Repository;
  * @property string     $type
  * @property string     $singular
  * @property string     $plural
+ * @property string     $slug
  * @property int        $sheetId
  * @property CheatSheet $sheet
  */
@@ -30,6 +31,11 @@ class PostType extends Repository {
    * @var string
    */
   protected $plural = "";
+
+  /**
+   * @var string
+   */
+  protected $slug = "";
 
   /**
    * @var CheatSheet
@@ -65,14 +71,28 @@ class PostType extends Repository {
   /**
    * setPlural
    *
-   * Sets the plural property
+   * Sets the plural and slug properties
    *
    * @param string $plural
    *
    * @return void
    */
   protected function setPlural (string $plural): void {
+    $this->setSlug($plural);
     $this->plural = $plural;
+  }
+
+  /**
+   * setSlug
+   *
+   * Sets the slug property
+   *
+   * @param string $slug
+   *
+   * @return void
+   */
+  protected function setSlug (string $slug): void {
+    $this->slug = Controller::sanitizeUrlSlug($slug);
   }
 
   /**
@@ -132,7 +152,7 @@ class PostType extends Repository {
       "labels"              => $labels,
       "label"               => $this->type,
       "supports"            => ["title", "editor"],
-      "rewrite"             => ["slug" => $this->getPostTypeSlug()],
+      "rewrite"             => ["slug" => $this->slug],
       "capability_type"     => "post",
       "hierarchical"        => false,
       "exclude_from_search" => false,
@@ -151,23 +171,23 @@ class PostType extends Repository {
   }
 
   /**
-   * getPostTypeSlug
+   * getSlug
    *
    * To keep the code clean above, this function simply constructs and returns
-   * the slug we want to use for this post type.  note that this is public so
-   * that we can use it while building our menu, too.
+   * the slug we want to use for this post type.  note that this getter will
+   * be automatically executed when we use the arrow operator to access the
+   * slug property of this object.  that's why it can be protected and still
+   * do the work we want it to do.
    *
    * @return string
    */
-  public function getPostTypeSlug (): string {
+  protected function getSlug (): string {
 
     // we want our post type archives/entries to put the name of the sheet
     // on which they are shown prior to their slug.  since it's possible that
     // sheet names or plural type names have spaces in them, we'll make them
     // url-friendly before we use them.
 
-    return sprintf("%s/%s",
-      Controller::sanitizeUrlSlug($this->sheet->title),
-      Controller::sanitizeUrlSlug($this->plural));
+    return sprintf("%s/%s", $this->sheet->slug, $this->slug);
   }
 }

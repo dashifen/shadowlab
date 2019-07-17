@@ -36,6 +36,11 @@ class MenuItem extends Repository {
   protected $label = "";
 
   /**
+   * @var MenuItem[]
+   */
+  protected $submenu = [];
+
+  /**
    * setClasses
    *
    * Sets the classes property by merging the current value with the
@@ -95,5 +100,26 @@ class MenuItem extends Repository {
    */
   protected function setLabel (string $label): void {
     $this->label = $label;
+  }
+
+  /**
+   * setSubmenu
+   *
+   * Sets the submenu property.
+   *
+   * @param MenuItem[] $submenu
+   *
+   * @return void
+   * @throws RepositoryException
+   */
+  protected function setSubmenu(array $submenu): void {
+    foreach ($submenu as $item) {
+      if (!($item instanceof MenuItem)) {
+        throw new RepositoryException("All submenu items must be MenuItems",
+          RepositoryException::INVALID_VALUE);
+      }
+    }
+
+    $this->submenu = $submenu;
   }
 }

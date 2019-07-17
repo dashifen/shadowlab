@@ -60,6 +60,15 @@ class Configuration extends Repository {
         "entries" => array_keys($entries),
       ]);
     }
+
+    // now, because i'm too lazy to ensure that our config.yaml file has
+    // our sheets listed in alphabetical order, we'll sort our sheets property
+    // here.  plus, it lets us use the spaceship operator which should be used
+    // at least once in every project!
+
+    usort($this->sheets, function(CheatSheet $a, CheatSheet $b): int {
+      return $a->title <=> $b->title;
+    });
   }
 
   /**
