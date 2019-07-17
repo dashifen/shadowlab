@@ -17,5 +17,17 @@ interface ControllerInterface {
    *
    * @return Configuration
    */
-  public function getConfig(): Configuration;
+  public function getConfig (): Configuration;
+
+  /**
+   * sanitizeUrlSlug
+   *
+   * Takes a string and makes sure it doesn't have spaces and is in lower
+   * case.  So "Foo Bar" would become "foo-bar," for example.
+   *
+   * @param string $unsanitary
+   *
+   * @return string
+   */
+  public static function sanitizeUrlSlug (string $unsanitary): string;
 }

@@ -40,20 +40,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
   }
 
   /**
-   * sanitizeUrlSlug
-   *
-   * Takes a string and makes sure it doesn't have spaces and is in lower
-   * case.  So "Foo Bar" would become "foo-bar," for example.
-   *
-   * @param string $unsanitary
-   *
-   * @return string
-   */
-  public static function sanitizeUrlSlug (string $unsanitary): string {
-    return strtolower(str_replace(" ", "-", $unsanitary));
-  }
-
-  /**
    * findPluginDirectory
    *
    * Returns the name of the directory in which our concrete extension

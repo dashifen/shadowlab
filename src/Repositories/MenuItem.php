@@ -3,7 +3,6 @@
 namespace Shadowlab\Repositories;
 
 use Dashifen\Repository\Repository;
-use Timber\MenuItem as TimberMenuItem;
 use Dashifen\Repository\RepositoryException;
 
 /**
@@ -35,29 +34,6 @@ class MenuItem extends Repository {
    * @var string
    */
   protected $label = "";
-
-  /**
-   * MenuItem constructor.
-   *
-   * Uses properties of the TimberMenuItem property to initialize our
-   * container.
-   *
-   * @param TimberMenuItem $item
-   *
-   * @throws RepositoryException
-   */
-  public function __construct (TimberMenuItem $item = null) {
-    if (!is_null($item)) {
-      $data = [
-        "label"   => $item->get_field("name"),
-        "classes" => array_filter($item->classes),
-        "current" => $item->current || $item->current_item_ancestor || $item->current_item_parent,
-        "url"     => $item->url,
-      ];
-    }
-
-    parent::__construct($data ?? []);
-  }
 
   /**
    * setClasses

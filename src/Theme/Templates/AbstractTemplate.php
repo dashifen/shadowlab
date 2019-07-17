@@ -2,11 +2,14 @@
 
 namespace Shadowlab\Theme\Templates;
 
+use Shadowlab\Repositories\CheatSheet;
 use Shadowlab\Repositories\Configuration;
+use Shadowlab\Repositories\PostType;
+use WP_Post;
 use Shadowlab\Theme\Theme;
 use Shadowlab\Repositories\MenuItem;
+use Dashifen\Repository\RepositoryException;
 use Dashifen\WPTemplates\Templates\AbstractTimberTemplate;
-use WP_Post;
 
 class AbstractTemplate extends AbstractTimberTemplate {
   /**
@@ -95,6 +98,7 @@ class AbstractTemplate extends AbstractTimberTemplate {
    * print the menu on-screen.
    *
    * @return MenuItem[]
+   * @throws RepositoryException
    */
   private function getMenu (): array {
 
@@ -102,21 +106,19 @@ class AbstractTemplate extends AbstractTimberTemplate {
     // features here.  instead, our main menu is based on our Cheat Sheets
     // post type.  each menu is comprised of a sheet at the top and then the
     // post types that are linked to those sheets as a submenu.  we'll
-    // construct that structure here using our config.yaml file to tell us
-    // about the structure of that menu.
+    // construct that structure here using our Configuration object.
 
-    $topLevel = $this->getCheatSheets();
+    $sheets = $this->getCheatSheets();
     $config = $this->theme->getController()->getConfig();
+    foreach ($sheets as $sheetTitle) {
+      $sheet = $config->getSheet($sheetTitle);
 
+      // we define a $submenu array here into which we put MenuItems for
+      // the entries within the current sheet.  by defining it here, we
+      // clear out prior iteration's list of such items.
 
-
-
-
-
-
-
-
-
+      $submenu = $this->getSubMenu($sheet, $config);
+    }
   }
 
   /**
@@ -132,9 +134,53 @@ class AbstractTemplate extends AbstractTimberTemplate {
     // all our calling scope wants is the titles, so we'll use array_map()
     // to make a new array containing only those.
 
-    return array_map(function(WP_Post $post) {
+    return array_map(function (WP_Post $post) {
       return $post->post_title;
     }, $posts);
   }
 
+  /**
+   * getSubMenu
+   *
+   * Given a CheatSheet, an array of MenuItems representing the submene for
+   * it's menu item.
+   *
+   * @param CheatSheet    $sheet
+   * @param Configuration $config
+   *
+   * @return MenuItem[]
+   * @throws RepositoryException
+   */
+  private function getSubMenu (CheatSheet $sheet, Configuration $config): array {
+    foreach ($sheet->entries as $entry) {
+      $postType = $config->getPostType($entry);
+
+      $submenu[] = new MenuItem([
+        "label"   => $postType->plural,
+        "url"     => trailingslashit(home_url()) . $postType->getPostTypeSlug(),
+        "current" => $this->isCurrent($postType),
+        "classes" => "submenu-item item",
+      ]);
+    }
+
+    return $submenu ?? [];
+  }
+
+  /**
+   * isCurrent
+   *
+   * Returns true if this post type is the one we're currently displaying.
+   *
+   * @param PostType $postType
+   *
+   * @return bool
+   */
+  private function isCurrent (PostType $postType): bool {
+
+    // using the global $wp object, we can get at the current WordPress
+    // request.  then, if our post type's slug is found within it, this one
+    // is current.
+
+    return strpos($GLOBALS["wp"]->request, $postType->getPostTypeSlug()) !== false;
+  }
 }

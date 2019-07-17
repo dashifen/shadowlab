@@ -63,4 +63,18 @@ class Controller implements ControllerInterface {
   public function getConfig (): Configuration {
     return $this->config;
   }
+
+  /**
+   * sanitizeUrlSlug
+   *
+   * Takes a string and makes sure it doesn't have spaces and is in lower
+   * case.  So "Foo Bar" would become "foo-bar," for example.
+   *
+   * @param string $unsanitary
+   *
+   * @return string
+   */
+  public static function sanitizeUrlSlug (string $unsanitary): string {
+    return strtolower(str_replace(" ", "-", $unsanitary));
+  }
 }

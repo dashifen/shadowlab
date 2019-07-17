@@ -2,8 +2,8 @@
 
 namespace Shadowlab\Repositories;
 
+use Shadowlab\Controller;
 use Dashifen\Repository\Repository;
-use Shadowlab\CheatSheets\CheatSheetsPlugin;
 
 /**
  * Class PostType
@@ -154,11 +154,12 @@ class PostType extends Repository {
    * getPostTypeSlug
    *
    * To keep the code clean above, this function simply constructs and returns
-   * the slug we want to use for this post type.
+   * the slug we want to use for this post type.  note that this is public so
+   * that we can use it while building our menu, too.
    *
    * @return string
    */
-  private function getPostTypeSlug (): string {
+  public function getPostTypeSlug (): string {
 
     // we want our post type archives/entries to put the name of the sheet
     // on which they are shown prior to their slug.  since it's possible that
@@ -166,7 +167,7 @@ class PostType extends Repository {
     // url-friendly before we use them.
 
     return sprintf("%s/%s",
-      CheatSheetsPlugin::sanitizeUrlSlug($this->sheet->title),
-      CheatSheetsPlugin::sanitizeUrlSlug($this->plural));
+      Controller::sanitizeUrlSlug($this->sheet->title),
+      Controller::sanitizeUrlSlug($this->plural));
   }
 }
