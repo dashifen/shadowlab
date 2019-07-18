@@ -31,7 +31,7 @@ class Theme extends AbstractThemeHandler {
    *
    * @return ControllerInterface
    */
-  public function getController(): ControllerInterface {
+  public function getController (): ControllerInterface {
     return $this->controller;
   }
 

@@ -3,9 +3,9 @@
 namespace Shadowlab\CheatSheets;
 
 use Exception;
-use Shadowlab\ControllerInterface;
-use WP_Admin_Bar;
+use Shadowlab\Controller;
 use Shadowlab\ShadowlabException;
+use Shadowlab\ControllerInterface;
 use Shadowlab\Repositories\CheatSheet;
 use HaydenPierce\ClassFinder\ClassFinder;
 use Dashifen\WPHandler\Hooks\HookException;
@@ -14,7 +14,7 @@ use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
   /**
-   * @var ControllerInterface 
+   * @var ControllerInterface
    */
   protected $controller;
 
@@ -83,14 +83,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
     $this->addFilter("query_vars", "queryVars");
     $this->addFilter("template_include", "templateInclude");
 
-    // here we remove parts of the default WordPress dashboard UI because
-    // we don't need them for this app.  these include posts, pages, media,
-    // and comment related stuff.
-
-    $this->addAction("admin_menu", "removeDefaultMenuItems");
-    $this->addAction("admin_bar_menu", "removeDefaultAdminBarItems", 1000);
-    $this->addAction("wp_dashboard_setup", "removeDraftWidget", 1000);
-
     // whenever one of our types is saved, not counting the sheets themselves,
     // we want to link the entry we just made to the sheet on which it should
     // appear.  this loop registers a series of save_post_{$postType} hooks,
@@ -147,18 +139,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
       $service = new $service($this);
       $service->initialize();
     }
-  }
-
-  /**
-   * unregisterPostTypes
-   *
-   * Removes posts and pages from the WordPress ecosystem.
-   *
-   * @return void
-   */
-  protected function unregisterPostTypes (): void {
-    unregister_post_type("post");
-    unregister_post_type("page");
   }
 
   /**
@@ -220,8 +200,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    * @return void
    */
   protected function registerSheetSlugs (): void {
-    foreach ($this->controller->getConfig()->sheets as $sheet) {
-      $slug = CheatSheetsPlugin::sanitizeUrlSlug($sheet->title);
+    foreach ($this->controller->getSheets() as $sheet) {
 
       // the pattern we build here is one in which the URL begins with our
       // slug, has an optional slash, and nothing else.  this is because our
@@ -229,7 +208,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
       // sheet's slug as a part of their URL, too.  thus, we only want these
       // rules to apply to the sheet itself.
 
-      add_rewrite_rule("^{$slug}/?$", "index.php?sheet_id=" . $sheet->sheetId, "top");
+      add_rewrite_rule("^{$sheet->slug}/?$", "index.php?sheet_id=" . $sheet->sheetId, "top");
     }
   }
 
@@ -277,48 +256,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
     }
 
     return $template;
-  }
-
-  /**
-   * removeDefaultMenuItems
-   *
-   * Removes some of the default menu items from our Dashboard to keep things
-   * as clean as possible.
-   *
-   * @return void
-   */
-  protected function removeDefaultMenuItems (): void {
-    remove_menu_page('edit.php');
-    remove_menu_page('edit.php?post_type=page');
-    remove_menu_page('upload.php');
-    remove_menu_page('edit-comments.php');
-  }
-
-  /**
-   * removeDefaultAdminBarItems
-   *
-   * Removes some of the items from our admin bar for core WP features we
-   * don't use here.
-   *
-   * @param WP_Admin_Bar $adminBar
-   *
-   * @return void
-   */
-  protected function removeDefaultAdminBarItems (WP_Admin_Bar $adminBar): void {
-    $adminBar->remove_menu("new-page");
-    $adminBar->remove_node("new-post");
-    $adminBar->remove_node("new-media");
-    $adminBar->remove_node("comments");
-  }
-
-  /**
-   * removeDraftWidget
-   *
-   * Makes sure to hide the quick draft widget on the Dashboard so that no
-   * one can cram a post into the database that way.
-   */
-  protected function removeDraftWidget (): void {
-    remove_meta_box("dashboard_quick_press", "dashboard", "side");
   }
 
   /**

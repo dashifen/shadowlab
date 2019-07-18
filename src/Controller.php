@@ -3,6 +3,8 @@
 namespace Shadowlab;
 
 use Symfony\Component\Yaml\Yaml;
+use Shadowlab\Repositories\PostType;
+use Shadowlab\Repositories\CheatSheet;
 use Shadowlab\Repositories\Configuration;
 use Dashifen\Repository\RepositoryException;
 use Symfony\Component\Yaml\Exception\ParseException;
@@ -62,6 +64,28 @@ class Controller implements ControllerInterface {
    */
   public function getConfig (): Configuration {
     return $this->config;
+  }
+
+  /**
+   * getSheets
+   *
+   * Returns the sheets property of our Configuration object
+   *
+   * @return CheatSheet[]
+   */
+  public function getSheets (): array {
+    return $this->config->sheets;
+  }
+
+  /**
+   * getPostTypes
+   *
+   * Returns the sheets property of our Configuration object
+   *
+   * @return PostType[]
+   */
+  public function getPostTypes (): array {
+    return $this->config->postTypes;
   }
 
   /**

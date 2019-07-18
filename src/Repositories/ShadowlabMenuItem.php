@@ -14,7 +14,7 @@ use Dashifen\Repository\RepositoryException;
  * @property $url
  * @property $label
  */
-class MenuItem extends Repository {
+class ShadowlabMenuItem extends Repository {
   /**
    * @var array
    */
@@ -36,7 +36,7 @@ class MenuItem extends Repository {
   protected $label = "";
 
   /**
-   * @var MenuItem[]
+   * @var ShadowlabMenuItem[]
    */
   protected $submenu = [];
 
@@ -107,14 +107,14 @@ class MenuItem extends Repository {
    *
    * Sets the submenu property.
    *
-   * @param MenuItem[] $submenu
+   * @param ShadowlabMenuItem[] $submenu
    *
    * @return void
    * @throws RepositoryException
    */
   protected function setSubmenu(array $submenu): void {
     foreach ($submenu as $item) {
-      if (!($item instanceof MenuItem)) {
+      if (!($item instanceof ShadowlabMenuItem)) {
         throw new RepositoryException("All submenu items must be MenuItems",
           RepositoryException::INVALID_VALUE);
       }

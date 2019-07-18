@@ -2,7 +2,9 @@
 
 namespace Shadowlab;
 
+use Shadowlab\Repositories\CheatSheet;
 use Shadowlab\Repositories\Configuration;
+use Shadowlab\Repositories\PostType;
 
 /**
  * Interface ControllerInterface
@@ -18,6 +20,24 @@ interface ControllerInterface {
    * @return Configuration
    */
   public function getConfig (): Configuration;
+
+  /**
+   * getSheets
+   *
+   * Returns the sheets property of our Configuration object
+   *
+   * @return CheatSheet[]
+   */
+  public function getSheets (): array;
+
+  /**
+   * getPostTypes
+   *
+   * Returns the sheets property of our Configuration object
+   *
+   * @return PostType[]
+   */
+  public function getPostTypes (): array;
 
   /**
    * sanitizeUrlSlug

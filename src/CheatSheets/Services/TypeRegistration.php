@@ -3,15 +3,8 @@
 namespace Shadowlab\CheatSheets\Services;
 
 use Dashifen\WPHandler\Hooks\HookException;
-use Shadowlab\CheatSheets\CheatSheetsPlugin;
-use Dashifen\WPHandler\Services\AbstractPluginService;
 
-class TypeRegistration extends AbstractPluginService {
-  /**
-   * @var CheatSheetsPlugin
-   */
-  protected $handler;
-
+class TypeRegistration extends AbstractShadowlabPluginService {
   /**
    * initialize
    *
@@ -39,8 +32,7 @@ class TypeRegistration extends AbstractPluginService {
     // loop over the post types in our configuration to register all of those.
 
     $this->registerSheetType();
-    $postTypes = $this->handler->getController()->getConfig()->postTypes;
-    foreach ($postTypes as $postType) {
+    foreach ($this->handler->getController()->getSheets() as $postType) {
       $postType->registerPostType();
     }
   }
