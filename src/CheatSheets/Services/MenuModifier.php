@@ -2,10 +2,11 @@
 
 namespace Shadowlab\CheatSheets\Services;
 
-use Dashifen\Repository\RepositoryException;
-use Dashifen\WPHandler\Hooks\HookException;
-use Dashifen\WPHandler\Repositories\MenuItem;
+use Dashifen\WPHandler\Handlers\HandlerException;
 use WP_Admin_Bar;
+use Dashifen\WPHandler\Hooks\HookException;
+use Dashifen\Repository\RepositoryException;
+use Dashifen\WPHandler\Repositories\MenuItem;
 
 class MenuModifier extends AbstractShadowlabPluginService {
   /**
@@ -35,25 +36,41 @@ class MenuModifier extends AbstractShadowlabPluginService {
    * @throws HookException
    */
   protected function addCheatSheetMenus (): void {
-    $startingLocation = 4;
     foreach ($this->handler->getController()->getSheets() as $sheet) {
+      $method = "show" . $this->getStudlyCaps($sheet->title);
 
       // for each sheet, we want to add a menu item as a top-level menu.
       // then, we add a sub-menu item within it for each type of entry
       // on that sheet.
 
-      $menuItem = new MenuItem($this->handler, [
-        "page_title" => $sheet->title,
-        "capability" => "edit_post",
-        "position" => ++$startingLocation,
-      ]);
-
-
-      $this->addMenuPage($menuItem);
+      $this->addMenuPage(new MenuItem($this->handler, [
+        "pageTitle"  => $sheet->title,
+        "capability" => "edit_posts",
+        "iconUrl"    => "dashicons-media-spreadsheet",
+        "method"     => $method,
+        "position"   => 5,
+      ]));
     }
   }
 
+  /**
+   * getStudlyCaps
+   *
+   * Takes the string we receive and returns it in studly caps.
+   *
+   * @param string $wimpyString
+   *
+   * @return string
+   */
+  private function getStudlyCaps (string $wimpyString): string {
 
+    // splitting our string based on non-word characters give us the set of
+    // words that within our wimpy string.  then, we can walk the array and
+    // use ucfirst to capitalize each word.  finally, we join it all together
+    // and return our studly string.
+
+    return preg_replace("/\W+/", "", $wimpyString);
+  }
 
   /**
    * removeDefaultMenuItems
