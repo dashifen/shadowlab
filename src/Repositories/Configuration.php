@@ -118,8 +118,10 @@ class Configuration extends Repository {
    * @return CheatSheet|null
    */
   public function getSheet (string $title): ?CheatSheet {
+    $title = strtolower($title);
+
     foreach ($this->sheets as $sheet) {
-      if ($sheet->title === $title) {
+      if (strtolower($sheet->title) === $title) {
         return $sheet;
       }
     }

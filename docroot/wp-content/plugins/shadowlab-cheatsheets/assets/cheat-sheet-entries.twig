@@ -1,0 +1,21 @@
+<!--suppress HtmlUnknownTarget -->
+
+<div class="wrap">
+  <header><h1>{{ sheet.title }}</h1></header>
+
+  {% if sheet.entries|length > 0 %}
+    <p>Click a link below to make a new entry on one of these sheets.</p>
+    <ul class="ul-disc">
+      {% for entry in sheet.entries %}
+        <li>
+          <a href="edit.php?post_type={{ entry.type }}">
+            {{ entry.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>We don't appear to have any cheat sheets here to which you can add entries at this time.  Dash is probably still working on it.  If you think this is a problem, drop them a line and they'll take a look at it.</p>
+  {% endif %}
+
+</div>

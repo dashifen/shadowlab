@@ -3,7 +3,6 @@
 namespace Shadowlab\CheatSheets;
 
 use Exception;
-use Shadowlab\Controller;
 use Shadowlab\ShadowlabException;
 use Shadowlab\ControllerInterface;
 use Shadowlab\Repositories\CheatSheet;

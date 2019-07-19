@@ -4,14 +4,14 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed0591f8bdc0648082ad69ef815fbbcb",
+    "content-hash": "b0ca2cc6704e6d986e97acd7bf91cc89",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.8.1",
+            "version": "5.8.2",
             "dist": {
                 "type": "zip",
-                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%ACF_PRO_KEY}&t=5.8.1#v5.8.1"
+                "url": "https://connect.advancedcustomfields.com/index.php?a=download&p=pro&k={%ACF_PRO_KEY}&t=5.8.2"
             },
             "require": {
                 "composer/installers": "^1.4",
@@ -341,16 +341,16 @@
         },
         {
             "name": "dashifen/wp-handler",
-            "version": "3.1.3",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/wp-handler.git",
-                "reference": "1314c652810efbdf7878d4b7f9fc33c3988c4627"
+                "reference": "c8e49bbff414aa43cc795b99948e54815eb81095"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/1314c652810efbdf7878d4b7f9fc33c3988c4627",
-                "reference": "1314c652810efbdf7878d4b7f9fc33c3988c4627",
+                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/c8e49bbff414aa43cc795b99948e54815eb81095",
+                "reference": "c8e49bbff414aa43cc795b99948e54815eb81095",
                 "shasum": ""
             },
             "require": {
@@ -371,12 +371,12 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "role": "developer"
+                    "role": "developer",
+                    "email": "dashifen@dashifen.com"
                 }
             ],
             "description": "An object to define handlers for various WordPress action and filter hooks using protected methods. ",
-            "time": "2019-07-07T15:18:20+00:00"
+            "time": "2019-07-19T17:27:16+00:00"
         },
         {
             "name": "dashifen/wp-templates",
@@ -473,16 +473,16 @@
         },
         {
             "name": "haydenpierce/class-finder",
-            "version": "0.3.2",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://gitlab.com/hpierce1102/ClassFinder.git",
-                "reference": "a7b3d050304bda998e124f650f3328d0286c8518"
+                "reference": "35ecd4bd9a44e406804d99dee79ffb8c96fb0705"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/hpierce1102%2FClassFinder/repository/archive.zip?sha=a7b3d050304bda998e124f650f3328d0286c8518",
-                "reference": "a7b3d050304bda998e124f650f3328d0286c8518",
+                "url": "https://gitlab.com/api/v4/projects/hpierce1102%2FClassFinder/repository/archive.zip?sha=35ecd4bd9a44e406804d99dee79ffb8c96fb0705",
+                "reference": "35ecd4bd9a44e406804d99dee79ffb8c96fb0705",
                 "shasum": ""
             },
             "require": {
@@ -511,7 +511,7 @@
                 }
             ],
             "description": "A library that can provide of a list of classes in a given namespace",
-            "time": "2019-05-25T17:27:37+00:00"
+            "time": "2019-07-14T15:19:06+00:00"
         },
         {
             "name": "phpoption/phpoption",

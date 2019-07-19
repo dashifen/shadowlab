@@ -2,6 +2,7 @@
 
 require ABSPATH . "../vendor/autoload.php";
 
+use Timber\Timber;
 use Shadowlab\Controller;
 use Shadowlab\Theme\Theme;
 use Dashifen\Exception\Exception;
@@ -13,6 +14,9 @@ try {
 
   $controller = new Controller();
   $theme = new Theme($controller);
+
+  Timber::$locations = $theme->getStylesheetDir() . "assets/twigs/";
+
   $theme->initialize();
 } catch (Exception $e) {
 

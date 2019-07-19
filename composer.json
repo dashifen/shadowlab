@@ -30,7 +30,7 @@
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.8.1",
+        "version": "5.8.2",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -54,7 +54,7 @@
     "advanced-custom-fields/advanced-custom-fields-pro": "5.8.*",
     "dashifen/repository": "1.0.*",
     "dashifen/router": "4.1.*",
-    "dashifen/wp-handler": "3.1.*",
+    "dashifen/wp-handler": "3.2.*",
     "dashifen/wp-templates": "1.0.*",
     "haydenpierce/class-finder": "^0.3.2",
     "symfony/yaml": "^4.3",
