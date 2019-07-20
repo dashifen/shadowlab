@@ -276,6 +276,9 @@ class MenuModifier extends AbstractShadowlabPluginService {
   protected function updateTopLevelMenuClasses (array $menuItems): array {
     $config = $this->handler->getController()->getConfig();
 
+
+
+
     // there are two things we hope to do here:  one is add a class to each
     // of our top-level sheet menus that will identify them for us.  the second
     // is to correct the sub-menu display when we're looking at one of our post

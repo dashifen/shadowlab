@@ -37,7 +37,16 @@ class TypeRegistration extends AbstractShadowlabPluginService {
     }
   }
 
-  private function registerSheetType () {
+  /**
+   * registerSheetType
+   *
+   * The cheat-sheet type doesn't have a corresponding PostType object
+   * because it's different from the other ones.  so, we have a hand-
+   * crafted registration method for them here.
+   *
+   * @return void
+   */
+  private function registerSheetType (): void {
     $labels = [
       'name'                  => 'Cheat Sheets',
       'singular_name'         => 'Cheat Sheet',
@@ -87,6 +96,12 @@ class TypeRegistration extends AbstractShadowlabPluginService {
       'exclude_from_search' => true,
       'publicly_queryable'  => true,
       'map_meta_cap'        => true,
+
+      // by changing the create and delete capabilities, we make sure that
+      // no visitors to the site can add or remove sheets.  the only way they
+      // get messed with is via the sheet registration process built into
+      // this plugin.
+
       'capabilities'        => [
         "create_posts" => "create_cheat_sheet",
         "delete_post"  => "delete_cheat_sheet",
