@@ -2,6 +2,7 @@
 
 namespace Shadowlab\Theme;
 
+use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Twig_Environment;
 use Twig_SimpleFilter;
 use Shadowlab\ControllerInterface;
@@ -17,11 +18,12 @@ class Theme extends AbstractThemeHandler {
   /**
    * Theme constructor.
    *
-   * @param ControllerInterface $controller
+   * @param HookFactoryInterface $hookFactory
+   * @param ControllerInterface  $controller
    */
-  public function __construct (ControllerInterface $controller) {
+  public function __construct (HookFactoryInterface $hookFactory, ControllerInterface $controller) {
+    parent::__construct($hookFactory);
     $this->controller = $controller;
-    parent::__construct();
   }
 
   /**

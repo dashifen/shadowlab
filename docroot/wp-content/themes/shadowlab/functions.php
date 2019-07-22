@@ -6,6 +6,7 @@ use Timber\Timber;
 use Shadowlab\Controller;
 use Shadowlab\Theme\Theme;
 use Dashifen\Exception\Exception;
+use Shadowlab\Framework\ShadowlabHookFactory;
 
 try {
 
@@ -13,7 +14,8 @@ try {
   // behaviors we need from it to the overall WordPress ecosystem.
 
   $controller = new Controller();
-  $theme = new Theme($controller);
+  $hookFactory = new ShadowlabHookFactory();
+  $theme = new Theme($hookFactory, $controller);
 
   Timber::$locations = $theme->getStylesheetDir() . "assets/twigs/";
 
