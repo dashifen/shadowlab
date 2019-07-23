@@ -1,15 +1,12 @@
 import Vue from "vue";
-import MenuControls from "./MenuControls.js";
-import FontAwesome from "./FontAwesome.js";
+import VueApp from "./VueApp.js";
 
 Vue.config.productionTip = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-  FontAwesome.initialize();
-  MenuControls.initialize();
   Dashifen.initialize();
+  VueApp.initialize();
 });
-
 
 const Dashifen  = {
   /**

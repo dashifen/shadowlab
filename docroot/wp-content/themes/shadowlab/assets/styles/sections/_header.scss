@@ -15,8 +15,9 @@
   }
 
   .container {
-    align-items: center;
+    align-items: baseline;
     display: flex;
+    justify-content: space-between;
   }
 }
 
@@ -28,87 +29,6 @@
   padding: rem(20px) 0;
 }
 
-#main-menu {
-  background: url("images/nav-divider-body.png") bottom right no-repeat;
-  background-size: 1092px 12px;
-  bottom: 12px;
-  flex-grow: 1;
-  margin-left: rem(80px);
-  padding-bottom: rem(18px);
-  position: relative;
-  width: 100%;
-
-  &::before {
-    background: url("images/nav-divider-left.png") top left no-repeat;
-    background-size: 15px 12px;
-    bottom: 0;
-    content: "";
-    height: 12px;
-    left: -15px;
-    position: absolute;
-    width: 15px;
-  }
-
-  .item {
-    display: inline-block;
-    margin-left: rem(20px);
-
-    a {
-      position: relative;
-    }
-
-    &.with-submenu > a::before {
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;;
-      border-left: 5px solid lighten($highlight, 20%);
-      display: block;
-      content: "";
-      height: 0;
-      left: -10px;
-      position: absolute;
-      top: 5px;
-      transition: all 150ms;
-      width: 0;
-    }
-
-    &.with-submenu.clicked > a::before {
-      border-left-color: $hover;
-      transform: rotate(90deg);
-    }
-
-    &.clicked {
-      > a {
-        color: $hover;
-      }
-
-      .submenu {
-        display: flex;
-      }
-    }
-  }
-
-  a {
-    color: lighten($highlight, 20%);
-    text-decoration: none;
-    outline: none;
-  }
-
-  .submenu {
-    display: none;
-    position: absolute;
-    left: 0;
-    margin-left: rem(20px);
-    top: 50px;
-
-    .item {
-      margin-left: 0;
-      margin-right: rem(20px);
-      white-space: nowrap;
-    }
-
-    a:hover, a:focus, a:active {
-      color: $hover;
-    }
-  }
+svg {
+  color: $white;
 }
-

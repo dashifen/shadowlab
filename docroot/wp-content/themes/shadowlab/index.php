@@ -17,19 +17,17 @@
 
   <header role="banner" id="banner" aria-labelledby="site-title">
     <div class="container">
-      <img src="/wp-content/themes/shadowlab/assets/images/shadowrun-logo-totem.png" alt="the shadowrun logo" width="150">
-
       <?php if (is_home()) { ?>
         <h1 id="site-title">Shadowlab</h1>
       <?php } else { ?>
         <p id="site-title">Shadowlab</p>
       <?php } ?>
 
-      <nav id="main-menu" aria-labelledby="main-menu-label">
+      <!--<nav id="main-menu" aria-labelledby="main-menu-label">
         <h2 class="visually-hidden" id="main-menu-label">Main Menu</h2>
 
         <ul class="menu">
-          <li class="item with-submenu clicked">
+          <li class="item with-submenu">
             <a href="#">Character</a>
             <ul class="submenu">
               <li class="submenu-item item"><a href="#">Statuses</a></li>
@@ -70,7 +68,7 @@
             </ul>
           </li>
         </ul>
-      </nav>
+      </nav>-->
     </div>
   </header>
 

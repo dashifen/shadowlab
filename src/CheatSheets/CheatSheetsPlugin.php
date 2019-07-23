@@ -274,6 +274,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
     // sheet ID to which we add it.
 
     $postType = $this->controller->getConfig()->getPostType(get_post_type($postId));
-    update_post_meta($postId, "_cheat-sheet-id", $postType->sheetId);
+    update_post_meta($postId, "_cheat-sheet-id", $postType->sheet->sheetId);
   }
 }

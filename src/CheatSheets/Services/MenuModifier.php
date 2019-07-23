@@ -276,16 +276,13 @@ class MenuModifier extends AbstractShadowlabPluginService {
   protected function updateTopLevelMenuClasses (array $menuItems): array {
     $config = $this->handler->getController()->getConfig();
 
-
-
-
     // there are two things we hope to do here:  one is add a class to each
     // of our top-level sheet menus that will identify them for us.  the second
     // is to correct the sub-menu display when we're looking at one of our post
     // types which don't trigger the display of the top-level item because of
     // the menu magic we performed above.
 
-    $postType = $config->getPostType($_GET["post_type"] ?? "");
+    $postType = $config->getPostType($this->getThePostType());
     $submenuSheet = is_null($postType) ? "" : $postType->sheet->title;
 
     foreach ($menuItems as &$item) {
@@ -311,6 +308,31 @@ class MenuModifier extends AbstractShadowlabPluginService {
   }
 
   /**
+   * getThePostType
+   *
+   * Returns the post type we're working with during the current request or
+   * null if the request doesn't really focus on posts at this time.
+   *
+   * @return string
+   */
+  private function getThePostType (): string {
+    if (isset($_GET["post_type"])) {
+      return $_GET["post_type"];
+    }
+
+    // if we're still here, then we need to see if the page were on has a
+    // post and, if so, what type it is.  this is usually the case when we're
+    // on the post.php page which, as it turns out, has a post query string
+    // parameter.
+
+    if ($_SERVER["PHP_SELF"] === "/wp-admin/post.php") {
+      return get_post_type($_GET["post"]);
+    }
+
+    return "";
+  }
+
+  /**
    * alterMenuDisplay
    *
    * Adds a style and, sometimes, a bit of JavaScript to the DOM to control
@@ -325,13 +347,13 @@ class MenuModifier extends AbstractShadowlabPluginService {
     // that's the case by seeing if the query string's post type parameter
     // exists.
 
-    $postType = $this->handler->getController()->getConfig()->getPostType($_GET["post_type"] ?? "");
+    $postType = $this->handler->getController()->getConfig()->getPostType($this->getThePostType());
     if (!is_null($postType)) {
 
       // boom!  now know we need the script.  we don't enqueue it because
       // then the display happens and there's a slight, but noticeable,
       // delay before our item lights up.  by adding it here, it executes
-      // before we actually paint the DOM on the browser.
+      // before we fully paint the DOM in the browser.
 
       $slug = strtolower($postType->plural); ?>
 
@@ -347,9 +369,8 @@ class MenuModifier extends AbstractShadowlabPluginService {
       /**
        * this we add here because it's easier than a 1-line CSS file that we
        * then have to enqueue.  plus, it keeps all our menu display mods in
-       * one place.  since the first submenu item determines the ink for the
-       * top-level item, we can't remove the repetitious link, but we can
-       * hide it!
+       * one place.  since the first submenu item determines the link for the
+       * top-level item, we can't remove it, but we can hide it!
        */
       li.menu-cheat-sheet ul.wp-submenu li.wp-first-item {
         display: none;
