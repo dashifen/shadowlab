@@ -9,6 +9,7 @@ use Shadowlab\Repositories\CheatSheet;
 use HaydenPierce\ClassFinder\ClassFinder;
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\WPHandler\Services\AbstractPluginService;
+use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
@@ -20,11 +21,12 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
   /**
    * CheatSheetsPlugin constructor.
    *
-   * @param ControllerInterface $controller
+   * @param HookFactoryInterface $hookFactory
+   * @param ControllerInterface  $controller
    */
-  public function __construct (ControllerInterface $controller) {
+  public function __construct (HookFactoryInterface $hookFactory, ControllerInterface $controller) {
+    parent::__construct($hookFactory);
     $this->controller = $controller;
-    parent::__construct();
   }
 
   /**
