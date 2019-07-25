@@ -1,7 +1,4 @@
-import Vue from "vue";
 import VueApp from "./VueApp.js";
-
-Vue.config.productionTip = false;
 
 document.addEventListener("DOMContentLoaded", () => {
   Dashifen.initialize();

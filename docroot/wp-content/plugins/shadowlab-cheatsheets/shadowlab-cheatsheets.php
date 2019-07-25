@@ -10,13 +10,13 @@ Version: 0.0.3
 use Shadowlab\Controller;
 use Dashifen\WPHandler\Hooks\HookException;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
-use Dashifen\WPHandler\Hooks\Factory\HookFactory;
+use Shadowlab\Framework\ShadowlabHookFactory;
 
 require ABSPATH . "../vendor/autoload.php";
 
 try {
   $controller = new Controller();
-  $hookFactory = new HookFactory();
+  $hookFactory = new ShadowlabHookFactory();
   $cheatSheets = new CheatSheetsPlugin($hookFactory, $controller);
   $cheatSheets->initialize();
 } catch (HookException $exception) {

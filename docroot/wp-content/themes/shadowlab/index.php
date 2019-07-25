@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Shadowlab</title>
+  <title>Shadowlab 6th Edition</title>
 
   <?php wp_head() ?>
 </head>
@@ -18,57 +18,12 @@
   <header role="banner" id="banner" aria-labelledby="site-title">
     <div class="container">
       <?php if (is_home()) { ?>
-        <h1 id="site-title">Shadowlab</h1>
+        <h1 id="site-title">Shadowlab 6<sup>th</sup> Edition</h1>
       <?php } else { ?>
-        <p id="site-title">Shadowlab</p>
+        <p id="site-title">Shadowlab 6<sup>th</sup> Edition</p>
       <?php } ?>
 
-      <!--<nav id="main-menu" aria-labelledby="main-menu-label">
-        <h2 class="visually-hidden" id="main-menu-label">Main Menu</h2>
-
-        <ul class="menu">
-          <li class="item with-submenu">
-            <a href="#">Character</a>
-            <ul class="submenu">
-              <li class="submenu-item item"><a href="#">Statuses</a></li>
-              <li class="submenu-item item"><a href="#">Qualities</a></li>
-            </ul>
-          </li>
-          <li class="item with-submenu">
-            <a href="#">Combat</a>
-            <ul class="submenu">
-              <li class="submenu-item item"><a href="#">Martial Arts</a></li>
-              <li class="submenu-item item"><a href="#">Something Else</a></li>
-              <li class="submenu-item item"><a href="#">A third thing</a></li>
-            </ul>
-          </li>
-          <li class="item with-submenu">
-            <a href="#">Gear</a>
-            <ul class="submenu">
-              <li class="submenu-item item"><a href="#">Guns</a></li>
-              <li class="submenu-item item"><a href="#">Electronics</a></li>
-            </ul>
-          </li>
-          <li class="item with-submenu">
-            <a href="#">Magic</a>
-            <ul class="submenu">
-              <li class="submenu-item item"><a href="#">Mentor Spirits</a></li>
-              <li class="submenu-item item"><a href="#">Powers</a></li>
-              <li class="submenu-item item"><a href="#">Spells</a></li>
-              <li class="submenu-item item"><a href="#">Spirits</a></li>
-              <li class="submenu-item item"><a href="#">Traditions</a></li>
-            </ul>
-          </li>
-          <li class="item with-submenu">
-            <a href="#">Matrix</a>
-            <ul class="submenu">
-              <li class="submenu-item item"><a href="#">Complex Forms</a></li>
-              <li class="submenu-item item"><a href="#">Matrix Actions</a></li>
-              <li class="submenu-item item"><a href="#">Sprites</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>-->
+      <site-navigation></site-navigation>
     </div>
   </header>
 
