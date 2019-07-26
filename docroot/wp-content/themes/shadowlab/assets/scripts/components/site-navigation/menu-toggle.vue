@@ -1,5 +1,5 @@
 <template>
-  <button id="menu-toggle" :class="{ 'clicked': clicked }" :title="iconLabel" @click="onClick" ref="button" aria-labelledby="menu-toggle-label">
+  <button id="menu-toggle" :title="iconLabel" @click="onClick" ref="button" aria-labelledby="menu-toggle-label">
     <span id="menu-toggle-label" aria-live="polite" class="visually-hidden">>{{ iconLabel }}</span>
     <font-awesome-icon fixed-width :icon="['fas', icon]"></font-awesome-icon>
   </button>
@@ -18,16 +18,12 @@
     components: {FontAwesomeIcon},
 
     computed: {
-      clicked() {
-        return this.$store.getters.isMenuOpen;
-      },
-
       icon() {
-        return this.clicked ? "times" : "bars";
+        return this.$store.getters.isMenuOpen ? "times" : "bars";
       },
 
       iconLabel() {
-        return this.clicked ? "Close Menu" : "Open Menu";
+        return this.$store.getters.isMenuOpen ? "Close Menu" : "Open Menu";
       }
     },
 

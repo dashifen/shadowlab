@@ -76,17 +76,10 @@ class Theme extends AbstractThemeHandler {
    * @return Twig_Environment
    */
   protected function addTwigFilters (Twig_Environment $twig): Twig_Environment {
-    $twig->addFilter(new Twig_SimpleFilter("esc_attr", function (string $string): string {
-      return esc_attr($string);
-    }));
-
-    $twig->addFilter(new Twig_SimpleFilter("esc_url", function (string $string): string {
-      return esc_url($string);
-    }));
-
     $twig->addFilter(new Twig_SimpleFilter("toId", function (string $string): string {
       return preg_replace("/\s+/", "-", strtolower($string));
     }));
+
     return $twig;
   }
 

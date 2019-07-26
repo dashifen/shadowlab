@@ -39,7 +39,7 @@
       text-decoration: none;
 
       &:active, &:focus, &:hover {
-        background-color: $highlight;
+        background-color: darken($highlight, 5%);
         color: lighten($hover, 10%);
       }
     }

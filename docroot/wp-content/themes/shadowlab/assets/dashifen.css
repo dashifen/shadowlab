@@ -101,6 +101,10 @@ svg {
   color: #ffffff;
 }
 
+.site-title-link {
+  text-decoration: none;
+}
+
 #site-title {
   color: #ffffff;
   font-family: "Iceland", sans-serif;
@@ -157,7 +161,7 @@ svg {
 }
 
 .cheat-sheet .cheat-sheet-entry-type a:active, .cheat-sheet .cheat-sheet-entry-type a:focus, .cheat-sheet .cheat-sheet-entry-type a:hover {
-  background-color: #95116f;
+  background-color: #7e0e5e;
   color: #82d4dc;
 }
 
