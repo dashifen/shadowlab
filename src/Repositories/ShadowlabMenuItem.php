@@ -55,6 +55,17 @@ class ShadowlabMenuItem extends Repository {
   }
 
   /**
+   * getClasses
+   *
+   * Transforms the classes property from an array to a string and returns it.
+   *
+   * @return string
+   */
+  public function getClasses (): string {
+    return join(" ", $this->classes);
+  }
+
+  /**
    * setCurrent
    *
    * Sets the current property and adds a class based on the state of

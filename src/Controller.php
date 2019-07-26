@@ -2,18 +2,28 @@
 
 namespace Shadowlab;
 
+use Throwable;
+use Shadowlab\Theme\Theme;
+use League\Container\Container;
 use Symfony\Component\Yaml\Yaml;
 use Shadowlab\Repositories\PostType;
 use Shadowlab\Repositories\CheatSheet;
 use Shadowlab\Repositories\Configuration;
+use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\Repository\RepositoryException;
+use Shadowlab\Framework\ShadowlabHookFactory;
 use Symfony\Component\Yaml\Exception\ParseException;
 
 class Controller implements ControllerInterface {
   /**
    * @var Configuration
    */
-  protected $config;
+  protected static $config;
+
+  /**
+   * @var Container
+   */
+  protected static $container;
 
   /**
    * Controller constructor.
@@ -22,6 +32,25 @@ class Controller implements ControllerInterface {
    * @throws RepositoryException
    */
   public function __construct () {
+    if (!(self::$config instanceof Configuration)) {
+      $this->setConfig();
+    }
+
+    if (!(self::$container instanceof Container)) {
+      $this->setContainer();
+    }
+  }
+
+  /**
+   * setConfig
+   *
+   * Parses the config.yaml file and sets our static config property.
+   *
+   * @return void
+   * @throws RepositoryException
+   * @throws ShadowlabException
+   */
+  protected function setConfig (): void {
     $configFile = ABSPATH . "../config.yaml";
 
     if (!is_file($configFile)) {
@@ -41,7 +70,7 @@ class Controller implements ControllerInterface {
       // properties.
 
       $yaml = Yaml::parseFile($configFile);
-      $this->config = new Configuration([
+      self::$config = new Configuration([
         "sheets"    => $yaml["sheets"],
         "postTypes" => $yaml["sheets"],
       ]);
@@ -56,6 +85,24 @@ class Controller implements ControllerInterface {
   }
 
   /**
+   * setContainer
+   *
+   * Sets the static container property.
+   */
+  protected function setContainer (): void {
+    self::$container = new Container();
+    self::$container->add(ShadowlabHookFactory::class);
+
+    self::$container->add(Theme::class)
+      ->addArgument(ShadowlabHookFactory::class)
+      ->addArgument($this);
+
+    self::$container->add(CheatSheetsPlugin::class)
+      ->addArgument(ShadowlabHookFactory::class)
+      ->addArgument($this);
+  }
+
+  /**
    * getConfig
    *
    * Returns the config property.
@@ -63,7 +110,7 @@ class Controller implements ControllerInterface {
    * @return Configuration
    */
   public function getConfig (): Configuration {
-    return $this->config;
+    return self::$config;
   }
 
   /**
@@ -74,7 +121,7 @@ class Controller implements ControllerInterface {
    * @return CheatSheet[]
    */
   public function getSheets (): array {
-    return $this->config->sheets;
+    return self::$config->sheets;
   }
 
   /**
@@ -85,7 +132,30 @@ class Controller implements ControllerInterface {
    * @return PostType[]
    */
   public function getPostTypes (): array {
-    return $this->config->postTypes;
+    return self::$config->postTypes;
+  }
+
+  /**
+   * getTheme
+   *
+   * Returns a Theme object constructed via our static container object.
+   *
+   * @return Theme
+   */
+  public function getTheme (): Theme {
+    return self::$container->get(Theme::class);
+  }
+
+  /**
+   * getCheatSheetsPlugin
+   *
+   * Returns a CheatSheetsPlugin object constructed via our static container
+   * object.
+   *
+   * @return CheatSheetsPlugin
+   */
+  public function getCheatSheetsPlugin (): CheatSheetsPlugin {
+    return self::$container->get(CheatSheetsPlugin::class);
   }
 
   /**
@@ -100,5 +170,29 @@ class Controller implements ControllerInterface {
    */
   public static function sanitizeUrlSlug (string $unsanitary): string {
     return strtolower(str_replace(" ", "-", $unsanitary));
+  }
+
+  /**
+   * isDebug
+   *
+   * Returns the Theme::isDebug() result as a way to access it when the Theme
+   * object hasn't been included into a file's context.
+   *
+   * @return bool
+   */
+  public function isDebug (): bool {
+    return Theme::isDebug();
+  }
+
+  /**
+   * catcher
+   *
+   * Executes the Theme::catcher() method as a way to access it when the
+   * Theme object hasn't been included into a file's context.
+   *
+   * @param Throwable $e
+   */
+  public function catcher (Throwable $e): void {
+    Theme::catcher($e);
   }
 }

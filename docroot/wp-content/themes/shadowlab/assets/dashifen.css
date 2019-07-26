@@ -56,7 +56,7 @@ a:link, a:visited {
 }
 
 a:active, a:focus, a:hover {
-  color: #5ac6d1;
+  color: #1c5f66;
 }
 
 nav ul {
@@ -68,6 +68,10 @@ nav ul {
 .container {
   margin: 0 auto;
   width: 97%;
+}
+
+svg {
+  color: #121212;
 }
 
 #banner {
@@ -93,6 +97,10 @@ nav ul {
   justify-content: space-between;
 }
 
+#banner svg {
+  color: #ffffff;
+}
+
 #site-title {
   color: #ffffff;
   font-family: "Iceland", sans-serif;
@@ -101,12 +109,61 @@ nav ul {
   padding: 1.25rem 0;
 }
 
-svg {
-  color: #ffffff;
-}
-
 #content {
   margin-top: 100px;
+}
+
+.cheat-sheets {
+  display: flex;
+}
+
+.cheat-sheet {
+  min-width: 19.5%;
+  text-align: center;
+}
+
+.cheat-sheet .cheat-sheet-title,
+.cheat-sheet .cheat-sheet-entry-type a {
+  display: block;
+  padding: 0.9375rem 0;
+}
+
+.cheat-sheet .cheat-sheet-title {
+  font-size: 115%;
+  font-variant: small-caps;
+  margin: 0;
+  text-decoration: underline;
+}
+
+.cheat-sheet .cheat-sheet-entry-type {
+  background: #23041a;
+  border: solid #95116f;
+  border-width: 0 2px;
+  margin-left: 0;
+}
+
+.cheat-sheet .cheat-sheet-entry-type:first-of-type {
+  border-top-width: 2px;
+}
+
+.cheat-sheet .cheat-sheet-entry-type:last-of-type {
+  border-bottom-width: 2px;
+}
+
+.cheat-sheet .cheat-sheet-entry-type a {
+  background-color: #23041a;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.cheat-sheet .cheat-sheet-entry-type a:active, .cheat-sheet .cheat-sheet-entry-type a:focus, .cheat-sheet .cheat-sheet-entry-type a:hover {
+  background-color: #95116f;
+  color: #82d4dc;
+}
+
+#footer {
+  font-size: 90%;
+  margin-top: 5rem;
 }
 
 /*!

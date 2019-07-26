@@ -24,7 +24,7 @@ a {
   }
 
   &:active, &:focus, &:hover {
-    color: $hover;
+    color: darken($hover, 33%);
   }
 }
 
@@ -37,4 +37,8 @@ nav ul {
 .container {
   margin: 0 auto;
   width: 97%;
+}
+
+svg {
+  color: $black;
 }

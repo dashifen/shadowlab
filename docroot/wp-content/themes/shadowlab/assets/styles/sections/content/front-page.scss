@@ -1,0 +1,48 @@
+.cheat-sheets {
+  display: flex;
+}
+
+.cheat-sheet {
+  min-width: 19.5%;
+  text-align: center;
+
+  .cheat-sheet-title,
+  .cheat-sheet-entry-type a {
+    display: block;
+    padding: rem(15px) 0;
+  }
+
+  .cheat-sheet-title {
+    font-size: 115%;
+    font-variant: small-caps;
+    margin: 0;
+    text-decoration: underline;
+  }
+
+  .cheat-sheet-entry-type {
+    background: darken($highlight, 25%);
+    border: solid $highlight;
+    border-width: 0 2px;
+    margin-left: 0;
+
+    &:first-of-type {
+      border-top-width: 2px;
+    }
+
+    &:last-of-type {
+      border-bottom-width: 2px;
+    }
+
+    a {
+      background-color: darken($highlight, 25%);
+      color: $white;
+      text-decoration: none;
+
+      &:active, &:focus, &:hover {
+        background-color: $highlight;
+        color: lighten($hover, 10%);
+      }
+    }
+  }
+
+}

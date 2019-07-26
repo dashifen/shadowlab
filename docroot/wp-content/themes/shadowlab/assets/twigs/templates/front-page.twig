@@ -1,0 +1,20 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  {% for item in menu %}
+    <div class="cheat-sheets">
+      <dl class="cheat-sheet" aria-labelledby="{{ item.label | toId }}">
+        <dt>
+          <h2 class="cheat-sheet-title" id="{{ item.label | toId }}">{{ item.label }}</h2>
+        </dt>
+
+        {% for submenuItem in item.submenu %}
+          <dd class="cheat-sheet-entry-type">
+            <a href="{{ submenuItem.url }}">{{ submenuItem.label }}</a>
+          </dd>
+        {% endfor %}
+
+      </dl>
+    </div>
+  {% endfor %}
+{% endblock %}

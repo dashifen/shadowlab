@@ -19,6 +19,10 @@
     display: flex;
     justify-content: space-between;
   }
+
+  svg {
+    color: $white;
+  }
 }
 
 #site-title {
@@ -27,8 +31,4 @@
   font-size: 200%;
   margin: 0;
   padding: rem(20px) 0;
-}
-
-svg {
-  color: $white;
 }

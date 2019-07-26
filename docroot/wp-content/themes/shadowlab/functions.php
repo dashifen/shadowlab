@@ -17,7 +17,7 @@ try {
   $hookFactory = new ShadowlabHookFactory();
   $theme = new Theme($hookFactory, $controller);
 
-  Timber::$locations = $theme->getStylesheetDir() . "assets/twigs/";
+  Timber::$locations = $theme->getStylesheetDir() . "/assets/twigs/";
 
   $theme->initialize();
 } catch (Exception $e) {
