@@ -1,17 +1,12 @@
+
+
 #banner {
   background: $black;
   position: relative;
   width: 100%;
 
   &::after {
-    background: url("images/footer-background-tear.png") top left repeat-x;
-    content: '';
-    display: block;
-    height: 100px;
-    left: 0;
-    position: absolute;
-    top: 100%;
-    width: 100%;
+    @include backgroundTear;
   }
 
   .container {
@@ -35,4 +30,40 @@
   font-size: 200%;
   margin: 0;
   padding: rem(20px) 0;
+}
+
+#site-navigation {
+  align-items: flex-start;
+  display: flex;
+  position: absolute;
+  right: -250px;
+  top: 30px;
+  transition: right 300ms ease-in-out;
+
+  &.menu-open {
+    right: 0;
+  }
+
+  #main-menu {
+    background-color: $black;
+    height: 100vh;
+    position: relative;
+    width: 250px;
+
+    &::after {
+      @include backgroundTear;
+    }
+
+    .menu {
+      position: relative;
+      z-index: 10;
+    }
+
+    .item a {
+      color: $white;
+      display: block;
+      text-decoration: none;
+      padding: rem(7px) rem(5px);
+    }
+  }
 }

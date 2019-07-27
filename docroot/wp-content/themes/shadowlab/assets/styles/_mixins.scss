@@ -10,6 +10,17 @@
   font-size: rem($size);
 }
 
+@mixin backgroundTear() {
+  background: url("images/footer-background-tear.png") top left repeat-x;
+  content: '';
+  display: block;
+  height: 100px;
+  left: 0;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+}
+
 @mixin atFullSize {
   @media only screen and (min-width: 1440px) {
     @content;

@@ -38,6 +38,7 @@
 html {
   background: url("images/background-light.jpg") top left;
   font: 1.125rem/1.15 "Droid Sans", sans-serif;
+  overflow-x: hidden;
 }
 
 html,
@@ -111,6 +112,49 @@ svg {
   font-size: 200%;
   margin: 0;
   padding: 1.25rem 0;
+}
+
+#site-navigation {
+  align-items: flex-start;
+  display: flex;
+  position: absolute;
+  right: -250px;
+  top: 30px;
+  transition: right 300ms ease-in-out;
+}
+
+#site-navigation.menu-open {
+  right: 0;
+}
+
+#site-navigation #main-menu {
+  background-color: #121212;
+  height: 100vh;
+  position: relative;
+  width: 250px;
+}
+
+#site-navigation #main-menu::after {
+  background: url("images/footer-background-tear.png") top left repeat-x;
+  content: '';
+  display: block;
+  height: 100px;
+  left: 0;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+}
+
+#site-navigation #main-menu .menu {
+  position: relative;
+  z-index: 10;
+}
+
+#site-navigation #main-menu .item a {
+  color: #ffffff;
+  display: block;
+  text-decoration: none;
+  padding: 0.4375rem 0.3125rem;
 }
 
 #content {

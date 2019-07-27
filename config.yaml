@@ -6,3 +6,7 @@ sheets:
     quality:
       singular: Quality
       plural: Qualities
+  Magic:
+    spell:
+      singular: Spell
+      plural: Spells
