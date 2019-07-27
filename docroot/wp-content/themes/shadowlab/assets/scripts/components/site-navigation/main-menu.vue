@@ -34,8 +34,9 @@
 
     methods: {
       getClasses(i) {
-        const clicked = this.clicked === i ? ["clicked"] : [];
-        return this.menuObj[i].classes.concat(clicked).join(" ");
+        return this.menuObj[i].classes
+          .concat(this.clicked === i ? ["clicked"] : [])
+          .join(" ");
       },
 
       openSubmenu(i) {

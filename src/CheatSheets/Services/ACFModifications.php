@@ -17,7 +17,9 @@ class ACFModifications extends AbstractPluginService {
    * @throws HookException
    */
   public function initialize (): void {
-    $this->addAction("save_post_acf-field-group", "exportCustomFieldGroups", 1000, 2);
+    if (!$this->isInitialized()) {
+      $this->addAction("save_post_acf-field-group", "exportCustomFieldGroups", 1000, 2);
+    }
   }
 
   /**

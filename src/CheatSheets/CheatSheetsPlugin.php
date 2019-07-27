@@ -71,27 +71,29 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    * @throws HookException
    */
   public function initialize (): void {
+    if (!$this->isInitialized()) {
 
-    // we initialize our services at priority level five here so that they can
-    // use the default of ten and know that their priority level in the queue
-    // has not yet happened.
+      // we initialize our services at priority level five here so that they can
+      // use the default of ten and know that their priority level in the queue
+      // has not yet happened.
 
-    $this->addAction("admin_init", "createSheets");
-    $this->addAction("init", "initializeServices", 5);
-    $this->addAction("init", "registerSheetSlugs", 15);
-    $this->addAction("init", "flush", 20);
+      $this->addAction("admin_init", "createSheets");
+      $this->addAction("init", "initializeServices", 5);
+      $this->addAction("init", "registerSheetSlugs", 15);
+      $this->addAction("init", "flush", 20);
 
-    $this->addFilter("query_vars", "queryVars");
-    $this->addFilter("template_include", "templateInclude");
+      $this->addFilter("query_vars", "queryVars");
+      $this->addFilter("template_include", "templateInclude");
 
-    // whenever one of our types is saved, not counting the sheets themselves,
-    // we want to link the entry we just made to the sheet on which it should
-    // appear.  this loop registers a series of save_post_{$postType} hooks,
-    // one per type, that does that work for us.
+      // whenever one of our types is saved, not counting the sheets themselves,
+      // we want to link the entry we just made to the sheet on which it should
+      // appear.  this loop registers a series of save_post_{$postType} hooks,
+      // one per type, that does that work for us.
 
-    foreach ($this->controller->getConfig()->postTypes as $postType) {
-      if ($postType->type !== "cheat-sheet") {
-        $this->addAction("save_post_" . $postType->type, "addEntryToSheet");
+      foreach ($this->controller->getConfig()->postTypes as $postType) {
+        if ($postType->type !== "cheat-sheet") {
+          $this->addAction("save_post_" . $postType->type, "addEntryToSheet");
+        }
       }
     }
   }

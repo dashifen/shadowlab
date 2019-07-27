@@ -15,7 +15,9 @@ class TypeRegistration extends AbstractShadowlabPluginService {
    * @throws HookException
    */
   public function initialize (): void {
-    $this->addAction("init", "registerTypes");
+    if (!$this->isInitialized()) {
+      $this->addAction("init", "registerTypes");
+    }
   }
 
   /**

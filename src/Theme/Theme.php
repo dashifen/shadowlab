@@ -46,11 +46,13 @@ class Theme extends AbstractThemeHandler {
    * @throws HookException
    */
   public function initialize (): void {
-    $this->addAction("init", "startSession");
-    $this->addFilter("timber/twig", "addTwigFilters");
-    $this->addAction("wp_enqueue_scripts", "addAssets");
-    $this->addAction("after_setup_theme", "addThemeFeatures");
-    $this->addAction("template_redirect", "forceAuthentication");
+    if (!$this->isInitialized()) {
+      $this->addAction("init", "startSession");
+      $this->addFilter("timber/twig", "addTwigFilters");
+      $this->addAction("wp_enqueue_scripts", "addAssets");
+      $this->addAction("after_setup_theme", "addThemeFeatures");
+      $this->addAction("template_redirect", "forceAuthentication");
+    }
   }
 
   /**

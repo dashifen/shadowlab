@@ -140,17 +140,19 @@ class MenuModifier extends AbstractShadowlabPluginService {
    * @throws HookException
    */
   public function initialize (): void {
-    $this->addAction("admin_menu", "addCheatSheetMenus");
-    $this->addAction("admin_menu", "removeDefaultMenuItems", 999);
-    $this->addAction("admin_bar_menu", "removeDefaultAdminBarItems", 1000);
-    $this->addAction("wp_dashboard_setup", "removeDraftWidget", 1000);
-    $this->addFilter("add_menu_classes", "updateTopLevelMenuClasses");
+    if (!$this->isInitialized()) {
+      $this->addAction("admin_menu", "addCheatSheetMenus");
+      $this->addAction("admin_menu", "removeDefaultMenuItems", 999);
+      $this->addAction("admin_bar_menu", "removeDefaultAdminBarItems", 1000);
+      $this->addAction("wp_dashboard_setup", "removeDraftWidget", 1000);
+      $this->addFilter("add_menu_classes", "updateTopLevelMenuClasses");
 
-    // the adminmenu action happens right after the menu has been displayed
-    // in the wp-admin/menu-header.php file.  it's not the same action as the
-    // admin_menu one we used above.
+      // the adminmenu action happens right after the menu has been displayed
+      // in the wp-admin/menu-header.php file.  it's not the same action as the
+      // admin_menu one we used above.
 
-    $this->addAction("adminmenu", "alterMenuDisplay");
+      $this->addAction("adminmenu", "alterMenuDisplay");
+    }
   }
 
   /**
