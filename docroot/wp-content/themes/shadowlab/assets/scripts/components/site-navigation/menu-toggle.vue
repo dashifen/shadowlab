@@ -14,7 +14,6 @@
 
   export default {
     name: "menu-toggle",
-
     components: {FontAwesomeIcon},
 
     computed: {

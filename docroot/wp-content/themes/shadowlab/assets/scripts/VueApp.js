@@ -15,7 +15,7 @@ export default {
 
     const store = new Vuex.Store({
       state: {
-        "menuOpen": true,
+        "menuOpen": false,
       },
 
       getters: {

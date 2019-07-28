@@ -22,5 +22,16 @@
 </script>
 
 <style scoped>
+  #site-navigation {
+    align-items: flex-start;
+    display: flex;
+    position: absolute;
+    right: -250px;
+    top: 30px;
+    transition: right 300ms ease-in-out;
+  }
 
+  #site-navigation.menu-open {
+    right: 0;
+  }
 </style>

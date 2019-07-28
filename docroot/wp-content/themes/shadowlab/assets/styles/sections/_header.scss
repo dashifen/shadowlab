@@ -1,5 +1,4 @@
 
-
 #banner {
   background: $black;
   position: relative;
@@ -59,11 +58,47 @@
       z-index: 10;
     }
 
-    .item a {
-      color: $white;
-      display: block;
-      text-decoration: none;
-      padding: rem(7px) rem(5px);
+    .item {
+      a {
+        color: $white;
+        display: block;
+        outline: none;
+        padding: rem(7px) rem(5px) rem(7px) rem(20px);
+        position: relative;
+        text-decoration: none;
+
+        &:active, &:focus, &:hover {
+          background-color: lighten($black, 15%);
+        }
+
+        svg {
+          font-size: 75%;
+          left: 6px;
+          position: absolute;
+          top: 11px;
+        }
+      }
+
+      &.clicked {
+        background-color: lighten($black, 15%);
+
+        .submenu {
+          display: block;
+        }
+      }
+    }
+
+    .submenu {
+      display: none;
+
+      .item a {
+        padding-left: 25px;
+        background: lighten($black, 15%);
+
+        &:active, &:focus, &:hover {
+          background-color: lighten($black, 25%);
+        }
+      }
     }
   }
 }

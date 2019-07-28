@@ -153,8 +153,42 @@ svg {
 #site-navigation #main-menu .item a {
   color: #ffffff;
   display: block;
+  outline: none;
+  padding: 0.4375rem 0.3125rem 0.4375rem 1.25rem;
+  position: relative;
   text-decoration: none;
-  padding: 0.4375rem 0.3125rem;
+}
+
+#site-navigation #main-menu .item a:active, #site-navigation #main-menu .item a:focus, #site-navigation #main-menu .item a:hover {
+  background-color: #383838;
+}
+
+#site-navigation #main-menu .item a svg {
+  font-size: 75%;
+  left: 6px;
+  position: absolute;
+  top: 11px;
+}
+
+#site-navigation #main-menu .item.clicked {
+  background-color: #383838;
+}
+
+#site-navigation #main-menu .item.clicked .submenu {
+  display: block;
+}
+
+#site-navigation #main-menu .submenu {
+  display: none;
+}
+
+#site-navigation #main-menu .submenu .item a {
+  padding-left: 25px;
+  background: #383838;
+}
+
+#site-navigation #main-menu .submenu .item a:active, #site-navigation #main-menu .submenu .item a:focus, #site-navigation #main-menu .submenu .item a:hover {
+  background-color: #525252;
 }
 
 #content {
