@@ -186,6 +186,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
         $hook = $this->addSubmenuPage(new SubmenuItem($this, [
           "parentSlug" => strtolower(urlencode($sheet->title)),
           "pageTitle"  => $config->getPostType($postType)->plural,
+          "method"     => "show" . $this->getStudlyCaps($postType),
           "capability" => "edit_posts",
         ]));
 

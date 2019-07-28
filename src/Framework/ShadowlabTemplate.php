@@ -83,14 +83,12 @@ class ShadowlabTemplate extends AbstractTimberTemplate {
     // post types that are linked to those sheets as a submenu.  we'll
     // construct that structure here using our Configuration object.
 
-    $sheets = $this->getCheatSheets();
-    $config = $this->theme->getController()->getConfig();
-    foreach ($sheets as $sheetTitle) {
-      $sheet = $config->getSheet($sheetTitle);
-      $submenu = $this->getSubMenu($sheet, $config);
+    $sheets = $this->theme->getController()->getSheets();
+    foreach ($sheets as $sheet) {
+    $submenu = $this->getSubMenu($sheet);
 
       $menu[] = new ShadowlabMenuItem([
-        "label"   => $sheetTitle,
+        "label"   => $sheet->title,
         "url"     => home_url($sheet->slug),
         "current" => $this->isCurrentSheet($sheet),
         "classes" => sizeof($submenu) > 0 ? ["item", "with-submenu"] : ["item"],
@@ -102,39 +100,19 @@ class ShadowlabTemplate extends AbstractTimberTemplate {
   }
 
   /**
-   * getCheatSheets
-   *
-   * Returns an array of registered cheat sheet titles.
-   *
-   * @return array
-   */
-  private function getCheatSheets (): array {
-    $posts = get_posts(["post_type" => "cheat-sheet"]);
-
-    // all our calling scope wants is the titles, so we'll use array_map()
-    // to make a new array containing only those.
-
-    return array_map(function (WP_Post $post) {
-      return $post->post_title;
-    }, $posts);
-  }
-
-  /**
    * getSubMenu
    *
    * Given a CheatSheet, an array of MenuItems representing the submenu for
    * it's menu item.
    *
    * @param CheatSheet    $sheet
-   * @param Configuration $config
    *
    * @return ShadowlabMenuItem[]
    * @throws RepositoryException
    */
-  private function getSubMenu (CheatSheet $sheet, Configuration $config): array {
+  private function getSubMenu (CheatSheet $sheet): array {
     foreach ($sheet->entries as $entry) {
-      $postType = $config->getPostType($entry);
-
+      $postType = $this->theme->getController()->getConfig()->getPostType($entry);
       $submenu[] = new ShadowlabMenuItem([
         "label"   => $postType->plural,
         "url"     => home_url($postType->slug),
