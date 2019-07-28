@@ -1,48 +1,26 @@
-.cheat-sheets {
-  display: flex;
-}
+$margin: 125px;
 
 .cheat-sheet {
-  min-width: 19.5%;
-  text-align: center;
-
-  .cheat-sheet-title,
-  .cheat-sheet-entry-type a {
-    display: block;
-    padding: rem(15px) 0;
-  }
+  display: flex;
+  margin-left: $margin;
+  position: relative;
 
   .cheat-sheet-title {
-    font-size: 115%;
-    font-variant: small-caps;
-    margin: 0;
-    text-decoration: underline;
-  }
+    left: $margin * -1;
+    position: absolute;
+    text-align: right;
+    width: $margin;
 
-  .cheat-sheet-entry-type {
-    background: darken($highlight, 25%);
-    border: solid $highlight;
-    border-width: 0 2px;
-    margin-left: 0;
+    h2 {
+      margin: 0;
 
-    &:first-of-type {
-      border-top-width: 2px;
-    }
-
-    &:last-of-type {
-      border-bottom-width: 2px;
-    }
-
-    a {
-      background-color: darken($highlight, 25%);
-      color: $white;
-      text-decoration: none;
-
-      &:active, &:focus, &:hover {
-        background-color: darken($highlight, 5%);
-        color: lighten($hover, 10%);
+      &::after {
+        content: ":";
       }
     }
   }
 
+  .cheat-sheet-entry-type {
+    margin-top: rem(8px);
+  }
 }

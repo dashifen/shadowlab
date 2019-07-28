@@ -1,11 +1,11 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  {% for item in menu %}
-    <div class="cheat-sheets">
+  <div class="cheat-sheets">
+    {% for item in menu %}
       <dl class="cheat-sheet" aria-labelledby="{{ item.label | toId }}">
-        <dt>
-          <h2 class="cheat-sheet-title" id="{{ item.label | toId }}">{{ item.label }}</h2>
+        <dt class="cheat-sheet-title">
+          <h2 id="{{ item.label | toId }}">{{ item.label }}</h2>
         </dt>
 
         {% for submenuItem in item.submenu %}
@@ -15,6 +15,6 @@
         {% endfor %}
 
       </dl>
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
 {% endblock %}

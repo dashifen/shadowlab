@@ -1,6 +1,7 @@
 
 #banner {
   background: $black;
+  margin-bottom: rem(128px);
   position: relative;
   width: 100%;
 
@@ -25,8 +26,10 @@
 
 #site-title {
   color: $white;
+  display: block;
   font-family: $headerFont;
   font-size: 200%;
+  font-weight: normal;
   margin: 0;
   padding: rem(20px) 0;
 }
@@ -45,7 +48,7 @@
 
   #main-menu {
     background-color: $black;
-    height: 100vh;
+    min-height: rem(350px);
     position: relative;
     width: 250px;
 

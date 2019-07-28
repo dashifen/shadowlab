@@ -152,7 +152,7 @@ class PostType extends Repository {
       "labels"              => $labels,
       "label"               => $this->type,
       "supports"            => ["title", "editor"],
-      "rewrite"             => ["slug" => $this->slug],
+      "rewrite"             => ["slug" => $this->getSlug()],
       "capability_type"     => "post",
       "hierarchical"        => false,
       "exclude_from_search" => false,
