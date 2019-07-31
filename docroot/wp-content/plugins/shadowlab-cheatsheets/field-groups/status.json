@@ -1,1 +1,94 @@
-{"key":"group_5d21f86b5fc4b","title":"Status","fields":[{"key":"field_5d21f9588cb95","label":"Maximum Level","name":"maximum_level","type":"number","instructions":"Enter the maximum level to which this status can be applied (e.g. the maximum level for the Blinded status is 3).","required":0,"conditional_logic":0,"wrapper":{"width":"","class":"","id":""},"default_value":"","placeholder":"","prepend":"","append":"","min":"","max":"","step":""},{"key":"field_5d21f9cfad45a","label":"Cancels","name":"cancels","type":"relationship","instructions":"","required":0,"conditional_logic":0,"wrapper":{"width":"","class":"","id":""},"post_type":["status"],"taxonomy":"","filters":["search"],"elements":"","min":"","max":"","return_format":"id"},{"key":"field_5d21f9f4ad45b","label":"Is Canceled By","name":"is_canceled_by","type":"relationship","instructions":"","required":0,"conditional_logic":0,"wrapper":{"width":"","class":"","id":""},"post_type":["status"],"taxonomy":"","filters":["search"],"elements":"","min":"","max":"","return_format":"id"}],"location":[[{"param":"post_type","operator":"==","value":"status"}]],"menu_order":0,"position":"normal","style":"default","label_placement":"top","instruction_placement":"label","hide_on_screen":"","active":true,"description":""}
+{
+    "key": "group_5d21f86b5fc4b",
+    "title": "Status",
+    "fields": [
+        {
+            "key": "field_5d21f9588cb95",
+            "label": "Maximum Level",
+            "name": "maximum_level",
+            "type": "number",
+            "instructions": "Enter the maximum level to which this status can be applied (e.g. the maximum level for the Blinded status is 3).",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": 0,
+            "max": "",
+            "step": ""
+        },
+        {
+            "key": "field_5d21f9cfad45a",
+            "label": "Cancels",
+            "name": "cancels",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "status"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id"
+        },
+        {
+            "key": "field_5d21f9f4ad45b",
+            "label": "Is Canceled By",
+            "name": "is_canceled_by",
+            "type": "relationship",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "status"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search"
+            ],
+            "elements": "",
+            "min": "",
+            "max": "",
+            "return_format": "id"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "status"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}

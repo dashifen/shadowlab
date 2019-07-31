@@ -26,6 +26,11 @@ class Controller implements ControllerInterface {
   protected static $container;
 
   /**
+   * @var string
+   */
+  protected $acfFolder = "";
+
+  /**
    * Controller constructor.
    *
    * @throws ShadowlabException
@@ -156,6 +161,42 @@ class Controller implements ControllerInterface {
    */
   public function getCheatSheetsPlugin (): CheatSheetsPlugin {
     return self::$container->get(CheatSheetsPlugin::class);
+  }
+
+  /**
+   * getAcfFolder
+   *
+   * Returns the ACF assets folder location.
+   *
+   * @return string
+   * @throws ShadowlabException
+   */
+  public function getAcfFolder (): string {
+    if (empty($this->acfFolder)) {
+      throw new ShadowlabException("Attempt to use uninitialized ACF folder.",
+        ShadowlabException::INVALID_ACF_FOLDER);
+    }
+
+    return $this->acfFolder;
+  }
+
+  /**
+   * setAcfFolder
+   *
+   * Sets the ACF Folder property.
+   *
+   * @param string $acfFolder
+   *
+   * @return void
+   * @throws ShadowlabException
+   */
+  public function setAcfFolder (string $acfFolder): void {
+    if (!is_dir($acfFolder)) {
+      throw new ShadowlabException("$acfFolder is not a directory.",
+        ShadowlabException::INVALID_ACF_FOLDER);
+    }
+
+    $this->acfFolder = $acfFolder;
   }
 
   /**

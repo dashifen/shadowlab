@@ -21,6 +21,9 @@
       </option>
       <option name="myCustomValuesEnabled" value="true" />
     </inspection_tool>
-    <inspection_tool class="PhpUnused" enabled="true" level="WEAK WARNING" enabled_by_default="true" method_visibility="private" />
+    <inspection_tool class="PhpUnused" enabled="true" level="WEAK WARNING" enabled_by_default="true" method_visibility="private" const_visibility="protected">
+      <option name="CLASS" value="false" />
+      <option name="MAGIC_METHOD" value="false" />
+    </inspection_tool>
   </profile>
 </component>

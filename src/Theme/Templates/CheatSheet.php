@@ -3,8 +3,10 @@
 namespace Shadowlab\Theme\Templates;
 
 use Shadowlab\Theme\Theme;
+use Shadowlab\ShadowlabException;
 use Shadowlab\Repositories\PostType;
 use Shadowlab\Framework\ShadowlabTemplate;
+use Shadowlab\Repositories\CheatSheetEntry;
 use Dashifen\Repository\RepositoryException;
 
 class CheatSheet extends ShadowlabTemplate {
@@ -38,13 +40,14 @@ class CheatSheet extends ShadowlabTemplate {
    *
    * @return void
    * @throws RepositoryException
+   * @throws ShadowlabException
    */
   public function setContext (array $context = []): void {
     parent::setContext($context);
 
     $this->context["page"] = [
-      "headers" => $this->getHeaders(),
-      "entries" => $this->getEntries(),
+      "headers" => ($headers = $this->getHeaders()),
+      "entries" => $this->getEntries($headers),
     ];
   }
 
@@ -54,9 +57,23 @@ class CheatSheet extends ShadowlabTemplate {
    * Returns an array of column headings for the display of this cheat sheet.
    *
    * @return array
+   * @throws ShadowlabException
    */
   private function getHeaders (): array {
+    $acfFolder = $this->theme->getController()->getAcfFolder();
+    $acfDefinition = sprintf("%s/%s.json", $acfFolder, $this->postType->type);
 
+    if (!is_file($acfDefinition)) {
+      throw new ShadowlabException("ACF Definition for $this->postType->type not found.",
+        ShadowlabException::ACF_DEFINITION_NOT_FOUND);
+    }
+
+    $acfObject = json_decode(file_get_contents($acfDefinition));
+    foreach ($acfObject->fields as $field) {
+      if ($field->required) {
+        $headers[$field->label] = $field->name;
+      }
+    }
 
     return $headers ?? [];
   }
@@ -66,11 +83,45 @@ class CheatSheet extends ShadowlabTemplate {
    *
    * Returns an array of entries made on this cheat sheet.
    *
+   * @param array $headers
+   *
    * @return array
    */
-  private function getEntries (): array {
+  private function getEntries (array $headers): array {
+    $posts = get_posts([
+      "post_type" => $this->postType->type,
+      "orderby"   => "title",
+      "order"     => "ASC",
+    ]);
 
+    foreach ($posts as $post) {
+      $entries[] = new CheatSheetEntry([
+        "title"       => $post->post_title,
+        "description" => apply_filters("the_content", $post->post_content),
+        "fields"      => $this->getFields($headers, $post->ID),
+        "book"        => get_field("book", $post->ID),
+        "page"        => get_field("page", $post->ID),
+      ]);
+    }
 
     return $entries ?? [];
+  }
+
+  /**
+   * getFields
+   *
+   * Returns a map of ACF labels to values for the specified post.
+   *
+   * @param array $headers
+   * @param int   $postId
+   *
+   * @return array
+   */
+  private function getFields (array $headers, int $postId): array {
+    foreach ($headers as $acfLabel => $acfName) {
+      $fields[$acfLabel] = get_field($acfName, $postId);
+    }
+
+    return $fields ?? [];
   }
 }

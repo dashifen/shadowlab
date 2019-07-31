@@ -2,11 +2,38 @@
 
 namespace Shadowlab\CheatSheets\Services;
 
+use DirectoryIterator;
+use Shadowlab\ShadowlabException;
+use Shadowlab\Repositories\ACFDefinition;
 use Dashifen\WPHandler\Hooks\HookException;
+use Dashifen\Repository\RepositoryException;
+use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\WPHandler\Services\AbstractPluginService;
-use WP_Post;
 
 class ACFModifications extends AbstractPluginService {
+  /**
+   * @var CheatSheetsPlugin
+   */
+  protected $handler;
+
+  /**
+   * @var string
+   */
+  private $fieldGroupFolder = "";
+
+  /**
+   * AbstractPluginService constructor.
+   *
+   * @param CheatSheetsPlugin $handler
+   *
+   * @throws ShadowlabException
+   */
+  public function __construct (CheatSheetsPlugin $handler) {
+    $this->fieldGroupFolder = sprintf("%s/field-groups", $handler->getPluginDir());
+    $handler->getController()->setAcfFolder($this->fieldGroupFolder);
+    parent::__construct($handler);
+  }
+
   /**
    * initialize
    *
@@ -17,9 +44,109 @@ class ACFModifications extends AbstractPluginService {
    * @throws HookException
    */
   public function initialize (): void {
+    $this->handler::debug(wp_get_current_user()->roles, true);
+
     if (!$this->isInitialized()) {
-      $this->addAction("save_post_acf-field-group", "exportCustomFieldGroups", 1000, 2);
+
+      // if the current user is an administrator, we want to automatically
+      // (re)import field groups to be sure that this installation is up to
+      // date.  since Dash is likely the only admin, this should only fire
+      // when it's them logging in.
+
+
+      if (in_array("administrator", wp_get_current_user()->roles)) {
+        $this->addAction("acf/init", "importFieldGroups");
+      }
+
+      $this->addAction("save_post_acf-field-group", "exportCustomFieldGroups", 1000);
     }
+  }
+
+  /**
+   * importFieldGroups
+   *
+   * Automatically imports field groups that either don't exist or are out
+   * of date.
+   *
+   * @return void
+   * @throws RepositoryException
+   */
+  protected function importFieldGroups () {
+    if (!get_transient(__FUNCTION__)) {
+      $fgRegistered = $this->getRegisteredFieldGroups();
+      $fgDefinitions = $this->getFieldGroupDefinitions();
+      foreach ($fgDefinitions as $fgTitle => $fgDefinition) {
+        $newField = !array_key_exists($fgTitle, $fgRegistered);
+
+        // if this isn't a new file, then we need to see if the date the
+        // post last modified in the database is less than the most recent
+        // modification to the definition file.  luckily, our $fgRegistered
+        // map is titles to dates, so we can determine this easily as
+        // follows.
+
+        $oldDefinition = !$newField && $fgRegistered[$fgTitle] < $fgDefinition->lastModified;
+        if ($newField || $oldDefinition) {
+
+          // the acf import function wants an array as its parameter, not
+          // the filename.  so, here we read it and decode it before calling
+          // the core ACF function to handle the import.
+
+          $contents = file_get_contents($fgDefinition->file);
+          $fgArray = json_decode($contents, true);
+          acf_import_field_group($fgArray);
+        }
+      }
+
+      // HOUR_IN_SECONDS * 12 means we'll do this roughly twice a day.
+      // that should be enough to catch changes regardless of where this
+      // system gets worked on.
+
+      set_transient(__FUNCTION__, time(), HOUR_IN_SECONDS * 12);
+    }
+  }
+
+  /**
+   * getFieldGroupDefinitions
+   *
+   * Returns an array of field group titles mapped to the JSON file that
+   * defines that group.
+   *
+   * @return ACFDefinition[]
+   * @throws RepositoryException
+   */
+  private function getFieldGroupDefinitions (): array {
+    $files = new DirectoryIterator($this->fieldGroupFolder);
+
+    foreach ($files as $file) {
+      if ($file->getExtension() === "json") {
+        $file = $file->getFilename();
+        $json = file_get_contents($file);
+
+        $definitions[] = new ACFDefinition([
+          "title"        => json_decode($json)->title,
+          "lastModified" => filemtime($file),
+          "file"         => $file,
+        ]);
+      }
+    }
+
+    return $definitions ?? [];
+  }
+
+  /**
+   * getRegisteredFieldGroups
+   *
+   * Returns an array of post titles mapped to post modification dates.
+   *
+   * @return array
+   */
+  private function getRegisteredFieldGroups (): array {
+    $fieldGroups = get_posts(["post_type" => "acf-field-group"]);
+    foreach ($fieldGroups as $fieldGroup) {
+      $registered[$fieldGroup->post_title] = strtotime($fieldGroup->post_modified);
+    }
+
+    return $registered ?? [];
   }
 
   /**
@@ -29,12 +156,11 @@ class ACFModifications extends AbstractPluginService {
    * so that we can commit it to the git repo.  That way we can rollback
    * changes if we mess something up, which, of course, we never do.
    *
-   * @param int     $postId
-   * @param WP_Post $post
+   * @param int $postId
    *
    * @return void
    */
-  protected function exportCustomFieldGroups (int $postId, WP_Post $post) {
+  protected function exportCustomFieldGroups (int $postId) {
     list($acfName, $filename) = $this->getFieldGroupDetails($postId);
 
     if (empty($acfName)) {
@@ -42,7 +168,7 @@ class ACFModifications extends AbstractPluginService {
     }
 
     $contents = $this->getFieldGroupContents($acfName);
-    $filename = sprintf("%s/field-groups/%s.json", $this->handler->getPluginDir(), $filename);
+    $filename = $this->fieldGroupFolder . sprintf("/%s.json", $filename);
     file_put_contents($filename, $contents);
   }
 
@@ -57,7 +183,7 @@ class ACFModifications extends AbstractPluginService {
    *
    * @return array
    */
-  protected function getFieldGroupDetails (int $postId) {
+  private function getFieldGroupDetails (int $postId) {
     global $wpdb;
 
     // here, we need to get the post data for the $postId that was
@@ -89,7 +215,7 @@ class ACFModifications extends AbstractPluginService {
    *
    * @return string
    */
-  protected function getFieldGroupContents (string $acfName) {
+  private function getFieldGroupContents (string $acfName) {
     $fieldGroup = acf_get_field_group($acfName);
 
     if (!empty($fieldGroup)) {
@@ -97,6 +223,6 @@ class ACFModifications extends AbstractPluginService {
       $json = acf_prepare_field_group_for_export($fieldGroup);
     }
 
-    return json_encode($json ?? "");
+    return json_encode($json ?? "", JSON_PRETTY_PRINT);
   }
 }

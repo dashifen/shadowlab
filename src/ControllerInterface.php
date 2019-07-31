@@ -2,9 +2,10 @@
 
 namespace Shadowlab;
 
+use Throwable;
+use Shadowlab\Repositories\PostType;
 use Shadowlab\Repositories\CheatSheet;
 use Shadowlab\Repositories\Configuration;
-use Shadowlab\Repositories\PostType;
 
 /**
  * Interface ControllerInterface
@@ -39,6 +40,29 @@ interface ControllerInterface {
    */
   public function getPostTypes (): array;
 
+
+  /**
+   * getAcfFolder
+   *
+   * Returns the ACF assets folder location.
+   *
+   * @return string
+   * @throws ShadowlabException
+   */
+  public function getAcfFolder (): string;
+
+  /**
+   * setAcfFolder
+   *
+   * Sets the ACF Folder property.
+   *
+   * @param string $acfFolder
+   *
+   * @return void
+   * @throws ShadowlabException
+   */
+  public function setAcfFolder (string $acfFolder): void;
+
   /**
    * sanitizeUrlSlug
    *
@@ -50,4 +74,24 @@ interface ControllerInterface {
    * @return string
    */
   public static function sanitizeUrlSlug (string $unsanitary): string;
+
+  /**
+   * isDebug
+   *
+   * Returns the value for Theme::isDebug().
+   *
+   * @return bool
+   */
+  public function isDebug (): bool;
+
+  /**
+   * catcher
+   *
+   * Calls the Theme::catcher() method passing it $e.
+   *
+   * @param Throwable $e
+   *
+   * @return void
+   */
+  public function catcher (Throwable $e): void;
 }
