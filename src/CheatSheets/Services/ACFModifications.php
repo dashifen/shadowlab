@@ -44,8 +44,6 @@ class ACFModifications extends AbstractPluginService {
    * @throws HookException
    */
   public function initialize (): void {
-    $this->handler::debug(wp_get_current_user()->roles, true);
-
     if (!$this->isInitialized()) {
 
       // if the current user is an administrator, we want to automatically
@@ -55,7 +53,7 @@ class ACFModifications extends AbstractPluginService {
 
 
       if (in_array("administrator", wp_get_current_user()->roles)) {
-        $this->addAction("acf/init", "importFieldGroups");
+        $this->addAction("admin_init", "importFieldGroups");
       }
 
       $this->addAction("save_post_acf-field-group", "exportCustomFieldGroups", 1000);
@@ -119,11 +117,9 @@ class ACFModifications extends AbstractPluginService {
 
     foreach ($files as $file) {
       if ($file->getExtension() === "json") {
-        $file = $file->getFilename();
-        $json = file_get_contents($file);
-
+        $file = $file->getPathname();
         $definitions[] = new ACFDefinition([
-          "title"        => json_decode($json)->title,
+          "title"        => json_decode(file_get_contents($file))->title,
           "lastModified" => filemtime($file),
           "file"         => $file,
         ]);
