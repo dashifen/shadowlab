@@ -4,14 +4,14 @@ namespace Shadowlab\Theme;
 
 use Twig_Environment;
 use Twig_SimpleFilter;
-use Shadowlab\ControllerInterface;
+use Shadowlab\Controller;
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Themes\AbstractThemeHandler;
 
 class Theme extends AbstractThemeHandler {
   /**
-   * @var ControllerInterface
+   * @var Controller
    */
   protected $controller;
 
@@ -19,9 +19,9 @@ class Theme extends AbstractThemeHandler {
    * Theme constructor.
    *
    * @param HookFactoryInterface $hookFactory
-   * @param ControllerInterface  $controller
+   * @param Controller           $controller
    */
-  public function __construct (HookFactoryInterface $hookFactory, ControllerInterface $controller) {
+  public function __construct (HookFactoryInterface $hookFactory, Controller $controller) {
     parent::__construct($hookFactory);
     $this->controller = $controller;
   }
@@ -31,9 +31,9 @@ class Theme extends AbstractThemeHandler {
    *
    * Returns the controller property
    *
-   * @return ControllerInterface
+   * @return Controller
    */
-  public function getController (): ControllerInterface {
+  public function getController (): Controller {
     return $this->controller;
   }
 

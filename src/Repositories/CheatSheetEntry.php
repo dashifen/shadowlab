@@ -2,11 +2,21 @@
 
 namespace Shadowlab\Repositories;
 
-use PhpOption\Tests\Repository;
+use Dashifen\Repository\Repository;
 
+/**
+ * Class CheatSheetEntry
+ *
+ * @package Shadowlab\Repositories
+ * @property-read array  $fields
+ * @property-read string $title
+ * @property-read string $description
+ * @property-read string $book
+ * @property-read int    $page
+ */
 class CheatSheetEntry extends Repository {
   /**
-   * @var array 
+   * @var array
    */
   protected $fields = [];
 

@@ -9,12 +9,12 @@ use Dashifen\Repository\Repository;
  * Class PostType
  *
  * @package Shadowlab\CheatSheets\Repositories
- * @property string     $type
- * @property string     $singular
- * @property string     $plural
- * @property string     $slug
- * @property int        $sheetId
- * @property CheatSheet $sheet
+ * @property-read string     $type
+ * @property-read string     $singular
+ * @property-read string     $plural
+ * @property-read string     $slug
+ * @property-read int        $sheetId
+ * @property-read CheatSheet $sheet
  */
 class PostType extends Repository {
   /**

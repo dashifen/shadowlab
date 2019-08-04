@@ -1,9 +1,9 @@
 {
-    "key": "group_5d41ab2f2b363",
+    "key": "group_5d46b47e6781c",
     "title": "Book and Page",
     "fields": [
         {
-            "key": "field_5d41ab42e1621",
+            "key": "field_5d46b48588077",
             "label": "Book",
             "name": "book",
             "type": "select",
@@ -27,7 +27,7 @@
             "placeholder": ""
         },
         {
-            "key": "field_5d41ab65e1622",
+            "key": "field_5d46b49688078",
             "label": "Page",
             "name": "page",
             "type": "number",
@@ -39,23 +39,16 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": 0,
             "placeholder": "",
             "prepend": "",
             "append": "",
-            "min": 1,
+            "min": 0,
             "max": "",
             "step": ""
         }
     ],
     "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "status"
-            }
-        ],
         [
             {
                 "param": "post_type",
@@ -67,16 +60,24 @@
             {
                 "param": "post_type",
                 "operator": "==",
+                "value": "status"
+            }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
                 "value": "spell"
             }
         ]
     ],
-    "menu_order": 0,
+    "menu_order": 9000,
     "position": "normal",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": true,
-    "description": ""
+    "active": 1,
+    "description": "",
+    "modified": 1564920799
 }

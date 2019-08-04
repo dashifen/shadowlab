@@ -3,32 +3,48 @@
 namespace Shadowlab;
 
 use Throwable;
+use DirectoryIterator;
 use Shadowlab\Theme\Theme;
 use League\Container\Container;
 use Symfony\Component\Yaml\Yaml;
+use Dashifen\Repository\Repository;
 use Shadowlab\Repositories\PostType;
+use Shadowlab\Theme\TemplateFactory;
 use Shadowlab\Repositories\CheatSheet;
 use Shadowlab\Repositories\Configuration;
+use Shadowlab\Repositories\ACFDefinition;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\Framework\ShadowlabHookFactory;
 use Symfony\Component\Yaml\Exception\ParseException;
 
-class Controller implements ControllerInterface {
+/**
+ * Class Controller
+ *
+ * @package Shadowlab
+ * @property-read string          $acfFolder
+ * @property-read ACFDefinition[] $acfDefinitions
+ */
+class Controller extends Repository {
   /**
    * @var Configuration
    */
-  protected static $config;
+  private static $config;
 
   /**
    * @var Container
    */
-  protected static $container;
+  private static $container;
 
   /**
    * @var string
    */
   protected $acfFolder = "";
+
+  /**
+   * @var array
+   */
+  protected $acfDefinitions = [];
 
   /**
    * Controller constructor.
@@ -37,6 +53,8 @@ class Controller implements ControllerInterface {
    * @throws RepositoryException
    */
   public function __construct () {
+    parent::__construct();
+
     if (!(self::$config instanceof Configuration)) {
       $this->setConfig();
     }
@@ -96,6 +114,7 @@ class Controller implements ControllerInterface {
    */
   protected function setContainer (): void {
     self::$container = new Container();
+
     self::$container->add(ShadowlabHookFactory::class);
 
     self::$container->add(Theme::class)
@@ -104,6 +123,9 @@ class Controller implements ControllerInterface {
 
     self::$container->add(CheatSheetsPlugin::class)
       ->addArgument(ShadowlabHookFactory::class)
+      ->addArgument($this);
+
+    self::$container->add(TemplateFactory::class)
       ->addArgument($this);
   }
 
@@ -143,12 +165,23 @@ class Controller implements ControllerInterface {
   /**
    * getTheme
    *
-   * Returns a Theme object constructed via our static container object.
+   * Returns a Theme object constructed via our static container.
    *
    * @return Theme
    */
   public function getTheme (): Theme {
     return self::$container->get(Theme::class);
+  }
+
+  /**
+   * getTemplateFactory
+   *
+   * Returns a TemplateFactory object constructed via our static container.
+   *
+   * @return TemplateFactory
+   */
+  public function getTemplateFactory (): TemplateFactory {
+    return self::$container->get(TemplateFactory::class);
   }
 
   /**
@@ -164,23 +197,6 @@ class Controller implements ControllerInterface {
   }
 
   /**
-   * getAcfFolder
-   *
-   * Returns the ACF assets folder location.
-   *
-   * @return string
-   * @throws ShadowlabException
-   */
-  public function getAcfFolder (): string {
-    if (empty($this->acfFolder)) {
-      throw new ShadowlabException("Attempt to use uninitialized ACF folder.",
-        ShadowlabException::INVALID_ACF_FOLDER);
-    }
-
-    return $this->acfFolder;
-  }
-
-  /**
    * setAcfFolder
    *
    * Sets the ACF Folder property.
@@ -189,6 +205,7 @@ class Controller implements ControllerInterface {
    *
    * @return void
    * @throws ShadowlabException
+   * @throws RepositoryException
    */
   public function setAcfFolder (string $acfFolder): void {
     if (!is_dir($acfFolder)) {
@@ -197,6 +214,33 @@ class Controller implements ControllerInterface {
     }
 
     $this->acfFolder = $acfFolder;
+    $this->setAcfDefinitions();
+  }
+
+  /**
+   * setAcfDefinitions
+   *
+   * Called after our folder is set, this initializes a map of field group
+   * names to files that we use when identifying cheat sheets.
+   *
+   * @return void
+   * @throws RepositoryException
+   */
+  protected function setAcfDefinitions (): void {
+    $files = new DirectoryIterator($this->acfFolder);
+
+    foreach ($files as $file) {
+      if ($file->getExtension() === "json") {
+        $path = $file->getPathname();
+        $contents = file_get_contents($path);
+        $title = json_decode($contents)->title;
+        $this->acfDefinitions[$title] = new ACFDefinition([
+          "title"        => $title,
+          "lastModified" => filemtime($path),
+          "file"         => $path,
+        ]);
+      }
+    }
   }
 
   /**

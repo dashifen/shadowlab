@@ -4,7 +4,7 @@ namespace Shadowlab\CheatSheets;
 
 use Exception;
 use Shadowlab\ShadowlabException;
-use Shadowlab\ControllerInterface;
+use Shadowlab\Controller;
 use Shadowlab\Repositories\CheatSheet;
 use HaydenPierce\ClassFinder\ClassFinder;
 use Dashifen\WPHandler\Hooks\HookException;
@@ -14,7 +14,7 @@ use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
   /**
-   * @var ControllerInterface
+   * @var Controller
    */
   protected $controller;
 
@@ -22,9 +22,9 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    * CheatSheetsPlugin constructor.
    *
    * @param HookFactoryInterface $hookFactory
-   * @param ControllerInterface  $controller
+   * @param Controller  $controller
    */
-  public function __construct (HookFactoryInterface $hookFactory, ControllerInterface $controller) {
+  public function __construct (HookFactoryInterface $hookFactory, Controller $controller) {
     parent::__construct($hookFactory);
     $this->controller = $controller;
   }
@@ -34,9 +34,9 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    *
    * Returns the controller property.
    *
-   * @return ControllerInterface
+   * @return Controller
    */
-  public function getController (): ControllerInterface {
+  public function getController (): Controller {
     return $this->controller;
   }
 

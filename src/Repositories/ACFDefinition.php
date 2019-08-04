@@ -8,9 +8,9 @@ use Dashifen\Repository\Repository;
  * Class ACFDefinition
  *
  * @package Shadowlab\Repositories
- * @property string $title
- * @property string $file
- * @property int    $lastModified
+ * @property-read string $title
+ * @property-read string $file
+ * @property-read int    $lastModified
  */
 class ACFDefinition extends Repository {
   /**

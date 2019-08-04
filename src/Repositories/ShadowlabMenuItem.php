@@ -9,10 +9,10 @@ use Dashifen\Repository\RepositoryException;
  * Class MenuItem
  *
  * @package Shadowlab\Theme\Repositories
- * @property $classes
- * @property $current
- * @property $url
- * @property $label
+ * @property-read array  $classes
+ * @property-read bool   $current
+ * @property-read string $url
+ * @property-read string $label
  */
 class ShadowlabMenuItem extends Repository {
   /**
@@ -123,7 +123,7 @@ class ShadowlabMenuItem extends Repository {
    * @return void
    * @throws RepositoryException
    */
-  protected function setSubmenu(array $submenu): void {
+  protected function setSubmenu (array $submenu): void {
     foreach ($submenu as $item) {
       if (!($item instanceof ShadowlabMenuItem)) {
         throw new RepositoryException("All submenu items must be MenuItems",

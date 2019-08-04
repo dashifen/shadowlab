@@ -9,8 +9,8 @@ use Dashifen\Repository\RepositoryException;
  * Class Configuration
  *
  * @package Shadowlab\CheatSheets\Repositories
- * @property CheatSheet[] $sheets
- * @property PostType[]   $postTypes
+ * @property-read CheatSheet[] $sheets
+ * @property-read PostType[]   $postTypes
  */
 class Configuration extends Repository {
 
@@ -66,7 +66,7 @@ class Configuration extends Repository {
     // here.  plus, it lets us use the spaceship operator which should be used
     // at least once in every project!
 
-    usort($this->sheets, function(CheatSheet $a, CheatSheet $b): int {
+    usort($this->sheets, function (CheatSheet $a, CheatSheet $b): int {
       return $a->title <=> $b->title;
     });
   }

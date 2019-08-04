@@ -10,10 +10,10 @@ use Dashifen\Repository\Repository;
  * Class CheatSheet
  *
  * @package Shadowlab\CheatSheets\Repositories
- * @property string $title
- * @property string $slug
- * @property array  $entries
- * @property int    $sheetId
+ * @property-read string $title
+ * @property-read string $slug
+ * @property-read array  $entries
+ * @property-read int    $sheetId
  */
 class CheatSheet extends Repository {
   /**
