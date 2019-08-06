@@ -1,5 +1,5 @@
 {
-    "key": "group_5d46b47e6781c",
+    "key": "group_5d46b47e6781c__trashed",
     "title": "Book and Page",
     "fields": [
         {
@@ -77,7 +77,6 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "modified": 1564920799
+    "active": true,
+    "description": ""
 }

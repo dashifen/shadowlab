@@ -1,13 +1,13 @@
 {
-    "key": "group_5d46bbf86ef88",
+    "key": "group_5d49b632a47ec",
     "title": "Status",
     "fields": [
         {
-            "key": "field_5d46bc4e8a750",
+            "key": "field_5d49b637c4775",
             "label": "Maximum Level",
             "name": "maximum_level",
             "type": "number",
-            "instructions": "Enter the maximum level for this status (e.g. the Blind status's maximum level is three).  If this status has no maximum level, simply leave this at zero.",
+            "instructions": "Enter the maximum level for this status.  If it does not have a maximum level, or does not have any levels at all, enter zero.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -21,7 +21,7 @@
             "append": "",
             "min": 0,
             "max": "",
-            "step": ""
+            "step": -3
         }
     ],
     "location": [
@@ -39,7 +39,6 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "modified": 1564920785
+    "active": true,
+    "description": ""
 }
