@@ -3,6 +3,7 @@
 namespace Shadowlab\CheatSheets\Services;
 
 use Dashifen\WPHandler\Hooks\HookException;
+use Shadowlab\Framework\AbstractShadowlabPluginService;
 
 class TypeRegistration extends AbstractShadowlabPluginService {
   /**
@@ -104,7 +105,7 @@ class TypeRegistration extends AbstractShadowlabPluginService {
       // get messed with is via the sheet registration process built into
       // this plugin.
 
-      'capabilities'        => [
+      'capabilities' => [
         "create_posts" => "create_cheat_sheet",
         "delete_post"  => "delete_cheat_sheet",
       ],

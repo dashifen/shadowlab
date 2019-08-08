@@ -17,6 +17,7 @@ use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\Framework\ShadowlabHookFactory;
 use Symfony\Component\Yaml\Exception\ParseException;
+use Shadowlab\CheatSheets\Services\Factory\ShadowlabServiceFactory;
 
 /**
  * Class Controller
@@ -114,8 +115,8 @@ class Controller extends Repository {
    */
   protected function setContainer (): void {
     self::$container = new Container();
-
     self::$container->add(ShadowlabHookFactory::class);
+    self::$container->add(ShadowlabServiceFactory::class);
 
     self::$container->add(Theme::class)
       ->addArgument(ShadowlabHookFactory::class)
@@ -123,6 +124,7 @@ class Controller extends Repository {
 
     self::$container->add(CheatSheetsPlugin::class)
       ->addArgument(ShadowlabHookFactory::class)
+      ->addArgument(ShadowlabServiceFactory::class)
       ->addArgument($this);
 
     self::$container->add(TemplateFactory::class)

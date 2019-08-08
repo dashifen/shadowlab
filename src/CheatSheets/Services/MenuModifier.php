@@ -10,6 +10,7 @@ use Dashifen\Repository\RepositoryException;
 use Dashifen\WPHandler\Repositories\MenuItem;
 use Dashifen\WPHandler\Repositories\SubmenuItem;
 use Dashifen\WPHandler\Handlers\HandlerException;
+use Shadowlab\CheatSheets\Services\AbstractShadowlabPluginService;
 
 class MenuModifier extends AbstractShadowlabPluginService {
   /**

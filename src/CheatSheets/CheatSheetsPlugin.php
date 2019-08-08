@@ -2,15 +2,14 @@
 
 namespace Shadowlab\CheatSheets;
 
-use Exception;
-use Shadowlab\ShadowlabException;
 use Shadowlab\Controller;
+use Shadowlab\ShadowlabException;
 use Shadowlab\Repositories\CheatSheet;
-use HaydenPierce\ClassFinder\ClassFinder;
 use Dashifen\WPHandler\Hooks\HookException;
-use Dashifen\WPHandler\Services\AbstractPluginService;
+use Dashifen\Repository\RepositoryException;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
+use Shadowlab\CheatSheets\Services\Factory\ShadowlabServiceFactory;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
   /**
@@ -19,13 +18,24 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
   protected $controller;
 
   /**
+   * @var ShadowlabServiceFactory
+   */
+  protected $serviceFactory;
+
+  /**
    * CheatSheetsPlugin constructor.
    *
-   * @param HookFactoryInterface $hookFactory
-   * @param Controller  $controller
+   * @param HookFactoryInterface    $hookFactory
+   * @param ShadowlabServiceFactory $serviceFactory
+   * @param Controller              $controller
    */
-  public function __construct (HookFactoryInterface $hookFactory, Controller $controller) {
+  public function __construct (
+    HookFactoryInterface $hookFactory,
+    ShadowlabServiceFactory $serviceFactory,
+    Controller $controller
+  ) {
     parent::__construct($hookFactory);
+    $this->serviceFactory = $serviceFactory;
     $this->controller = $controller;
   }
 
@@ -101,45 +111,14 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
   /**
    * initializeServices
    *
-   * Uses the ClassFinder object to get a list of Services for this object
-   * and initializes them.
+   * Uses the ShadowlabServiceFactory object to initialize services.
    *
    * @return void
+   * @throws RepositoryException
+   * @throws ShadowlabException
    */
   protected function initializeServices () {
-    try {
-
-      // the ClassFinder object will return an array of all objects found in
-      // the specified namespace.  in this case, they're all plugin services.
-      // this lets us add services to that folder without having to remember
-      // to also add them here for initialization.
-
-      $services = ClassFinder::getClassesInNamespace(
-        'Shadowlab\CheatSheets\Services',
-        ClassFinder::RECURSIVE_MODE
-      );
-    } catch (Exception $e) {
-
-      // if there were any problems, we'll just skip the initialization of
-      // services by setting an empty array.  then the loop below never
-      // iterates at all.  this will probably cause all sorts of havoc
-      // elsewhere, though.
-
-      $services = [];
-    }
-
-    foreach ($services as $service) {
-      /** @var AbstractPluginService $service */
-
-      if (strpos($service, "Abstract") !== false) {
-        continue;
-      }
-
-      // services get a reference to this object, their handler.  then, we
-      // call their initialize function.  see the objects in the adjacent
-      // Services folder for more information on what each of these do.
-
-      $service = new $service($this);
+    foreach ($this->serviceFactory->getServices() as $service) {
       $service->initialize();
     }
   }

@@ -14,7 +14,8 @@ require ABSPATH . "../vendor/autoload.php";
 
 try {
   $controller = new Controller();
-  $controller->getCheatSheetsPlugin()->initialize();
+  $cheatSheets = $controller->getCheatSheetsPlugin();
+  $cheatSheets->initialize();
 } catch (Exception $e) {
   $controller->catcher($e);
 }
