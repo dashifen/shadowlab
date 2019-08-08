@@ -16,8 +16,8 @@ use Shadowlab\Repositories\ACFDefinition;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\Framework\ShadowlabHookFactory;
+use Shadowlab\Framework\ShadowlabServiceFactory;
 use Symfony\Component\Yaml\Exception\ParseException;
-use Shadowlab\CheatSheets\Services\Factory\ShadowlabServiceFactory;
 
 /**
  * Class Controller

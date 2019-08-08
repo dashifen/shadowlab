@@ -1,14 +1,12 @@
 <?php
 
-namespace Shadowlab\CheatSheets\Services\Factory;
+namespace Shadowlab\Framework;
 
-use MongoDB\BSON\Type;
 use Shadowlab\ShadowlabException;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\CheatSheets\Services\ACFModifier;
 use Shadowlab\CheatSheets\Services\MenuModifier;
 use Shadowlab\CheatSheets\Services\TypeRegistration;
-use Shadowlab\CheatSheets\Services\AbstractShadowlabPluginService;
 
 /**
  * Class ShadowlabServiceFactory
@@ -25,7 +23,7 @@ class ShadowlabServiceFactory {
    * @throws RepositoryException
    * @throws ShadowlabException
    */
-  public function getServices(): array {
+  public function getServices (): array {
     return [
       $this->getACFModifier(),
       $this->getMenuModifier(),

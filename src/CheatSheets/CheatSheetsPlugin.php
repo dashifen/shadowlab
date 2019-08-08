@@ -9,7 +9,7 @@ use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
-use Shadowlab\CheatSheets\Services\Factory\ShadowlabServiceFactory;
+use Shadowlab\Framework\ShadowlabServiceFactory;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
   /**
