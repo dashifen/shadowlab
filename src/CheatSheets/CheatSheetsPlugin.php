@@ -82,18 +82,17 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    */
   public function initialize (): void {
     if (!$this->isInitialized()) {
-
-      // we initialize our services at priority level five here so that they can
-      // use the default of ten and know that their priority level in the queue
-      // has not yet happened.
-
       $this->addAction("admin_init", "createSheets");
-      $this->addAction("init", "initializeServices", 5);
-      $this->addAction("init", "registerSheetSlugs", 15);
-      $this->addAction("init", "flush", 20);
 
-      $this->addFilter("query_vars", "queryVars");
-      $this->addFilter("template_include", "templateInclude");
+      // we initialize our services at priority level five here so that they
+      // can use the default of ten and know that their priority level in the
+      // queue has not yet happened.  i.e., if a service X needs to hook
+      // something to priority 10, it's possible that some actions at 10 have
+      // already occurred at this point.  using 5 means that service should be
+      // fine as long as we don't use priorities less than 6 within them.
+
+      $this->addAction("init", "initializeServices", 5);
+      $this->addAction("init", "flush", 20);
 
       // whenever one of our types is saved, not counting the sheets themselves,
       // we want to link the entry we just made to the sheet on which it should
@@ -174,27 +173,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
   }
 
   /**
-   * registerSheetSlugs
-   *
-   * Registers rewrite rules for each sheet so that we can load up pages
-   * like /<sheet-name> and have it work.
-   *
-   * @return void
-   */
-  protected function registerSheetSlugs (): void {
-    foreach ($this->controller->getSheets() as $sheet) {
-
-      // the pattern we build here is one in which the URL begins with our
-      // slug, has an optional slash, and nothing else.  this is because our
-      // sheet entries (e.g. the statuses on the character sheet) all use the
-      // sheet's slug as a part of their URL, too.  thus, we only want these
-      // rules to apply to the sheet itself.
-
-      add_rewrite_rule("^{$sheet->slug}/?$", "index.php?sheet_id=" . $sheet->sheetId, "top");
-    }
-  }
-
-  /**
    * flush
    *
    * Flushes rewrite rules while we're debugging.
@@ -205,39 +183,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
     if (self::isDebug()) {
       flush_rewrite_rules();
     }
-  }
-
-  /**
-   * queryVars
-   *
-   * Filters our query variables.
-   *
-   * @param array $vars
-   *
-   * @return array
-   */
-  protected function queryVars (array $vars): array {
-    $vars[] = "sheet_id";
-    return $vars;
-  }
-
-  /**
-   * templateInclude
-   *
-   * Filters the WordPress template name that we include.  Note:  this has
-   * nothing to do with the Twig template that is used by those templates to
-   * build actual pages.
-   *
-   * @param string $template
-   *
-   * @return string
-   */
-  protected function templateInclude (string $template): string {
-    if (is_numeric(get_query_var("sheet_id"))) {
-      $template = locate_template("single-cheat-sheet.php");
-    }
-
-    return $template;
   }
 
   /**

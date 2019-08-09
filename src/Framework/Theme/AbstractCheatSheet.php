@@ -3,12 +3,12 @@
 namespace Shadowlab\Framework\Theme;
 
 use Shadowlab\Theme\Theme;
-use Shadowlab\Exception;
+use Shadowlab\Framework\Exception;
 use Shadowlab\Repositories\PostType;
 use Shadowlab\Repositories\CheatSheetEntry;
 use Dashifen\Repository\RepositoryException;
 
-abstract class AbstractCheatSheet extends ShadowlabTemplate {
+abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
   /**
    * @var PostType
    */
@@ -23,6 +23,23 @@ abstract class AbstractCheatSheet extends ShadowlabTemplate {
   public function __construct (Theme $theme, bool $getTimberContext = false) {
     $this->postType = $theme->getController()->getConfig()->getPostType(get_post_type());
     parent::__construct($theme, $getTimberContext);
+  }
+
+  /**
+   * assignTemplate
+   *
+   * Sets the template property; named "assign" to make it more clear that this
+   * isn't your typical setter.
+   *
+   * @return void
+   */
+  protected function assignTemplate (): void {
+
+    // at the moment, all of our cheat sheets use the same twig.  thus, we
+    // can implement the abstract-in-our-parent assignTwig() method here and
+    // not worry about it in the concrete objects that extend this one.
+
+    $this->template = "cheat-sheet.twig";
   }
 
   /**

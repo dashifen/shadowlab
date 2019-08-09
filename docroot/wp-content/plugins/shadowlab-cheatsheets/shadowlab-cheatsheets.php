@@ -7,14 +7,14 @@ Author URI: https://dashifen.com
 Version: 0.0.3
 */
 
-use Shadowlab\Controller;
 use Dashifen\Exception\Exception;
+use Shadowlab\Framework\Controller;
 
 require ABSPATH . "../vendor/autoload.php";
 
 try {
   $controller = new Controller();
-  $cheatSheets = $controller->getCheatSheetsPlugin();
+  $cheatSheets = $controller->getPlugin();
   $cheatSheets->initialize();
 } catch (Exception $e) {
   $controller->catcher($e);

@@ -5,15 +5,21 @@ namespace Shadowlab\Framework\Theme;
 use Shadowlab\Theme\Theme;
 use Shadowlab\Repositories\PostType;
 use Shadowlab\Repositories\CheatSheet;
+use Dashifen\WPTemplates\PostException;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\Repositories\ShadowlabMenuItem;
 use Dashifen\WPTemplates\Templates\AbstractTimberTemplate;
 
-class ShadowlabTemplate extends AbstractTimberTemplate {
+abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
   /**
    * @var Theme
    */
   protected $theme;
+
+  /**
+   * @var string
+   */
+  protected $template;
 
   /**
    * AbstractTemplate constructor.
@@ -24,6 +30,41 @@ class ShadowlabTemplate extends AbstractTimberTemplate {
   public function __construct (Theme $theme, bool $getTimberContext = false) {
     $this->theme = $theme;
     parent::__construct($getTimberContext);
+    $this->assignTemplate();
+  }
+
+  /**
+   * assignTemplate
+   *
+   * Sets the template property; named "assign" to make it more clear that this
+   * isn't your typical setter.
+   *
+   * @return void
+   */
+  abstract protected function assignTemplate (): void;
+
+  /**
+   * show
+   *
+   * Given a template, displays it using the $context property for this
+   * page.  If $debug is set, then it also prints the $context property in
+   * a large comment at the top of the page.
+   *
+   * @param string $template
+   * @param bool   $debug
+   *
+   * @return void
+   * @throws PostException
+   */
+  public function show (string $template = "", bool $debug = false): void {
+
+    // what we want to do here is offer the ability to default to the twig
+    // file template that's specified in our properties.  thus, we added the
+    // default value for the template parameter, and then, if it's empty, we
+    // set it to the property.
+
+    $template = empty($template) ? $this->template : $template;
+    parent::show($template, $debug);
   }
 
   /**
