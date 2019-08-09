@@ -11,7 +11,7 @@
         <th scope="row" :id="'row' + j" headers="type">
           <a :href="entry.url" @click.prevent="setOpenItem(j)" v-text="entry.title"></a>
         </th>
-        <td v-for="(header, i) in headers" :headers="'row' + j + ' col' + i" v-text="entry.fields[i]"></td>
+        <td v-for="i in headers.length" :headers="'row' + j + ' col' + i" v-text="entry.fields[i]"></td>
       </tr>
       <tr class="body-row">
         <td :colspan="entries.length + 1">

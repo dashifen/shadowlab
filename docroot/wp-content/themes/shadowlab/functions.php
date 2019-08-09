@@ -8,6 +8,7 @@ use Shadowlab\Theme\Theme;
 use Dashifen\Exception\Exception;
 use Shadowlab\Framework\ShadowlabHookFactory;
 
+
 try {
 
   // here we initialize our theme object and let it add the necessary
