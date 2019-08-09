@@ -2,8 +2,8 @@
   <nav id="main-menu" aria-labelledby="main-menu-label">
     <span class="visually-hidden" id="main-menu-label">Main Menu</span>
 
-    <ul v-if="menuObj.length > 0" class="menu">
-      <li v-for="(item, i) in menuObj" :class="getClasses(i)" @click.prevent="openSubmenu(i)">
+    <ul v-if="menu.length > 0" class="menu">
+      <li v-for="(item, i) in menu" :class="getClasses(i)" @click.prevent="openSubmenu(i)">
         <a :href="item.url">
           <font-awesome-icon v-if="item.submenu.length > 0" :icon="['far', getIcon(i)]"></font-awesome-icon>
           {{ item.label }}
@@ -29,18 +29,18 @@
   export default {
     name: "main-menu",
     components: {FontAwesomeIcon},
-    props: ["menu"],
+    props: ["menuJson"],
 
     data: function() {
       return {
+        "menu": JSON.parse(this.menuJson),
         "clicked": false,
-        "menuObj": JSON.parse(this.menu),
       }
     },
 
     methods: {
       getClasses(i) {
-        return this.menuObj[i].classes
+        return this.menu[i].classes
           .concat(this.clicked === i ? ["clicked"] : [])
           .join(" ");
       },

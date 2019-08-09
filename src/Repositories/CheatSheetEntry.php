@@ -33,6 +33,11 @@ class CheatSheetEntry extends Repository {
   /**
    * @var string
    */
+  protected $url;
+
+  /**
+   * @var string
+   */
   protected $book = "";
 
   /**
@@ -77,6 +82,20 @@ class CheatSheetEntry extends Repository {
    */
   protected function setDescription (string $description): void {
     $this->description = $description;
+  }
+
+  /**
+   * setUrl
+   *
+   * Sets the URL property; we don't use filter_var() to confirm it because
+   * it's likely to be a WP permalink and not a full address.
+   *
+   * @param string $url
+   *
+   * @return void
+   */
+  protected function setUrl (string $url): void {
+    $this->url = $url;
   }
 
   /**

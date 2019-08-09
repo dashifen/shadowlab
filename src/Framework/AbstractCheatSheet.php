@@ -110,6 +110,7 @@ abstract class AbstractCheatSheet extends ShadowlabTemplate {
     foreach ($posts as $post) {
       $entries[] = new CheatSheetEntry([
         "title"       => $post->post_title,
+        "url"         => get_permalink($post->ID),
         "description" => apply_filters("the_content", $post->post_content),
         "fields"      => $this->getFields($headers, $post->ID),
         "page"        => (int) get_field("page", $post->ID),
