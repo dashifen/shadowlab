@@ -4,6 +4,7 @@ namespace Shadowlab\Framework;
 
 use Shadowlab\ShadowlabException;
 use Dashifen\Repository\RepositoryException;
+use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Shadowlab\CheatSheets\Services\ACFModifier;
 use Shadowlab\CheatSheets\Services\MenuModifier;
 use Shadowlab\CheatSheets\Services\TypeRegistration;
@@ -15,15 +16,24 @@ use Shadowlab\CheatSheets\Services\TypeRegistration;
  */
 class ShadowlabServiceFactory {
   /**
+   * @var CheatSheetsPlugin
+   */
+  protected $handler;
+
+  /**
    * getServices
    *
    * Returns an array of the services that this factory produces.
+   *
+   * @param CheatSheetsPlugin $handler
    *
    * @return AbstractShadowlabPluginService[]
    * @throws RepositoryException
    * @throws ShadowlabException
    */
-  public function getServices (): array {
+  public function getServices (CheatSheetsPlugin $handler): array {
+    $this->handler = $handler;
+
     return [
       $this->getACFModifier(),
       $this->getMenuModifier(),
@@ -41,7 +51,7 @@ class ShadowlabServiceFactory {
    * @throws ShadowlabException
    */
   public function getACFModifier (): ACFModifier {
-    return new ACFModifier();
+    return new ACFModifier($this->handler);
   }
 
   /**
@@ -52,7 +62,7 @@ class ShadowlabServiceFactory {
    * @return MenuModifier
    */
   public function getMenuModifier (): MenuModifier {
-    return new MenuModifier();
+    return new MenuModifier($this->handler);
   }
 
   /**
@@ -63,6 +73,6 @@ class ShadowlabServiceFactory {
    * @return TypeRegistration
    */
   public function getTypeRegistration (): TypeRegistration {
-    return new TypeRegistration();
+    return new TypeRegistration($this->handler);
   }
 }

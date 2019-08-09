@@ -38,10 +38,6 @@
       }
     },
 
-    computed: {
-
-    },
-
     methods: {
       getClasses(i) {
         return this.menuObj[i].classes

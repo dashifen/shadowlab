@@ -54,7 +54,7 @@ class ACFModifier extends AbstractShadowlabPluginService {
 
 
       if (in_array("administrator", wp_get_current_user()->roles)) {
-        $this->addAction("admin_init", "importFieldGroups");
+        //$this->addAction("admin_init", "importFieldGroups");
       }
 
       $this->addAction("save_post_acf-field-group", "exportCustomFieldGroups", 1000);
@@ -71,37 +71,37 @@ class ACFModifier extends AbstractShadowlabPluginService {
    * @throws RepositoryException
    */
   protected function importFieldGroups () {
-    //if (!get_transient(__FUNCTION__)) {
-    $fgRegistered = $this->getRegisteredFieldGroups();
-    $fgDefinitions = $this->getFieldGroupDefinitions();
-    foreach ($fgDefinitions as $fgTitle => $fgDefinition) {
-      $newField = !array_key_exists($fgTitle, $fgRegistered);
+    if (!get_transient(__FUNCTION__)) {
+      $fgRegistered = $this->getRegisteredFieldGroups();
+      $fgDefinitions = $this->getFieldGroupDefinitions();
+      foreach ($fgDefinitions as $fgTitle => $fgDefinition) {
+        $newField = !array_key_exists($fgTitle, $fgRegistered);
 
-      // if this isn't a new file, then we need to see if the date the
-      // post last modified in the database is less than the most recent
-      // modification to the definition file.  luckily, our $fgRegistered
-      // map is titles to dates, so we can determine this easily as
-      // follows.
+        // if this isn't a new file, then we need to see if the date the
+        // post last modified in the database is less than the most recent
+        // modification to the definition file.  luckily, our $fgRegistered
+        // map is titles to dates, so we can determine this easily as
+        // follows.
 
-      $oldDefinition = !$newField && $fgRegistered[$fgTitle] < $fgDefinition->lastModified;
-      if ($newField || $oldDefinition) {
+        $oldDefinition = !$newField && $fgRegistered[$fgTitle] < $fgDefinition->lastModified;
+        if ($newField || $oldDefinition) {
 
-        // the acf import function wants an array as its parameter, not
-        // the filename.  so, here we read it and decode it before calling
-        // the core ACF function to handle the import.
+          // the acf import function wants an array as its parameter, not
+          // the filename.  so, here we read it and decode it before calling
+          // the core ACF function to handle the import.
 
-        $contents = file_get_contents($fgDefinition->file);
-        $fgArray = json_decode($contents, true);
-        acf_add_local_field_group($fgArray);
+          $contents = file_get_contents($fgDefinition->file);
+          $fgArray = json_decode($contents, true);
+          acf_add_local_field_group($fgArray);
+        }
       }
+
+      // HOUR_IN_SECONDS * 12 means we'll do this roughly twice a day.
+      // that should be enough to catch changes regardless of where this
+      // system gets worked on.
+
+      set_transient(__FUNCTION__, time(), HOUR_IN_SECONDS * 12);
     }
-
-    // HOUR_IN_SECONDS * 12 means we'll do this roughly twice a day.
-    // that should be enough to catch changes regardless of where this
-    // system gets worked on.
-
-    //set_transient(__FUNCTION__, time(), HOUR_IN_SECONDS * 12);
-    //}
   }
 
   /**

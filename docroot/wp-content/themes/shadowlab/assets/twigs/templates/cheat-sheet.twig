@@ -1,0 +1,5 @@
+{% extends "base.twig" %}
+
+{% block content %}
+  <cheat-sheet type="{{ page.type }}" entries-json='{{ page.entries | json_encode }}'></cheat-sheet>
+{% endblock %}

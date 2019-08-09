@@ -43,6 +43,7 @@ abstract class AbstractCheatSheet extends ShadowlabTemplate {
     parent::setContext($context);
 
     $this->context["page"] = [
+      "type"    => $this->postType->singular,
       "headers" => ($headers = $this->getHeaders()),
       "entries" => $this->getEntries($headers),
     ];

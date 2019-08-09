@@ -118,7 +118,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    * @throws ShadowlabException
    */
   protected function initializeServices () {
-    foreach ($this->serviceFactory->getServices() as $service) {
+    foreach ($this->serviceFactory->getServices($this) as $service) {
       $service->initialize();
     }
   }

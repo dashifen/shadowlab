@@ -2,11 +2,9 @@
 
 namespace Shadowlab\Framework;
 
-use WP_Post;
 use Shadowlab\Theme\Theme;
 use Shadowlab\Repositories\PostType;
 use Shadowlab\Repositories\CheatSheet;
-use Shadowlab\Repositories\Configuration;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\Repositories\ShadowlabMenuItem;
 use Dashifen\WPTemplates\Templates\AbstractTimberTemplate;
@@ -85,7 +83,7 @@ class ShadowlabTemplate extends AbstractTimberTemplate {
 
     $sheets = $this->theme->getController()->getSheets();
     foreach ($sheets as $sheet) {
-    $submenu = $this->getSubMenu($sheet);
+      $submenu = $this->getSubMenu($sheet);
 
       $menu[] = new ShadowlabMenuItem([
         "label"   => $sheet->title,
@@ -105,7 +103,7 @@ class ShadowlabTemplate extends AbstractTimberTemplate {
    * Given a CheatSheet, an array of MenuItems representing the submenu for
    * it's menu item.
    *
-   * @param CheatSheet    $sheet
+   * @param CheatSheet $sheet
    *
    * @return ShadowlabMenuItem[]
    * @throws RepositoryException
