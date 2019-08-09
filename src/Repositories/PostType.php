@@ -2,7 +2,7 @@
 
 namespace Shadowlab\Repositories;
 
-use Shadowlab\Controller;
+use Shadowlab\Framework\Controller;
 use Dashifen\Repository\Repository;
 
 /**

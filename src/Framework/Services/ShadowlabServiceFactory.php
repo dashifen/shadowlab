@@ -1,13 +1,13 @@
 <?php
 
-namespace Shadowlab\Framework;
+namespace Shadowlab\Framework\Services;
 
-use Shadowlab\ShadowlabException;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Shadowlab\CheatSheets\Services\ACFModifier;
 use Shadowlab\CheatSheets\Services\MenuModifier;
 use Shadowlab\CheatSheets\Services\TypeRegistration;
+use Shadowlab\Framework\Exception;
 
 /**
  * Class ShadowlabServiceFactory
@@ -29,7 +29,7 @@ class ShadowlabServiceFactory {
    *
    * @return AbstractShadowlabPluginService[]
    * @throws RepositoryException
-   * @throws ShadowlabException
+   * @throws Exception
    */
   public function getServices (CheatSheetsPlugin $handler): array {
     $this->handler = $handler;
@@ -48,7 +48,7 @@ class ShadowlabServiceFactory {
    *
    * @return ACFModifier
    * @throws RepositoryException
-   * @throws ShadowlabException
+   * @throws Exception
    */
   public function getACFModifier (): ACFModifier {
     return new ACFModifier($this->handler);

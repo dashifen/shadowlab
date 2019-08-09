@@ -2,8 +2,8 @@
 
 namespace Shadowlab\Repositories;
 
-use Shadowlab\Controller;
-use Shadowlab\ShadowlabException;
+use Shadowlab\Framework\Exception;
+use Shadowlab\Framework\Controller;
 use Dashifen\Repository\Repository;
 
 /**
@@ -90,7 +90,7 @@ class CheatSheet extends Repository {
    * @param int $sheetId
    *
    * @return void
-   * @throws ShadowlabException
+   * @throws Exception
    */
   public function setSheetId (int $sheetId): void {
 
@@ -103,8 +103,8 @@ class CheatSheet extends Repository {
     // registered.
 
     if ($this->sheetId !== 0) {
-      throw new ShadowlabException("Attempt to overwrite $this->title sheet ID",
-        ShadowlabException::SHEET_REREGISTRATION);
+      throw new Exception("Attempt to overwrite $this->title sheet ID",
+        Exception::SHEET_REREGISTRATION);
     }
 
     $this->sheetId = $sheetId;

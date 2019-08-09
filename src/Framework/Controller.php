@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab;
+namespace Shadowlab\Framework;
 
 use Throwable;
 use DirectoryIterator;
@@ -15,9 +15,9 @@ use Shadowlab\Repositories\Configuration;
 use Shadowlab\Repositories\ACFDefinition;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\Repository\RepositoryException;
-use Shadowlab\Framework\ShadowlabHookFactory;
-use Shadowlab\Framework\ShadowlabServiceFactory;
+use Shadowlab\Framework\Hooks\ShadowlabHookFactory;
 use Symfony\Component\Yaml\Exception\ParseException;
+use Shadowlab\Framework\Services\ShadowlabServiceFactory;
 
 /**
  * Class Controller
@@ -50,7 +50,7 @@ class Controller extends Repository {
   /**
    * Controller constructor.
    *
-   * @throws ShadowlabException
+   * @throws Exception
    * @throws RepositoryException
    */
   public function __construct () {
@@ -72,14 +72,14 @@ class Controller extends Repository {
    *
    * @return void
    * @throws RepositoryException
-   * @throws ShadowlabException
+   * @throws Exception
    */
   protected function setConfig (): void {
     $configFile = ABSPATH . "../config.yaml";
 
     if (!is_file($configFile)) {
-      throw new ShadowlabException("Unable to find config.yaml",
-        ShadowlabException::CONFIG_FILE_NOT_FOUND);
+      throw new Exception("Unable to find config.yaml",
+        Exception::CONFIG_FILE_NOT_FOUND);
     }
 
     try {
@@ -103,8 +103,8 @@ class Controller extends Repository {
       // rather than throw symfony's exception, we'll throw ours.  so, here
       // we convert the former to the latter.
 
-      throw new ShadowlabException("Unable to parse config.yaml",
-        ShadowlabException::CONFIG_FILE_INVALID);
+      throw new Exception("Unable to parse config.yaml",
+        Exception::CONFIG_FILE_INVALID);
     }
   }
 
@@ -187,14 +187,14 @@ class Controller extends Repository {
   }
 
   /**
-   * getCheatSheetsPlugin
+   * getPlugin
    *
    * Returns a CheatSheetsPlugin object constructed via our static container
    * object.
    *
    * @return CheatSheetsPlugin
    */
-  public function getCheatSheetsPlugin (): CheatSheetsPlugin {
+  public function getPlugin (): CheatSheetsPlugin {
     return self::$container->get(CheatSheetsPlugin::class);
   }
 
@@ -206,13 +206,13 @@ class Controller extends Repository {
    * @param string $acfFolder
    *
    * @return void
-   * @throws ShadowlabException
+   * @throws Exception
    * @throws RepositoryException
    */
   public function setAcfFolder (string $acfFolder): void {
     if (!is_dir($acfFolder)) {
-      throw new ShadowlabException("$acfFolder is not a directory.",
-        ShadowlabException::INVALID_ACF_FOLDER);
+      throw new Exception("$acfFolder is not a directory.",
+        Exception::INVALID_ACF_FOLDER);
     }
 
     $this->acfFolder = $acfFolder;

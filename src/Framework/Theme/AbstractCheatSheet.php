@@ -1,9 +1,9 @@
 <?php
 
-namespace Shadowlab\Framework;
+namespace Shadowlab\Framework\Theme;
 
 use Shadowlab\Theme\Theme;
-use Shadowlab\ShadowlabException;
+use Shadowlab\Exception;
 use Shadowlab\Repositories\PostType;
 use Shadowlab\Repositories\CheatSheetEntry;
 use Dashifen\Repository\RepositoryException;
@@ -37,7 +37,7 @@ abstract class AbstractCheatSheet extends ShadowlabTemplate {
    *
    * @return void
    * @throws RepositoryException
-   * @throws ShadowlabException
+   * @throws Exception
    */
   public function setContext (array $context = []): void {
     parent::setContext($context);
@@ -55,14 +55,14 @@ abstract class AbstractCheatSheet extends ShadowlabTemplate {
    * Returns an array of column headings for the display of this cheat sheet.
    *
    * @return array
-   * @throws ShadowlabException
+   * @throws Exception
    */
   private function getHeaders (): array {
     $acfDefinition = $this->theme->getController()->acfDefinitions[$this->postType->singular];
 
     if (!is_file($acfDefinition->file)) {
-      throw new ShadowlabException("ACF Definition for {$this->postType->singular} not found.",
-        ShadowlabException::ACF_DEFINITION_NOT_FOUND);
+      throw new Exception("ACF Definition for {$this->postType->singular} not found.",
+        Exception::ACF_DEFINITION_NOT_FOUND);
     }
 
     $contents = file_get_contents($acfDefinition->file);

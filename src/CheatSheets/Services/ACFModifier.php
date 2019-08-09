@@ -3,12 +3,12 @@
 namespace Shadowlab\CheatSheets\Services;
 
 use DirectoryIterator;
-use Shadowlab\ShadowlabException;
+use Shadowlab\Framework\Exception;
 use Shadowlab\Repositories\ACFDefinition;
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
-use Shadowlab\Framework\AbstractShadowlabPluginService;
+use Shadowlab\Framework\Services\AbstractShadowlabPluginService;
 
 class ACFModifier extends AbstractShadowlabPluginService {
   /**
@@ -26,7 +26,7 @@ class ACFModifier extends AbstractShadowlabPluginService {
    *
    * @param CheatSheetsPlugin $handler
    *
-   * @throws ShadowlabException
+   * @throws Exception
    * @throws RepositoryException
    */
   public function __construct (CheatSheetsPlugin $handler) {
@@ -53,9 +53,9 @@ class ACFModifier extends AbstractShadowlabPluginService {
       // when it's them logging in.
 
 
-      if (in_array("administrator", wp_get_current_user()->roles)) {
-        //$this->addAction("admin_init", "importFieldGroups");
-      }
+      /*if (in_array("administrator", wp_get_current_user()->roles)) {
+        $this->addAction("admin_init", "importFieldGroups");
+      }*/
 
       $this->addAction("save_post_acf-field-group", "exportCustomFieldGroups", 1000);
     }

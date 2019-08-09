@@ -2,14 +2,14 @@
 
 namespace Shadowlab\CheatSheets;
 
-use Shadowlab\Controller;
-use Shadowlab\ShadowlabException;
+use Shadowlab\Framework\Exception;
+use Shadowlab\Framework\Controller;
 use Shadowlab\Repositories\CheatSheet;
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
+use Shadowlab\Framework\Services\ShadowlabServiceFactory;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
-use Shadowlab\Framework\ShadowlabServiceFactory;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
   /**
@@ -115,7 +115,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    *
    * @return void
    * @throws RepositoryException
-   * @throws ShadowlabException
+   * @throws Exception
    */
   protected function initializeServices () {
     foreach ($this->serviceFactory->getServices($this) as $service) {
@@ -130,7 +130,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    * our configuration.
    *
    * @return void
-   * @throws ShadowlabException
+   * @throws Exception
    */
   protected function createSheets (): void {
     foreach ($this->controller->getConfig()->sheets as $sheet) {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Framework;
+namespace Shadowlab\Framework\Hooks;
 
 use Dashifen\WPHandler\Hooks\Hook;
 use Dashifen\WPHandler\Hooks\HookException;

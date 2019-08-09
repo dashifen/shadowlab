@@ -4,7 +4,7 @@ namespace Shadowlab\Theme;
 
 use Twig_Environment;
 use Twig_SimpleFilter;
-use Shadowlab\Controller;
+use Shadowlab\Framework\Controller;
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Themes\AbstractThemeHandler;

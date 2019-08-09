@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Framework;
+namespace Shadowlab\Framework\Theme;
 
 use Shadowlab\Theme\Theme;
 use Shadowlab\Repositories\PostType;

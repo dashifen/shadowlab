@@ -2,8 +2,8 @@
 
 namespace Shadowlab\Theme;
 
-use Shadowlab\Controller;
-use Shadowlab\Framework\AbstractCheatSheet;
+use Shadowlab\Framework\Controller;
+use Shadowlab\Framework\Theme\AbstractCheatSheet;
 
 class TemplateFactory {
   /**

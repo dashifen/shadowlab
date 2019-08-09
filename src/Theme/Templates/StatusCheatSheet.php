@@ -2,7 +2,7 @@
 
 namespace Shadowlab\Theme\Templates;
 
-use Shadowlab\Framework\AbstractCheatSheet;
+use Shadowlab\Framework\Theme\AbstractCheatSheet;
 
 class StatusCheatSheet extends AbstractCheatSheet {
   /**

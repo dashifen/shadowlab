@@ -3,7 +3,7 @@
 namespace Shadowlab\CheatSheets\Services;
 
 use Dashifen\WPHandler\Hooks\HookException;
-use Shadowlab\Framework\AbstractShadowlabPluginService;
+use Shadowlab\Framework\Services\AbstractShadowlabPluginService;
 
 class TypeRegistration extends AbstractShadowlabPluginService {
   /**
