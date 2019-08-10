@@ -44,11 +44,14 @@
 
   &.menu-open {
     right: 0;
+
+    #main-menu {
+      min-height: rem(350px);
+    }
   }
 
   #main-menu {
     background-color: $black;
-    min-height: rem(350px);
     position: relative;
     width: 250px;
 

@@ -1,5 +1,9 @@
 {% extends "base.twig" %}
 
 {% block content %}
-  <cheat-sheet type="{{ page.type }}" entries-json='{{ page.entries | json_encode }}'></cheat-sheet>
+  <header><h1 id="entry-title">{{ page.plural }}</h1></header>
+  <cheat-sheet type="{{ page.type }}"
+               headers-json='{{ page.headers | json_encode }}'
+               entries-json='{{ page.entries | json_encode }}'>
+  </cheat-sheet>
 {% endblock %}

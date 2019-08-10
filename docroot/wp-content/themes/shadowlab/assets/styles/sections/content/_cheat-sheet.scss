@@ -1,0 +1,35 @@
+table {
+  background-color: $white;
+  border: 1px solid $black;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+th, td {
+  padding: rem(7.5px);
+  text-align: left;
+  vertical-align: top;
+
+  &.field {
+    width: 5%;
+  }
+
+  &.field-numeric {
+    text-align: right;
+  }
+}
+
+thead th {
+  background-color: $hover;
+  border-bottom: 1px solid $black;
+  vertical-align: bottom;
+}
+
+tbody:not(:last-of-type) {
+  border-bottom: 1px solid $black;
+}
+
+tbody:not(.clicked) tr.body-row {
+  display: none;
+}

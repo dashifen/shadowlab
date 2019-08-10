@@ -39,7 +39,7 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
     // can implement the abstract-in-our-parent assignTwig() method here and
     // not worry about it in the concrete objects that extend this one.
 
-    $this->template = "cheat-sheet.twig";
+    $this->template = "templates/cheat-sheet.twig";
   }
 
   /**
@@ -58,11 +58,13 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
    */
   public function setContext (array $context = []): void {
     parent::setContext($context);
+    $headers = $this->getHeaders();
 
     $this->context["page"] = [
       "type"    => $this->postType->singular,
-      "headers" => ($headers = $this->getHeaders()),
+      "plural"  => $this->postType->plural,
       "entries" => $this->getEntries($headers),
+      "headers" => array_keys($headers),
     ];
   }
 
@@ -125,10 +127,12 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
     ]);
 
     foreach ($posts as $post) {
+      $content = apply_filters("the_content", $post->post_content);
+
       $entries[] = new CheatSheetEntry([
         "title"       => $post->post_title,
         "url"         => get_permalink($post->ID),
-        "description" => apply_filters("the_content", $post->post_content),
+        "description" => $this->transformContent($content),
         "fields"      => $this->getFields($headers, $post->ID),
         "page"        => (int) get_field("page", $post->ID),
         "book"        => get_field("book", $post->ID),
@@ -137,6 +141,18 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
 
     return $entries ?? [];
   }
+
+  /**
+   * transformContent
+   *
+   * Transforms the content of a post in case there's more to do to it for
+   * our sheet than what WordPress can do via the the_content filter.
+   *
+   * @param string $content
+   *
+   * @return string
+   */
+  abstract protected function transformContent(string $content): string;
 
   /**
    * getFields
@@ -151,7 +167,7 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
   private function getFields (array $headers, int $postId): array {
     foreach ($headers as $transformedLabel => $acfName) {
       $value = $this->transformFieldValue(get_field($acfName, $postId), $transformedLabel);
-      $fields[$transformedLabel] = $value;
+      $fields[] = $value;
     }
 
     return $fields ?? [];

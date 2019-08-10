@@ -14,6 +14,6 @@ class Homepage extends AbstractShadowlabTemplate {
    * @return void
    */
   protected function assignTemplate (): void {
-    $this->template = "homepage.twig";
+    $this->template = "templates/homepage.twig";
   }
 }

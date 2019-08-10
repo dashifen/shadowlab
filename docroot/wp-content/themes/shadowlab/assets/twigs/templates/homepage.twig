@@ -1,6 +1,8 @@
 {% extends "base.twig" %}
 
 {% block content %}
+  <h2 id="entry-title" class="visually-hidden">Cheat Sheets</h2>
+
   <div class="cheat-sheets">
     {% for item in menu %}
       <dl class="cheat-sheet" aria-labelledby="{{ item.label | toId }}">

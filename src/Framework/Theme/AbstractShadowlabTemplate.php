@@ -61,9 +61,12 @@ abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
     // what we want to do here is offer the ability to default to the twig
     // file template that's specified in our properties.  thus, we added the
     // default value for the template parameter, and then, if it's empty, we
-    // set it to the property.
+    // set it to the property.  we also want to default to the value of our
+    // Theme's isDebug() check so if the debug parameter is false, we use
+    // that static method to identify our debugging state.
 
     $template = empty($template) ? $this->template : $template;
+    $debug = !$debug ? $this->theme::isDebug() : true;
     parent::show($template, $debug);
   }
 

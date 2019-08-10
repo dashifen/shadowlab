@@ -2,7 +2,11 @@
   margin-top: 100px;
 }
 
-
-
+#entry-title {
+  font-family: $headerFont;
+  font-size: 175%;
+  font-weight: normal;
+}
 
 @import "content/front-page";
+@import "content/cheat-sheet";

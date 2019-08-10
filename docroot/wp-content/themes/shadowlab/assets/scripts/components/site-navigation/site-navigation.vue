@@ -1,7 +1,7 @@
 <template>
   <div id="site-navigation" :class="{ 'menu-open': isMenuOpen }">
     <menu-toggle></menu-toggle>
-    <main-menu :menu="menu"></main-menu>
+    <main-menu :menu-json="menuJson"></main-menu>
   </div>
 </template>
 
@@ -10,7 +10,7 @@
   import MenuToggle from "./menu-toggle.vue";
 
   export default {
-    props: ["menu"],
+    props: ["menuJson"],
     name: "site-navigation",
     components: {MainMenu, MenuToggle},
     computed: {

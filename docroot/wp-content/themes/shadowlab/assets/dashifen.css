@@ -129,9 +129,12 @@ svg {
   right: 0;
 }
 
+#site-navigation.menu-open #main-menu {
+  min-height: 21.875rem;
+}
+
 #site-navigation #main-menu {
   background-color: #121212;
-  min-height: 21.875rem;
   position: relative;
   width: 250px;
 }
@@ -197,6 +200,12 @@ svg {
   margin-top: 100px;
 }
 
+#entry-title {
+  font-family: "Iceland", sans-serif;
+  font-size: 175%;
+  font-weight: normal;
+}
+
 .cheat-sheet {
   display: flex;
   margin-left: 125px;
@@ -220,6 +229,42 @@ svg {
 
 .cheat-sheet .cheat-sheet-entry-type {
   margin-top: 0.5rem;
+}
+
+table {
+  background-color: #ffffff;
+  border: 1px solid #121212;
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+
+th, td {
+  padding: 0.46875rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th.field, td.field {
+  width: 5%;
+}
+
+th.field-numeric, td.field-numeric {
+  text-align: right;
+}
+
+thead th {
+  background-color: #5ac6d1;
+  border-bottom: 1px solid #121212;
+  vertical-align: bottom;
+}
+
+tbody:not(:last-of-type) {
+  border-bottom: 1px solid #121212;
+}
+
+tbody:not(.clicked) tr.body-row {
+  display: none;
 }
 
 #footer {

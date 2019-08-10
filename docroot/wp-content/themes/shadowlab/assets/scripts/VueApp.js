@@ -7,7 +7,7 @@ import {faWordpress} from "@fortawesome/free-brands-svg-icons";
 import {faCopyright} from "@fortawesome/pro-regular-svg-icons/faCopyright";
 
 import SiteNavigation from "./components/site-navigation/site-navigation.vue";
-import CheatSheet from "./components/cheat-sheet.vue";
+import CheatSheet from "./components/cheat-sheets/cheat-sheet.vue";
 
 Vue.use(Vuex);
 Vue.config.productionTip = false;

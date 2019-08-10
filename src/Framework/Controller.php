@@ -260,6 +260,43 @@ class Controller extends Repository {
   }
 
   /**
+   * toStudlyCaps
+   *
+   * Given a wimpy string return it in StudlyCaps.
+   *
+   * @param string $wimpyString
+   *
+   * @return string
+   */
+  public static function toStudlyCaps (string $wimpyString): string {
+
+    // splitting our string based on non-word characters give us the set of
+    // words that within our wimpy string.  then, we can walk the array and
+    // use ucfirst to capitalize each word.  finally, we join it all together
+    // and return our studly string.
+
+    return join("", array_map("ucfirst", preg_split("/\W+/", $wimpyString)));
+  }
+
+  /**
+   * toKabobCase
+   *
+   * Takes a StudlyCaps string and returns it in kabob-case.
+   *
+   * @param string $studlyString
+   *
+   * @return string
+   */
+  public static function toKabobCase(string $studlyString): string {
+
+    // we add a dash between lower-to-capital patterns using preg_replace()
+    // and then lower case the resulting string to take StudlyCaps and return
+    // kabob-case.
+
+    return strtolower(preg_replace("/([a-z])([A-Z])/", '%1-%2', $studlyString));
+  }
+
+  /**
    * isDebug
    *
    * Returns the Theme::isDebug() result as a way to access it when the Theme
@@ -269,6 +306,20 @@ class Controller extends Repository {
    */
   public function isDebug (): bool {
     return Theme::isDebug();
+  }
+
+  /**
+   * debug
+   *
+   * Print's our $stuff and sometimes quits if $die is set using the Theme
+   * object's static debug() method so that we don't have to pull that object
+   * into a context where it's not necessary.
+   *
+   * @param      $stuff
+   * @param bool $die
+   */
+  public function debug($stuff, bool $die = false): void {
+    Theme::debug($stuff, $die);
   }
 
   /**

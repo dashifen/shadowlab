@@ -4,6 +4,7 @@ namespace Shadowlab\CheatSheets\Services;
 
 use WP_Admin_Bar;
 use Timber\Timber;
+use Shadowlab\Framework\Controller;
 use Shadowlab\Repositories\CheatSheet;
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
@@ -36,7 +37,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
     // non StudlyCaps version of our information.  then, we see if it's a
     // sheet and, if so, handle it appropriately.
 
-    $sheetOrPostType = $this->undoStudlyCaps($method);
+    $sheetOrPostType = Controller::toKabobCase($method);
     $config = $this->handler->getController()->getConfig();
     $sheet = $config->getSheet($sheetOrPostType);
 
@@ -60,21 +61,6 @@ class MenuModifier extends AbstractShadowlabPluginService {
 
     throw new HandlerException("Unknown method: $method",
       HandlerException::INAPPROPRIATE_CALL);
-  }
-
-  /**
-   * undoStudlyCaps
-   *
-   * Given a string like showStudlyCaps, returns studly-caps.
-   *
-   * @param string $studly
-   *
-   * @return string
-   */
-  private function undoStudlyCaps (string $studly): string {
-    $noShow = substr($studly, 4);
-    $dashed = preg_replace("/([a-z])([A-Z])/", '$1-$2', $noShow);
-    return strtolower($dashed);
   }
 
   /**
@@ -179,7 +165,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
         "pageTitle"  => $sheet->title,
         "capability" => "edit_posts",
         "iconUrl"    => "dashicons-media-spreadsheet",
-        "method"     => "show" . $this->getStudlyCaps($sheet->title),
+        "method"     => "show" . Controller::toStudlyCaps($sheet->title),
         "position"   => 5,
       ]));
 
@@ -187,7 +173,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
         $hook = $this->addSubmenuPage(new SubmenuItem($this, [
           "parentSlug" => strtolower(urlencode($sheet->title)),
           "pageTitle"  => $config->getPostType($postType)->plural,
-          "method"     => "show" . $this->getStudlyCaps($postType),
+          "method"     => "show" . Controller::toStudlyCaps($postType),
           "capability" => "edit_posts",
         ]));
 
@@ -204,25 +190,6 @@ class MenuModifier extends AbstractShadowlabPluginService {
         });
       }
     }
-  }
-
-  /**
-   * getStudlyCaps
-   *
-   * Takes the string we receive and returns it in studly caps.
-   *
-   * @param string $wimpyString
-   *
-   * @return string
-   */
-  private function getStudlyCaps (string $wimpyString): string {
-
-    // splitting our string based on non-word characters give us the set of
-    // words that within our wimpy string.  then, we can walk the array and
-    // use ucfirst to capitalize each word.  finally, we join it all together
-    // and return our studly string.
-
-    return preg_replace("/\W+/", "", $wimpyString);
   }
 
   /**
