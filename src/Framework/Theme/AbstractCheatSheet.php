@@ -5,6 +5,7 @@ namespace Shadowlab\Framework\Theme;
 use Shadowlab\Theme\Theme;
 use Shadowlab\Framework\Exception;
 use Shadowlab\Repositories\PostType;
+use Dashifen\Searchbar\SearchbarInterface;
 use Shadowlab\Repositories\CheatSheetEntry;
 use Dashifen\Repository\RepositoryException;
 
@@ -59,12 +60,14 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
   public function setContext (array $context = []): void {
     parent::setContext($context);
     $headers = $this->getHeaders();
+    $entries = $this->getEntries($headers);
 
     $this->context["page"] = [
-      "type"    => $this->postType->singular,
-      "plural"  => $this->postType->plural,
-      "entries" => $this->getEntries($headers),
-      "headers" => array_keys($headers),
+      "type"      => $this->postType->singular,
+      "plural"    => $this->postType->plural,
+      "searchbar" => $this->getSearchbar($headers, $entries),
+      "headers"   => array_keys($headers),
+      "entries"   => $entries,
     ];
   }
 
@@ -152,7 +155,7 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
    *
    * @return string
    */
-  abstract protected function transformContent(string $content): string;
+  abstract protected function transformContent (string $content): string;
 
   /**
    * getFields
@@ -186,4 +189,17 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
    * @return mixed
    */
   abstract protected function transformFieldValue ($value, string $label);
+
+  /**
+   * getSearchbar
+   *
+   * Uses the information in our headers and entries to construct a
+   * Searchbar that can help people find the entry they're looking for.
+   *
+   * @param array $headers
+   * @param array $entries
+   *
+   * @return SearchbarInterface
+   */
+  abstract protected function getSearchbar(array $headers, array $entries): SearchbarInterface;
 }

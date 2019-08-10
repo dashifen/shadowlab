@@ -2,6 +2,7 @@
 
 namespace Shadowlab\Theme\Templates\Character;
 
+use Dashifen\Searchbar\SearchbarInterface;
 use Shadowlab\Framework\Theme\AbstractCheatSheet;
 
 class Statuses extends AbstractCheatSheet {
@@ -48,4 +49,25 @@ class Statuses extends AbstractCheatSheet {
   protected function transformFieldValue ($value, string $label) {
     return $label === "Max. Level" && $value === 0 ? "" : $value;
   }
+
+  /**
+   * getSearchbar
+   *
+   * Uses the information in our headers and entries to construct a
+   * Searchbar that can help people find the entry they're looking for.
+   *
+   * @param array $headers
+   * @param array $entries
+   *
+   * @return SearchbarInterface
+   */
+  protected function getSearchbar (array $headers, array $entries): SearchbarInterface {
+
+    // here we construct
+
+
+
+  }
+
+
 }

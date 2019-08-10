@@ -8,11 +8,9 @@
         </th>
       </tr>
     </thead>
-    <tbody v-for="(entry, j) in entries" :class="getEntryClasses(j)">
-      <tr class="heading-row" @click.prevent="setOpenItem(j)">
-        <th scope="row" headers="type">
-          <a :href="entry.url" v-text="entry.title"></a>
-        </th>
+    <tbody v-for="(entry, j) in entries" :class="getEntryClasses(j)" @click.prevent="toggleEntry(j)">
+      <tr class="heading-row">
+        <th scope="row" headers="type" v-text="entry.title"></th>
         <td v-for="i in headers.length" class="field" :class="getColumnClass(i-1)" v-text="getFieldValue(j, i-1)"></td>
       </tr>
       <tr class="body-row">
@@ -44,7 +42,7 @@
       return {
         "entries": JSON.parse(this.entriesJson),
         "headers": JSON.parse(this.headersJson),
-        "clicked": false,
+        "clicked": [],
       }
     },
 
@@ -62,6 +60,10 @@
         }
 
         return classes;
+      },
+
+      colspan() {
+        return this.headers.length + 1;
       }
     },
 
@@ -71,11 +73,25 @@
       },
 
       getEntryClasses(entryIndex) {
-        return this.clicked === entryIndex ? "clicked" : "";
+        return this.clicked.includes(entryIndex) ? "clicked" : "";
       },
 
-      setOpenItem(entryIndex) {
-        this.clicked = this.clicked === entryIndex ? false : entryIndex;
+      toggleEntry(entryIndex) {
+        if (!this.clicked.includes(entryIndex)) {
+
+          // if the array doesn't include this entry's index, we push it
+          // onto the array.
+
+          this.clicked.push(entryIndex);
+        } else {
+
+          // if it did include it, we filter the array to remove it.
+          // filter keeps array values when the callback returns true.
+          // so, we want to return true for all the numbers that aren't
+          // this entry's index, i.e. when they're not equal.
+
+          this.clicked = this.clicked.filter((i) => i !== entryIndex);
+        }
       },
 
       getFieldValue(entryIndex, headerIndex) {
