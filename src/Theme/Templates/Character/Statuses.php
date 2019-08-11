@@ -2,7 +2,9 @@
 
 namespace Shadowlab\Theme\Templates\Character;
 
+use Shadowlab\Framework\Exception;
 use Dashifen\Searchbar\SearchbarInterface;
+use Dashifen\Searchbar\SearchbarException;
 use Shadowlab\Framework\Theme\AbstractCheatSheet;
 
 class Statuses extends AbstractCheatSheet {
@@ -53,21 +55,23 @@ class Statuses extends AbstractCheatSheet {
   /**
    * getSearchbar
    *
-   * Uses the information in our headers and entries to construct a
-   * Searchbar that can help people find the entry they're looking for.
+   * Uses the headers and entries for this sheet as well as the searchbar
+   * property to produce the HTML necessary for the searchbar on this sheet.
    *
    * @param array $headers
    * @param array $entries
    *
-   * @return SearchbarInterface
+   * @return string
    */
-  protected function getSearchbar (array $headers, array $entries): SearchbarInterface {
+  protected function getSearchbar (array $headers, array $entries): string {
 
-    // here we construct
+    // the sheet for statuses only needs the item and book filters.  this means
+    // that in this case we do not actually need our headers, only the book
+    // data in our entries.
 
-
-
+    $this->searchbar->addSearch("Status", "status");
+    $this->searchbar->addFilter("Book", "book", $this->extractBooksFromEntries($entries));
+    $this->searchbar->addReset("Reset");
+    return $this->searchbar->getBar();
   }
-
-
 }

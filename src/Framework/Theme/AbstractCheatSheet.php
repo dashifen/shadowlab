@@ -3,9 +3,11 @@
 namespace Shadowlab\Framework\Theme;
 
 use Shadowlab\Theme\Theme;
+use Shadowlab\Repositories\Book;
 use Shadowlab\Framework\Exception;
+use Dashifen\Searchbar\Searchbar;
 use Shadowlab\Repositories\PostType;
-use Dashifen\Searchbar\SearchbarInterface;
+use Dashifen\Searchbar\SearchbarException;
 use Shadowlab\Repositories\CheatSheetEntry;
 use Dashifen\Repository\RepositoryException;
 
@@ -18,12 +20,13 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
   /**
    * AbstractTemplate constructor.
    *
-   * @param Theme $theme
-   * @param bool  $getTimberContext
+   * @param Theme     $theme
+   * @param Searchbar $searchbar
+   * @param bool      $getTimberContext
    */
-  public function __construct (Theme $theme, bool $getTimberContext = false) {
+  public function __construct (Theme $theme, Searchbar $searchbar, bool $getTimberContext = false) {
     $this->postType = $theme->getController()->getConfig()->getPostType(get_post_type());
-    parent::__construct($theme, $getTimberContext);
+    parent::__construct($theme, $searchbar, $getTimberContext);
   }
 
   /**
@@ -63,8 +66,8 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
     $entries = $this->getEntries($headers);
 
     $this->context["page"] = [
-      "type"      => $this->postType->singular,
       "plural"    => $this->postType->plural,
+      "singular"  => $this->postType->singular,
       "searchbar" => $this->getSearchbar($headers, $entries),
       "headers"   => array_keys($headers),
       "entries"   => $entries,
@@ -137,8 +140,8 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
         "url"         => get_permalink($post->ID),
         "description" => $this->transformContent($content),
         "fields"      => $this->getFields($headers, $post->ID),
+        "book"        => new Book(get_field("book", $post->ID)),
         "page"        => (int) get_field("page", $post->ID),
-        "book"        => get_field("book", $post->ID),
       ]);
     }
 
@@ -193,13 +196,44 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
   /**
    * getSearchbar
    *
-   * Uses the information in our headers and entries to construct a
-   * Searchbar that can help people find the entry they're looking for.
+   * Uses the headers and entries for this sheet as well as the searchbar
+   * property to produce the HTML necessary for the searchbar on this sheet.
    *
    * @param array $headers
    * @param array $entries
    *
-   * @return SearchbarInterface
+   * @return string
    */
-  abstract protected function getSearchbar(array $headers, array $entries): SearchbarInterface;
+  abstract protected function getSearchbar (array $headers, array $entries): string;
+
+  /**
+   * extractBooksFromEntries
+   *
+   * Used by the concrete implementations of the getSearchbar method, this
+   * iterates over our entries and constructs a list of books for use in
+   * this sheet's searchbar.
+   *
+   * @param CheatSheetEntry[] $entries
+   *
+   * @return array
+   */
+  protected function extractBooksFromEntries (array $entries): array {
+    $books = [];
+
+    foreach ($entries as $entry) {
+
+      // the entry's book is a Book object which has an abbr and a title
+      // property that we can read.  we'll construct an array that maps
+      // the former to the latter and return it below.
+
+      $books[$entry->book->abbr] = $entry->book->title;
+    }
+
+    // the above loop doesn't worry about sorting our books.  but, for
+    // our on-screen purposes, we'll want to do so here.  it's better to
+    // sort by the book's title and not the abbreviation.
+
+    sort($books);
+    return $books;
+  }
 }

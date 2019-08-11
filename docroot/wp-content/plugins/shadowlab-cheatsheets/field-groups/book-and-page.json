@@ -1,5 +1,5 @@
 {
-    "key": "group_5d46b47e6781c__trashed",
+    "key": "group_5d46b47e6781c",
     "title": "Book and Page",
     "fields": [
         {
@@ -22,7 +22,7 @@
             "allow_null": 0,
             "multiple": 0,
             "ui": 0,
-            "return_format": "value",
+            "return_format": "array",
             "ajax": 0,
             "placeholder": ""
         },

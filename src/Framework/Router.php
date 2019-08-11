@@ -41,7 +41,10 @@ class Router {
     // if this is the homepage, we can bug out easily and early.
 
     if ($route === "/") {
-      return new Homepage($this->controller->getTheme());
+      return new Homepage(
+        $this->controller->getTheme(),
+        $this->controller->getSearchbar()
+      );
     }
 
     // if we're still here then we need to see if we're displaying the post
@@ -66,6 +69,9 @@ class Router {
     );
 
     $object = join("\\", $fullObjectPath);
-    return new $object($this->controller->getTheme());
+    return new $object(
+      $this->controller->getTheme(),
+      $this->controller->getSearchbar()
+    );
   }
 }

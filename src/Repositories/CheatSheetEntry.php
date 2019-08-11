@@ -11,7 +11,7 @@ use Dashifen\Repository\Repository;
  * @property-read array  $fields
  * @property-read string $title
  * @property-read string $description
- * @property-read string $book
+ * @property-read Book   $book
  * @property-read int    $page
  */
 class CheatSheetEntry extends Repository {
@@ -36,7 +36,7 @@ class CheatSheetEntry extends Repository {
   protected $url;
 
   /**
-   * @var string
+   * @var Book
    */
   protected $book = "";
 
@@ -103,11 +103,11 @@ class CheatSheetEntry extends Repository {
    *
    * Sets the book property.
    *
-   * @param string $book
+   * @param Book $book
    *
    * @return void
    */
-  protected function setBook (string $book): void {
+  protected function setBook (Book $book): void {
     $this->book = $book;
   }
 

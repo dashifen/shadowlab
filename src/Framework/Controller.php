@@ -7,9 +7,9 @@ use DirectoryIterator;
 use Shadowlab\Theme\Theme;
 use League\Container\Container;
 use Symfony\Component\Yaml\Yaml;
+use Dashifen\Searchbar\Searchbar;
 use Dashifen\Repository\Repository;
 use Shadowlab\Repositories\PostType;
-use Shadowlab\Theme\TemplateFactory;
 use Shadowlab\Repositories\CheatSheet;
 use Shadowlab\Repositories\Configuration;
 use Shadowlab\Repositories\ACFDefinition;
@@ -117,6 +117,7 @@ class Controller extends Repository {
     self::$container = new Container();
     self::$container->add(ShadowlabHookFactory::class);
     self::$container->add(ShadowlabServiceFactory::class);
+    self::$container->add(Searchbar::class);
 
     self::$container->add(Theme::class)
       ->addArgument(ShadowlabHookFactory::class)
@@ -125,9 +126,6 @@ class Controller extends Repository {
     self::$container->add(CheatSheetsPlugin::class)
       ->addArgument(ShadowlabHookFactory::class)
       ->addArgument(ShadowlabServiceFactory::class)
-      ->addArgument($this);
-
-    self::$container->add(TemplateFactory::class)
       ->addArgument($this);
   }
 
@@ -176,17 +174,6 @@ class Controller extends Repository {
   }
 
   /**
-   * getTemplateFactory
-   *
-   * Returns a TemplateFactory object constructed via our static container.
-   *
-   * @return TemplateFactory
-   */
-  public function getTemplateFactory (): TemplateFactory {
-    return self::$container->get(TemplateFactory::class);
-  }
-
-  /**
    * getPlugin
    *
    * Returns a CheatSheetsPlugin object constructed via our static container
@@ -196,6 +183,17 @@ class Controller extends Repository {
    */
   public function getPlugin (): CheatSheetsPlugin {
     return self::$container->get(CheatSheetsPlugin::class);
+  }
+
+  /**
+   * getSearchbar
+   *
+   * Returns a Searchbar object constructed via our static container object.
+   *
+   * @return Searchbar
+   */
+  public function getSearchbar (): Searchbar {
+    return self::$container->get(Searchbar::class);
   }
 
   /**

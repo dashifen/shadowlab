@@ -2,7 +2,7 @@
   <table>
     <thead>
       <tr>
-        <th scope="col" id="type" v-text="type"></th>
+        <th scope="col" id="type" v-text="singular"></th>
         <th scope="col" v-for="(header, i) in headers" class="field" :class="getColumnClass(i)">
           <header-abbr :header="header"></header-abbr>
         </th>
@@ -33,7 +33,7 @@
     name: "cheat-sheet.vue",
     components: { HeaderAbbr },
     props: [
-      "type",
+      "singular",
       "headersJson",
       "entriesJson",
     ],
