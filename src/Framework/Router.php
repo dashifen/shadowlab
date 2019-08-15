@@ -2,7 +2,6 @@
 
 namespace Shadowlab\Framework;
 
-use Shadowlab\Theme\Templates\Homepage;
 use Shadowlab\Framework\Theme\AbstractShadowlabTemplate;
 
 /**
@@ -35,40 +34,39 @@ class Router {
   public function getTemplate (): AbstractShadowlabTemplate {
     $route = $_SERVER["PHP_SELF"];
 
-    // WordPress ensures that all roads lead to the theme's index.php.  within
-    // that file, we construct this Router and let it identify, construct, and
-    // return the template object that we use to display this request.  first,
-    // if this is the homepage, we can bug out easily and early.
-
     if ($route === "/") {
-      return new Homepage(
-        $this->controller->getTheme(),
-        $this->controller->getSearchbar()
-      );
+
+      // if we're on the homepage, the algorithm we use for everything else
+      // doesn't work.  so, for it, we'll just specify the homepage template
+      // directly as follows.
+
+      $object = '\Shadowlab\Theme\Templates\Homepage';
+    } else {
+
+      // otherwise, our routes match the folder structure that we've created
+      // for the Shadowlab\Theme\Templates namespace.  so, we can construct
+      // template objects sort of like a PSR-4 include.  we split up our
+      // route into its parts, filter out any blank ones, then pass it all
+      // through array_map() where we convert from the kabob-case that URLs
+      // prefer into StudlyCaps for our object names.
+
+      $objectPathEnding = array_map(function (string $kabobString): string {
+        return Controller::toStudlyCaps($kabobString);
+      }, array_filter(explode("/", $route)));
+
+      // now, we'll merge the object names from above after the namespace path
+      // that isn't represented in our route.  joining that with our namespace
+      // separator gives us the fully qualified object name for the template we
+      // want to return.
+
+      $fullObjectPath = array_merge(["Shadowlab", "Theme", "Templates"], $objectPathEnding);
+      $object = join("\\", $fullObjectPath);
     }
 
-    // if we're still here then we need to see if we're displaying the post
-    // types on a sheet or the entries made within a post type.  our route
-    // matches the hierarchy within the \Shadowlab\Theme\Templates namespace,
-    // but we need to convert the parts of our route into StudlyCaps as
-    // needed.  the following complex array statement does the conversion
-    // after splitting our route and filtering out any blanks.
+    // $object is now the fully namespaced class name for the template that
+    // should be used for this route.  we can construct it and use the DI
+    // container within our controller to pass it the arguments that it needs.
 
-    $objectPathEnding = array_map(function (string $kabobString): string {
-      return Controller::toStudlyCaps($kabobString);
-    }, array_filter(explode("/", $route)));
-
-    // now, we'll mere the object names from above after the namespace path
-    // that isn't represented in our route.  joining that with our namespace
-    // separator gives us the fully qualified object name for the template we
-    // want to return.  so, we construct it and do so.
-
-    $fullObjectPath = array_merge(
-      ["Shadowlab", "Theme", "Templates"],
-      $objectPathEnding
-    );
-
-    $object = join("\\", $fullObjectPath);
     return new $object(
       $this->controller->getTheme(),
       $this->controller->getSearchbar()
