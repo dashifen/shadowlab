@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 use Shadowlab\Framework\Router;
 use Dashifen\Exception\Exception;
 use Shadowlab\Framework\Controller;
@@ -14,13 +11,6 @@ try {
   // response to this request.
 
   $controller = new Controller();
-
-  $post = get_post();
-  $book = get_field("book", $post->ID);
-  $controller->debug($book, true);
-
-
-
   $router = new Router($controller);
   $template = $router->getTemplate();
   $template->show();
