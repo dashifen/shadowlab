@@ -24,7 +24,7 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
    * @param bool      $getTimberContext
    */
   public function __construct (Theme $theme, Searchbar $searchbar, bool $getTimberContext = false) {
-    $this->postType = $theme->getController()->getConfig()->getPostType(get_post_type());
+    $this->postType = $theme->getPostType(get_post_type());
     parent::__construct($theme, $searchbar, $getTimberContext);
   }
 

@@ -102,7 +102,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
       // appear.  this loop registers a series of save_post_{$postType} hooks,
       // one per type, that does that work for us.
 
-      foreach ($this->controller->getConfig()->postTypes as $postType) {
+      foreach ($this->getPostTypes() as $postType) {
         if ($postType->type !== "cheat-sheet") {
           $this->addAction("save_post_" . $postType->type, "addEntryToSheet");
         }
@@ -135,7 +135,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    * @throws Exception
    */
   protected function createSheets (): void {
-    foreach ($this->controller->getConfig()->sheets as $sheet) {
+    foreach ($this->getCheatSheets() as $sheet) {
       if ($sheet->sheetId === 0) {
         $sheetId = $this->createSheet($sheet);
         $sheet->setSheetId($sheetId);
@@ -204,7 +204,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
     // first we need to get this post's type and then use that to identify the
     // sheet ID to which we add it.
 
-    $postType = $this->controller->getConfig()->getPostType(get_post_type($postId));
+    $postType = $this->getPostType(get_post_type($postId));
     update_post_meta($postId, "_cheat-sheet-id", $postType->sheet->sheetId);
   }
 }

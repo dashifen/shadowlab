@@ -2,7 +2,7 @@
 
 namespace Shadowlab\Framework;
 
-use Shadowlab\Framework\Theme\AbstractShadowlabTemplate;
+use Dashifen\WPTemplates\Templates\TemplateInterface;
 
 /**
  * Class Router
@@ -11,17 +11,17 @@ use Shadowlab\Framework\Theme\AbstractShadowlabTemplate;
  */
 class Router {
   /**
-   * @var Controller
+   * @var Shadowlab
    */
-  protected $controller;
+  protected $shadowlab;
 
   /**
    * Router constructor.
    *
-   * @param Controller $controller
+   * @param Shadowlab $shadowlab
    */
-  public function __construct (Controller $controller) {
-    $this->controller = $controller;
+  public function __construct (Shadowlab $shadowlab) {
+    $this->shadowlab = $shadowlab;
   }
 
   /**
@@ -29,9 +29,9 @@ class Router {
    *
    * Uses the current route to return the appropriate template object.
    *
-   * @return AbstractShadowlabTemplate
+   * @return TemplateInterface
    */
-  public function getTemplate (): AbstractShadowlabTemplate {
+  public function getTemplate (): TemplateInterface {
     $route = $_SERVER["PHP_SELF"];
 
     if ($route === "/") {
@@ -67,9 +67,6 @@ class Router {
     // should be used for this route.  we can construct it and use the DI
     // container within our controller to pass it the arguments that it needs.
 
-    return new $object(
-      $this->controller->getTheme(),
-      $this->controller->getSearchbar()
-    );
+    return $this->shadowlab->getTemplate($object);
   }
 }

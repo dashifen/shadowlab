@@ -8,6 +8,8 @@ use League\Container\Container;
 use League\Container\ReflectionContainer;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Shadowlab\Framework\Hooks\ShadowlabHookFactory;
+use Dashifen\WPTemplates\Templates\TemplateInterface;
+use Shadowlab\Framework\Theme\AbstractShadowlabTemplate;
 use Shadowlab\Framework\Services\ShadowlabServiceFactory;
 
 class Shadowlab {
@@ -80,6 +82,15 @@ class Shadowlab {
     self::$container->share(CheatSheetsPlugin::class)
       ->addArgument(ShadowlabHookFactory::class)
       ->addArgument(ShadowlabServiceFactory::class);
+
+    // our Router actually needs a reference to this object; that's because
+    // it needs to know how to construct the various templates within this
+    // application.  doing so requires access to this object's getTemplate()
+    // method.  so, we'll add this object as an argument to the Router as
+    // follows.
+
+    self::$container->share(Router::class)
+      ->addArgument($this);
   }
 
   /**
@@ -113,6 +124,19 @@ class Shadowlab {
    */
   public function getRouter (): Router {
     return self::$container->get(Router::class);
+  }
+
+  /**
+   * getTemplate
+   *
+   * Given the fully namespaced template object's name, return one of them.
+   *
+   * @param string $template
+   *
+   * @return TemplateInterface
+   */
+  public function getTemplate (string $template): TemplateInterface {
+    return self::$container->get($template);
   }
 
 

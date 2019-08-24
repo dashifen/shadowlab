@@ -38,8 +38,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
     // sheet and, if so, handle it appropriately.
 
     $sheetOrPostType = Controller::toKebabCase($method);
-    $config = $this->handler->getController()->getConfig();
-    $sheet = $config->getSheet($sheetOrPostType);
+    $sheet = $this->handler->getSheet($sheetOrPostType);
 
     if (!is_null($sheet)) {
       return $this->handleShowSheet($sheet);
@@ -49,7 +48,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
     // and throw an exception if it's not.  if it is, it is, then we redirect
     // to the edit.php page for that post type.
 
-    $postType = $config->getPostType($sheetOrPostType);
+    $postType = $this->handler->getPostType($sheetOrPostType);
 
     if (!is_null($postType)) {
       wp_safe_redirect(admin_url("edit.php?post_type=" . $postType->slug));
@@ -104,7 +103,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
       // to get the rest out of our config object.
 
       $entries[] = [
-        "title" => $this->handler->getController()->getConfig()->getPostType($postType)->plural,
+        "title" => $this->handler->getPostType($postType)->plural,
         "type"  => $postType,
       ];
     }
@@ -153,7 +152,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
    * @throws HookException
    */
   protected function addCheatSheetMenus (): void {
-    $config = $this->handler->getController()->getConfig();
+    $config = $this->handler->getConfiguration();
 
     foreach ($config->sheets as $sheet) {
 
@@ -245,7 +244,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
    * @return array
    */
   protected function updateTopLevelMenuClasses (array $menuItems): array {
-    $config = $this->handler->getController()->getConfig();
+    $config = $this->handler->getConfiguration();
 
     // there are two things we hope to do here:  one is add a class to each
     // of our top-level sheet menus that will identify them for us.  the second
@@ -318,7 +317,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
     // that's the case by seeing if the query string's post type parameter
     // exists.
 
-    $postType = $this->handler->getController()->getConfig()->getPostType($this->getThePostType());
+    $postType = $this->handler->getPostType($this->getThePostType());
     if (!is_null($postType)) {
 
       // boom!  now know we need the script.  we don't enqueue it because
@@ -336,6 +335,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
     <?php } ?>
 
     <!--suppress CssUnusedSymbol -->
+
     <style type="text/css">
       /**
        * this we add here because it's easier than a 1-line CSS file that we

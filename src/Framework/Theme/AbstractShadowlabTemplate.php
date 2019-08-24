@@ -133,7 +133,8 @@ abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
     // post types that are linked to those sheets as a submenu.  we'll
     // construct that structure here using our Configuration object.
 
-    $sheets = $this->theme->getController()->getSheets();
+    $sheets = $this->theme->getCheatSheets();
+
     foreach ($sheets as $sheet) {
       $submenu = $this->getSubMenu($sheet);
 
@@ -162,7 +163,8 @@ abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
    */
   private function getSubMenu (CheatSheet $sheet): array {
     foreach ($sheet->entries as $entry) {
-      $postType = $this->theme->getController()->getConfig()->getPostType($entry);
+      $postType = $this->theme->getPostType($entry);
+
       $submenu[] = new MenuItem([
         "label"   => $postType->plural,
         "url"     => home_url($postType->slug),

@@ -35,7 +35,7 @@ class TypeRegistration extends AbstractShadowlabPluginService {
     // loop over the post types in our configuration to register all of those.
 
     $this->registerSheetType();
-    foreach ($this->handler->getController()->getPostTypes() as $postType) {
+    foreach ($this->handler->getPostTypes() as $postType) {
       $postType->registerPostType();
     }
   }
