@@ -8,13 +8,13 @@ Version: 0.0.3
 */
 
 use Dashifen\Exception\Exception;
-use Shadowlab\Framework\Controller;
+use Shadowlab\Framework\Shadowlab;
 
 require ABSPATH . "../vendor/autoload.php";
 
 try {
-  $controller = new Controller();
-  $cheatSheets = $controller->getPlugin();
+  $shadowlab = new Shadowlab();
+  $cheatSheets = $shadowlab->getCheatSheetsPlugin();
   $cheatSheets->initialize();
 } catch (Exception $e) {
   $controller->catcher($e);

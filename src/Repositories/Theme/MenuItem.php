@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Repositories;
+namespace Shadowlab\Repositories\Theme;
 
 use Dashifen\Repository\Repository;
 use Dashifen\Repository\RepositoryException;
@@ -14,7 +14,7 @@ use Dashifen\Repository\RepositoryException;
  * @property-read string $url
  * @property-read string $label
  */
-class ShadowlabMenuItem extends Repository {
+class MenuItem extends Repository {
   /**
    * @var array
    */
@@ -36,7 +36,7 @@ class ShadowlabMenuItem extends Repository {
   protected $label = "";
 
   /**
-   * @var ShadowlabMenuItem[]
+   * @var MenuItem[]
    */
   protected $submenu = [];
 
@@ -118,14 +118,14 @@ class ShadowlabMenuItem extends Repository {
    *
    * Sets the submenu property.
    *
-   * @param ShadowlabMenuItem[] $submenu
+   * @param MenuItem[] $submenu
    *
    * @return void
    * @throws RepositoryException
    */
   protected function setSubmenu (array $submenu): void {
     foreach ($submenu as $item) {
-      if (!($item instanceof ShadowlabMenuItem)) {
+      if (!($item instanceof MenuItem)) {
         throw new RepositoryException("All submenu items must be MenuItems",
           RepositoryException::INVALID_VALUE);
       }

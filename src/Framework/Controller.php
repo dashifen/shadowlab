@@ -2,22 +2,13 @@
 
 namespace Shadowlab\Framework;
 
-use Throwable;
 use DirectoryIterator;
-use Shadowlab\Theme\Theme;
-use League\Container\Container;
 use Symfony\Component\Yaml\Yaml;
-use Dashifen\Searchbar\Searchbar;
 use Dashifen\Repository\Repository;
-use Shadowlab\Repositories\PostType;
-use Shadowlab\Repositories\CheatSheet;
-use Shadowlab\Repositories\Configuration;
-use Shadowlab\Repositories\ACFDefinition;
-use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\Repository\RepositoryException;
-use Shadowlab\Framework\Hooks\ShadowlabHookFactory;
+use Shadowlab\Repositories\Framework\ACFDefinition;
+use Shadowlab\Repositories\Framework\Configuration;
 use Symfony\Component\Yaml\Exception\ParseException;
-use Shadowlab\Framework\Services\ShadowlabServiceFactory;
 
 /**
  * Class Controller
@@ -31,11 +22,6 @@ class Controller extends Repository {
    * @var Configuration
    */
   private static $config;
-
-  /**
-   * @var Container
-   */
-  private static $container;
 
   /**
    * @var string
@@ -58,10 +44,6 @@ class Controller extends Repository {
 
     if (!(self::$config instanceof Configuration)) {
       $this->setConfig();
-    }
-
-    if (!(self::$container instanceof Container)) {
-      $this->setContainer();
     }
   }
 
@@ -109,27 +91,6 @@ class Controller extends Repository {
   }
 
   /**
-   * setContainer
-   *
-   * Sets the static container property.
-   */
-  protected function setContainer (): void {
-    self::$container = new Container();
-    self::$container->add(ShadowlabHookFactory::class);
-    self::$container->add(ShadowlabServiceFactory::class);
-    self::$container->add(Searchbar::class);
-
-    self::$container->add(Theme::class)
-      ->addArgument(ShadowlabHookFactory::class)
-      ->addArgument($this);
-
-    self::$container->add(CheatSheetsPlugin::class)
-      ->addArgument(ShadowlabHookFactory::class)
-      ->addArgument(ShadowlabServiceFactory::class)
-      ->addArgument($this);
-  }
-
-  /**
    * getConfig
    *
    * Returns the config property.
@@ -138,62 +99,6 @@ class Controller extends Repository {
    */
   public function getConfig (): Configuration {
     return self::$config;
-  }
-
-  /**
-   * getSheets
-   *
-   * Returns the sheets property of our Configuration object
-   *
-   * @return CheatSheet[]
-   */
-  public function getSheets (): array {
-    return self::$config->sheets;
-  }
-
-  /**
-   * getPostTypes
-   *
-   * Returns the sheets property of our Configuration object
-   *
-   * @return PostType[]
-   */
-  public function getPostTypes (): array {
-    return self::$config->postTypes;
-  }
-
-  /**
-   * getTheme
-   *
-   * Returns a Theme object constructed via our static container.
-   *
-   * @return Theme
-   */
-  public function getTheme (): Theme {
-    return self::$container->get(Theme::class);
-  }
-
-  /**
-   * getPlugin
-   *
-   * Returns a CheatSheetsPlugin object constructed via our static container
-   * object.
-   *
-   * @return CheatSheetsPlugin
-   */
-  public function getPlugin (): CheatSheetsPlugin {
-    return self::$container->get(CheatSheetsPlugin::class);
-  }
-
-  /**
-   * getSearchbar
-   *
-   * Returns a Searchbar object constructed via our static container object.
-   *
-   * @return Searchbar
-   */
-  public function getSearchbar (): Searchbar {
-    return self::$container->get(Searchbar::class);
   }
 
   /**
@@ -285,50 +190,12 @@ class Controller extends Repository {
    *
    * @return string
    */
-  public static function toKabobCase(string $studlyString): string {
+  public static function toKabobCase (string $studlyString): string {
 
     // we add a dash between lower-to-capital patterns using preg_replace()
     // and then lower case the resulting string to take StudlyCaps and return
     // kabob-case.
 
     return strtolower(preg_replace("/([a-z])([A-Z])/", '%1-%2', $studlyString));
-  }
-
-  /**
-   * isDebug
-   *
-   * Returns the Theme::isDebug() result as a way to access it when the Theme
-   * object hasn't been included into a file's context.
-   *
-   * @return bool
-   */
-  public function isDebug (): bool {
-    return Theme::isDebug();
-  }
-
-  /**
-   * debug
-   *
-   * Print's our $stuff and sometimes quits if $die is set using the Theme
-   * object's static debug() method so that we don't have to pull that object
-   * into a context where it's not necessary.
-   *
-   * @param      $stuff
-   * @param bool $die
-   */
-  public function debug($stuff, bool $die = false): void {
-    Theme::debug($stuff, $die);
-  }
-
-  /**
-   * catcher
-   *
-   * Executes the Theme::catcher() method as a way to access it when the
-   * Theme object hasn't been included into a file's context.
-   *
-   * @param Throwable $e
-   */
-  public function catcher (Throwable $e): void {
-    Theme::catcher($e);
   }
 }

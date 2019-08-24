@@ -4,10 +4,10 @@ namespace Shadowlab\CheatSheets\Services;
 
 use DirectoryIterator;
 use Shadowlab\Framework\Exception;
-use Shadowlab\Repositories\ACFDefinition;
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
+use Shadowlab\Repositories\Framework\ACFDefinition;
 use Shadowlab\Framework\Services\AbstractShadowlabPluginService;
 
 class ACFModifier extends AbstractShadowlabPluginService {

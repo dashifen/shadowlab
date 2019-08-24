@@ -3,13 +3,12 @@
 namespace Shadowlab\Framework\Theme;
 
 use Shadowlab\Theme\Theme;
-use Shadowlab\Repositories\Book;
-use Shadowlab\Framework\Exception;
 use Dashifen\Searchbar\Searchbar;
-use Shadowlab\Repositories\PostType;
-use Dashifen\Searchbar\SearchbarException;
-use Shadowlab\Repositories\CheatSheetEntry;
+use Shadowlab\Framework\Exception;
+use Shadowlab\Repositories\CheatSheets\Book;
 use Dashifen\Repository\RepositoryException;
+use Shadowlab\Repositories\CheatSheets\PostType;
+use Shadowlab\Repositories\CheatSheets\CheatSheetEntry;
 
 abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
   /**

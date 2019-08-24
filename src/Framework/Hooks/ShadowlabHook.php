@@ -4,9 +4,7 @@ namespace Shadowlab\Framework\Hooks;
 
 use Dashifen\WPHandler\Hooks\Hook;
 use Dashifen\WPHandler\Hooks\HookException;
-use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Shadowlab\CheatSheets\Services\MenuModifier;
-use Timber\Menu;
 
 class ShadowlabHook extends Hook {
   /**

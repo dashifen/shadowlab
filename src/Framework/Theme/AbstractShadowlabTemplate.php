@@ -4,11 +4,11 @@ namespace Shadowlab\Framework\Theme;
 
 use Shadowlab\Theme\Theme;
 use Dashifen\Searchbar\Searchbar;
-use Shadowlab\Repositories\PostType;
-use Shadowlab\Repositories\CheatSheet;
 use Dashifen\WPTemplates\PostException;
+use Shadowlab\Repositories\Theme\MenuItem;
 use Dashifen\Repository\RepositoryException;
-use Shadowlab\Repositories\ShadowlabMenuItem;
+use Shadowlab\Repositories\CheatSheets\PostType;
+use Shadowlab\Repositories\CheatSheets\CheatSheet;
 use Dashifen\WPTemplates\Templates\AbstractTimberTemplate;
 
 abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
@@ -122,7 +122,7 @@ abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
    * Returns an array of MenuItem objects that we can use elsewhere to
    * print the menu on-screen.
    *
-   * @return ShadowlabMenuItem[]
+   * @return MenuItem[]
    * @throws RepositoryException
    */
   private function getMenu (): array {
@@ -137,7 +137,7 @@ abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
     foreach ($sheets as $sheet) {
       $submenu = $this->getSubMenu($sheet);
 
-      $menu[] = new ShadowlabMenuItem([
+      $menu[] = new MenuItem([
         "label"   => $sheet->title,
         "url"     => home_url($sheet->slug),
         "current" => $this->isCurrentSheet($sheet),
@@ -157,13 +157,13 @@ abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
    *
    * @param CheatSheet $sheet
    *
-   * @return ShadowlabMenuItem[]
+   * @return MenuItem[]
    * @throws RepositoryException
    */
   private function getSubMenu (CheatSheet $sheet): array {
     foreach ($sheet->entries as $entry) {
       $postType = $this->theme->getController()->getConfig()->getPostType($entry);
-      $submenu[] = new ShadowlabMenuItem([
+      $submenu[] = new MenuItem([
         "label"   => $postType->plural,
         "url"     => home_url($postType->slug),
         "current" => $this->isCurrentPostType($postType),

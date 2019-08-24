@@ -5,12 +5,12 @@ namespace Shadowlab\CheatSheets\Services;
 use WP_Admin_Bar;
 use Timber\Timber;
 use Shadowlab\Framework\Controller;
-use Shadowlab\Repositories\CheatSheet;
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
 use Dashifen\WPHandler\Repositories\MenuItem;
 use Dashifen\WPHandler\Repositories\SubmenuItem;
 use Dashifen\WPHandler\Handlers\HandlerException;
+use Shadowlab\Repositories\CheatSheets\CheatSheet;
 use Shadowlab\Framework\Services\AbstractShadowlabPluginService;
 
 class MenuModifier extends AbstractShadowlabPluginService {

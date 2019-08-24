@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Repositories;
+namespace Shadowlab\Repositories\CheatSheets;
 
 use Shadowlab\Framework\Exception;
 use Shadowlab\Framework\Controller;

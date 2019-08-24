@@ -2,9 +2,6 @@
 
 namespace Shadowlab\Theme\Templates\Character;
 
-use Shadowlab\Framework\Exception;
-use Dashifen\Searchbar\SearchbarInterface;
-use Dashifen\Searchbar\SearchbarException;
 use Shadowlab\Framework\Theme\AbstractCheatSheet;
 
 class Statuses extends AbstractCheatSheet {

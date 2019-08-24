@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Repositories;
+namespace Shadowlab\Repositories\Framework;
 
 use Dashifen\Repository\Repository;
 

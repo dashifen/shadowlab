@@ -1,9 +1,11 @@
 <?php
 
-namespace Shadowlab\Repositories;
+namespace Shadowlab\Repositories\Framework;
 
 use Dashifen\Repository\Repository;
 use Dashifen\Repository\RepositoryException;
+use Shadowlab\Repositories\CheatSheets\PostType;
+use Shadowlab\Repositories\CheatSheets\CheatSheet;
 
 /**
  * Class Configuration

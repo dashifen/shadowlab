@@ -2,6 +2,7 @@
 
 use Shadowlab\Framework\Router;
 use Dashifen\Exception\Exception;
+use Shadowlab\Framework\Shadowlab;
 use Shadowlab\Framework\Controller;
 
 try {
@@ -10,8 +11,8 @@ try {
   // Router.  with the Router we can get a Template that we use to show the
   // response to this request.
 
-  $controller = new Controller();
-  $router = new Router($controller);
+  $shadowlab = new Shadowlab();
+  $router = $shadowlab->getRouter();
   $template = $router->getTemplate();
   $template->show();
 } catch (Exception $e) {
