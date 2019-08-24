@@ -14,6 +14,7 @@ use Symfony\Component\Yaml\Exception\ParseException;
  * Class Controller
  *
  * @package Shadowlab
+ * @property-read Configuration   $configuration
  * @property-read string          $acfFolder
  * @property-read ACFDefinition[] $acfDefinitions
  */
@@ -21,7 +22,7 @@ class Controller extends Repository {
   /**
    * @var Configuration
    */
-  protected $config;
+  protected $configuration;
 
   /**
    * @var string
@@ -41,7 +42,7 @@ class Controller extends Repository {
    */
   public function __construct () {
     parent::__construct();
-    $this->setConfig();
+    $this->setConfiguration();
   }
 
   /**
@@ -53,7 +54,7 @@ class Controller extends Repository {
    * @throws RepositoryException
    * @throws Exception
    */
-  protected function setConfig (): void {
+  protected function setConfiguration (): void {
     $configFile = ABSPATH . "../config.yaml";
 
     if (!is_file($configFile)) {
@@ -73,7 +74,7 @@ class Controller extends Repository {
       // properties.
 
       $yaml = Yaml::parseFile($configFile);
-      $this->config = new Configuration([
+      $this->configuration = new Configuration([
         "sheets"    => $yaml["sheets"],
         "postTypes" => $yaml["sheets"],
       ]);

@@ -4,6 +4,7 @@ namespace Shadowlab\CheatSheets;
 
 use Shadowlab\Framework\Exception;
 use Shadowlab\Framework\Controller;
+use Shadowlab\Traits\ConfigurationTrait;
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\Repositories\CheatSheets\CheatSheet;
@@ -12,6 +13,8 @@ use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
+  use ConfigurationTrait;
+
   /**
    * @var Controller
    */
