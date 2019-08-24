@@ -47,11 +47,11 @@ class Router {
       // for the Shadowlab\Theme\Templates namespace.  so, we can construct
       // template objects sort of like a PSR-4 include.  we split up our
       // route into its parts, filter out any blank ones, then pass it all
-      // through array_map() where we convert from the kabob-case that URLs
+      // through array_map() where we convert from the kebab-case that URLs
       // prefer into StudlyCaps for our object names.
 
-      $objectPathEnding = array_map(function (string $kabobString): string {
-        return Controller::toStudlyCaps($kabobString);
+      $objectPathEnding = array_map(function (string $kebabString): string {
+        return Controller::toStudlyCaps($kebabString);
       }, array_filter(explode("/", $route)));
 
       // now, we'll merge the object names from above after the namespace path

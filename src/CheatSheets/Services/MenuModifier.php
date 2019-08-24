@@ -37,7 +37,7 @@ class MenuModifier extends AbstractShadowlabPluginService {
     // non StudlyCaps version of our information.  then, we see if it's a
     // sheet and, if so, handle it appropriately.
 
-    $sheetOrPostType = Controller::toKabobCase($method);
+    $sheetOrPostType = Controller::toKebabCase($method);
     $config = $this->handler->getController()->getConfig();
     $sheet = $config->getSheet($sheetOrPostType);
 

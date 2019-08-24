@@ -21,7 +21,7 @@ class Controller extends Repository {
   /**
    * @var Configuration
    */
-  private static $config;
+  protected $config;
 
   /**
    * @var string
@@ -41,10 +41,7 @@ class Controller extends Repository {
    */
   public function __construct () {
     parent::__construct();
-
-    if (!(self::$config instanceof Configuration)) {
-      $this->setConfig();
-    }
+    $this->setConfig();
   }
 
   /**
@@ -76,7 +73,7 @@ class Controller extends Repository {
       // properties.
 
       $yaml = Yaml::parseFile($configFile);
-      self::$config = new Configuration([
+      $this->config = new Configuration([
         "sheets"    => $yaml["sheets"],
         "postTypes" => $yaml["sheets"],
       ]);
@@ -88,17 +85,6 @@ class Controller extends Repository {
       throw new Exception("Unable to parse config.yaml",
         Exception::CONFIG_FILE_INVALID);
     }
-  }
-
-  /**
-   * getConfig
-   *
-   * Returns the config property.
-   *
-   * @return Configuration
-   */
-  public function getConfig (): Configuration {
-    return self::$config;
   }
 
   /**
@@ -182,19 +168,19 @@ class Controller extends Repository {
   }
 
   /**
-   * toKabobCase
+   * toKebabCase
    *
-   * Takes a StudlyCaps string and returns it in kabob-case.
+   * Takes a StudlyCaps string and returns it in kebab-case.
    *
    * @param string $studlyString
    *
    * @return string
    */
-  public static function toKabobCase (string $studlyString): string {
+  public static function toKebabCase (string $studlyString): string {
 
     // we add a dash between lower-to-capital patterns using preg_replace()
     // and then lower case the resulting string to take StudlyCaps and return
-    // kabob-case.
+    // kebab-case.
 
     return strtolower(preg_replace("/([a-z])([A-Z])/", '%1-%2', $studlyString));
   }
