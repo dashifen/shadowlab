@@ -9,7 +9,7 @@
           {{ item.label }}
         </a>
         <ul v-if="item.submenu.length > 0" class="submenu">
-          <li v-for="submenuItem in item.submenu" :class="submenuItem.classes">
+          <li v-for="submenuItem in item.submenu" :class="submenuItem.classes" @click.prevent="openCheatSheet(submenuItem.url)">
             <a :href="submenuItem.url" v-text="submenuItem.label"></a>
           </li>
         </ul>
@@ -51,6 +51,10 @@
 
       getIcon(i) {
         return this.clicked === i ? "minus-square" : "plus-square";
+      },
+
+      openCheatSheet(url) {
+        window.location.href = url;
       }
     }
   };

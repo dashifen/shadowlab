@@ -2,10 +2,22 @@
   <profile version="1.0">
     <option name="myName" value="Project Default" />
     <inspection_tool class="ES6CheckImport" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
+    <inspection_tool class="HtmlUnknownAttribute" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="myValues">
+        <value>
+          <list size="3">
+            <item index="0" class="java.lang.String" itemvalue="entry-classes" />
+            <item index="1" class="java.lang.String" itemvalue="classes" />
+            <item index="2" class="java.lang.String" itemvalue="entry" />
+          </list>
+        </value>
+      </option>
+      <option name="myCustomValuesEnabled" value="true" />
+    </inspection_tool>
     <inspection_tool class="HtmlUnknownTag" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="myValues">
         <value>
-          <list size="11">
+          <list size="12">
             <item index="0" class="java.lang.String" itemvalue="nobr" />
             <item index="1" class="java.lang.String" itemvalue="noembed" />
             <item index="2" class="java.lang.String" itemvalue="comment" />
@@ -17,6 +29,7 @@
             <item index="8" class="java.lang.String" itemvalue="menu-toggle" />
             <item index="9" class="java.lang.String" itemvalue="site-navigation" />
             <item index="10" class="java.lang.String" itemvalue="cheat-sheet" />
+            <item index="11" class="java.lang.String" itemvalue="page-reference" />
           </list>
         </value>
       </option>

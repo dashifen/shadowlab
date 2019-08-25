@@ -128,7 +128,7 @@ class Theme extends AbstractThemeHandler {
       // and passes the address of the current page over to that one so we can
       // be brought back here after authentication.
 
-      wp_safe_redirect(wp_login_url(get_permalink()));
+      wp_safe_redirect(wp_login_url(home_url()));
     }
   }
 }

@@ -267,11 +267,6 @@ tbody:not(.clicked) tr.body-row {
   display: none;
 }
 
-.reference {
-  margin-bottom: 0;
-  text-align: right;
-}
-
 #footer {
   font-size: 90%;
   margin-top: 5rem;

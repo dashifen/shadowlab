@@ -2,9 +2,11 @@
 
 {% block content %}
   <header><h1 id="entry-title">{{ page.plural }}</h1></header>
+
+  {{ page.searchbar }}
+
   <cheat-sheet type="{{ page.singular }}"
                headers-json='{{ page.headers | json_encode }}'
-               entries-json='{{ page.entries | json_encode }}'
-               searchbar='page.searchbar'>
+               entries-json='{{ page.entries | json_encode }}'>
   </cheat-sheet>
 {% endblock %}
