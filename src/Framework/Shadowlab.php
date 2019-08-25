@@ -9,7 +9,6 @@ use League\Container\ReflectionContainer;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Shadowlab\Framework\Hooks\ShadowlabHookFactory;
 use Dashifen\WPTemplates\Templates\TemplateInterface;
-use Shadowlab\Framework\Theme\AbstractShadowlabTemplate;
 use Shadowlab\Framework\Services\ShadowlabServiceFactory;
 
 class Shadowlab {
@@ -75,13 +74,16 @@ class Shadowlab {
     self::$container->share(Controller::class);
     self::$container->share(ShadowlabHookFactory::class);
     self::$container->share(ShadowlabServiceFactory::class);
+    self::$container->share(Theme::class)->addArguments([
+        ShadowlabHookFactory::class,
+        Controller::class,
+      ]);
 
-    self::$container->share(Theme::class)
-      ->addArgument(ShadowlabHookFactory::class);
-
-    self::$container->share(CheatSheetsPlugin::class)
-      ->addArgument(ShadowlabHookFactory::class)
-      ->addArgument(ShadowlabServiceFactory::class);
+    self::$container->share(CheatSheetsPlugin::class)->addArguments([
+      ShadowlabHookFactory::class,
+      ShadowlabServiceFactory::class,
+      Controller::class,
+    ]);
 
     // our Router actually needs a reference to this object; that's because
     // it needs to know how to construct the various templates within this
@@ -89,8 +91,7 @@ class Shadowlab {
     // method.  so, we'll add this object as an argument to the Router as
     // follows.
 
-    self::$container->share(Router::class)
-      ->addArgument($this);
+    self::$container->share(Router::class)->addArgument($this);
   }
 
   /**
