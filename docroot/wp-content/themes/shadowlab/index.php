@@ -4,7 +4,6 @@ use Dashifen\Exception\Exception;
 use Shadowlab\Framework\Shadowlab;
 
 try {
-  $shadowlab->debug($_SERVER, true);
 
   // first we instantiate our Controller.  this allows us to instantiate the
   // Router.  with the Router we can get a Template that we use to show the

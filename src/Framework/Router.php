@@ -32,7 +32,7 @@ class Router {
    * @return TemplateInterface
    */
   public function getTemplate (): TemplateInterface {
-    $route = $_SERVER["PHP_SELF"];
+    $route = $_SERVER["REQUEST_URI"];
 
     if ($route === "/") {
 
