@@ -1,11 +1,10 @@
 <?php
 
-use Shadowlab\Framework\Router;
 use Dashifen\Exception\Exception;
 use Shadowlab\Framework\Shadowlab;
-use Shadowlab\Framework\Controller;
 
 try {
+  $shadowlab->debug($_SERVER, true);
 
   // first we instantiate our Controller.  this allows us to instantiate the
   // Router.  with the Router we can get a Template that we use to show the
@@ -21,5 +20,5 @@ try {
   // now.  this lets us fix things as they happen.  not the best solution for
   // a "real world" project, but good enough for my purposes for now.
 
-  $controller->catcher($e);
+  $shadowlab->catcher($e);
 }
