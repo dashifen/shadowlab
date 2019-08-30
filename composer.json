@@ -66,5 +66,9 @@
         "type:wordpress-plugin"
       ]
     }
+  },
+  "scripts": {
+	"post-install-cmd": "composer dumpautoload --optimize",
+	"post-update-cmd": "composer dumpautoload --optimize"  
   }
 }
