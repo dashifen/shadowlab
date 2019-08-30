@@ -1,34 +1,41 @@
 <template>
-  <table>
-    <thead>
-    <tr>
-      <th scope="col" id="type" v-text="singular"></th>
-      <th scope="col" v-for="(header, i) in headers" class="field" :class="getColumnClass(i)">
-        <header-abbr :header="header"></header-abbr>
-      </th>
-    </tr>
-    </thead>
-    <tbody is="cheat-sheet-entry" v-for="entry in entries" :entry="entry" :column-classes="columnClasses"></tbody>
-  </table>
+  <div class="cheat-sheet">
+    <search-bar :searchbar="searchbar"></search-bar>
+
+    <table>
+      <thead>
+      <tr>
+        <th scope="col" id="type" v-text="type"></th>
+        <th scope="col" v-for="(header, i) in headers" class="field" :class="getColumnClass(i)">
+          <header-abbr :header="header"></header-abbr>
+        </th>
+      </tr>
+      </thead>
+      <tbody is="cheat-sheet-entry" v-for="entry in entries" :entry="entry" :column-classes="columnClasses"></tbody>
+    </table>
+  </div>
 </template>
 
 <script>
   import HeaderAbbr from "./header-abbr.vue";
+  import SearchBar from "./search-bar/search-bar.vue";
   import CheatSheetEntry from "./cheat-sheet-entry.vue";
 
   export default {
     name: "cheat-sheet.vue",
-    components: {HeaderAbbr, CheatSheetEntry},
+    components: {HeaderAbbr, SearchBar, CheatSheetEntry},
     props: [
-      "singular",
+      "type",
       "headersJson",
       "entriesJson",
+      "searchbarJson",
     ],
 
     data: function () {
       return {
         "entries": JSON.parse(this.entriesJson),
         "headers": JSON.parse(this.headersJson),
+        "searchbar": JSON.parse(this.searchbarJson),
       };
     },
 

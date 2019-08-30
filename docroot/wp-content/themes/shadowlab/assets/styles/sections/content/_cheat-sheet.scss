@@ -21,7 +21,7 @@ th, td {
 }
 
 thead th {
-  background-color: $hover;
+  background-color: lighten($hover, 15%);
   border-bottom: 1px solid $black;
   vertical-align: bottom;
 }
@@ -32,4 +32,49 @@ tbody:not(:last-of-type) {
 
 tbody:not(.clicked) tr.body-row {
   display: none;
+}
+
+.search-bar {
+  background-color: #ffe3a8;
+  border: 1px solid $black;
+  padding: rem(5px);
+  margin-bottom: rem(16.2px);
+
+  fieldset {
+    border-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  legend,
+  label strong span {
+    @extend %visually-hidden;
+  }
+
+  ol {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin-right: rem(16.2px);
+  }
+
+  li.reset {
+    flex-grow: 1;
+    text-align: right;
+    margin: 0 0 0 rem(16.2px);
+ }
+
+  input,
+  button,
+  select {
+    font-size: 18px;
+  }
+
+  select {
+    height: 29px;
+  }
 }

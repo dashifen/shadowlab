@@ -3,7 +3,6 @@
 namespace Shadowlab\Framework\Theme;
 
 use Shadowlab\Theme\Theme;
-use Dashifen\Searchbar\Searchbar;
 use Shadowlab\Framework\Exception;
 use Shadowlab\Repositories\CheatSheets\Book;
 use Dashifen\Repository\RepositoryException;
@@ -20,12 +19,11 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
    * AbstractTemplate constructor.
    *
    * @param Theme     $theme
-   * @param Searchbar $searchbar
    * @param bool      $getTimberContext
    */
-  public function __construct (Theme $theme, Searchbar $searchbar, bool $getTimberContext = false) {
+  public function __construct (Theme $theme, bool $getTimberContext = false) {
     $this->postType = $theme->getPostType(get_post_type());
-    parent::__construct($theme, $searchbar, $getTimberContext);
+    parent::__construct($theme, $getTimberContext);
   }
 
   /**
@@ -201,9 +199,9 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
    * @param array $headers
    * @param array $entries
    *
-   * @return string
+   * @return array
    */
-  abstract protected function getSearchbar (array $headers, array $entries): string;
+  abstract protected function getSearchbar (array $headers, array $entries): array;
 
   /**
    * extractBooksFromEntries
@@ -229,10 +227,11 @@ abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
     }
 
     // the above loop doesn't worry about sorting our books.  but, for
-    // our on-screen purposes, we'll want to do so here.  it's better to
-    // sort by the book's title and not the abbreviation.
+    // our on-screen purposes, we'll want to do so here.  while we want to
+    // sort by the book's title, we use asort() so that we keep the
+    // abbreviations, too.
 
-    sort($books);
+    asort($books);
     return $books;
   }
 }

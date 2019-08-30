@@ -58,17 +58,30 @@ class Statuses extends AbstractCheatSheet {
    * @param array $headers
    * @param array $entries
    *
-   * @return string
+   * @return array
    */
-  protected function getSearchbar (array $headers, array $entries): string {
+  protected function getSearchbar (array $headers, array $entries): array {
 
     // the sheet for statuses only needs the item and book filters.  this means
     // that in this case we do not actually need our headers, only the book
     // data in our entries.
 
-    $this->searchbar->addSearch("Status", "status");
-    $this->searchbar->addFilter("Book", "book", $this->extractBooksFromEntries($entries));
-    $this->searchbar->addReset("Reset");
-    return $this->searchbar->getBar();
+    return [
+      [
+        "type"   => "search",
+        "name"   => "status",
+        "label"  => "Status",
+        "plural" => "Statuses",
+      ], [
+        "type"    => "filter",
+        "name"    => "book",
+        "label"   => "Book",
+        "plural"  => "Books",
+        "options" => $this->extractBooksFromEntries($entries)
+      ], [
+        "type"  => "reset",
+        "label" => "Reset",
+      ]
+    ];
   }
 }

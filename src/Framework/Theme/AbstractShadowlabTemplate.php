@@ -3,7 +3,6 @@
 namespace Shadowlab\Framework\Theme;
 
 use Shadowlab\Theme\Theme;
-use Dashifen\Searchbar\Searchbar;
 use Dashifen\WPTemplates\PostException;
 use Shadowlab\Repositories\Theme\MenuItem;
 use Dashifen\Repository\RepositoryException;
@@ -18,11 +17,6 @@ abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
   protected $theme;
 
   /**
-   * @var Searchbar
-   */
-  protected $searchbar;
-
-  /**
    * @var string
    */
   protected $template;
@@ -31,12 +25,10 @@ abstract class AbstractShadowlabTemplate extends AbstractTimberTemplate {
    * AbstractTemplate constructor.
    *
    * @param Theme     $theme
-   * @param Searchbar $searchbar
    * @param bool      $getTimberContext
    */
-  public function __construct (Theme $theme, Searchbar $searchbar, bool $getTimberContext = false) {
+  public function __construct (Theme $theme, bool $getTimberContext = false) {
     $this->theme = $theme;
-    $this->searchbar = $searchbar;
     parent::__construct($getTimberContext);
     $this->assignTemplate();
   }

@@ -6,7 +6,8 @@
 /_______  /|___|  (____  /\____ |\____/ \/\_/ |____(____  /___  /
         \/      \/     \/      \/                       \/    \/
 */
-.visually-hidden, .screen-reader-text {
+.visually-hidden, .search-bar legend,
+.search-bar label strong span, .screen-reader-text {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -206,28 +207,28 @@ svg {
   font-weight: normal;
 }
 
-.cheat-sheet {
+.home .cheat-sheet {
   display: flex;
   margin-left: 125px;
   position: relative;
 }
 
-.cheat-sheet .cheat-sheet-title {
+.home .cheat-sheet .cheat-sheet-title {
   left: -125px;
   position: absolute;
   text-align: right;
   width: 125px;
 }
 
-.cheat-sheet .cheat-sheet-title h2 {
+.home .cheat-sheet .cheat-sheet-title h2 {
   margin: 0;
 }
 
-.cheat-sheet .cheat-sheet-title h2::after {
+.home .cheat-sheet .cheat-sheet-title h2::after {
   content: ":";
 }
 
-.cheat-sheet .cheat-sheet-entry-type {
+.home .cheat-sheet .cheat-sheet-entry-type {
   margin-top: 0.5rem;
 }
 
@@ -254,7 +255,7 @@ th.field-numeric, td.field-numeric {
 }
 
 thead th {
-  background-color: #5ac6d1;
+  background-color: #96dbe2;
   border-bottom: 1px solid #121212;
   vertical-align: bottom;
 }
@@ -265,6 +266,46 @@ tbody:not(:last-of-type) {
 
 tbody:not(.clicked) tr.body-row {
   display: none;
+}
+
+.search-bar {
+  background-color: #ffe3a8;
+  border: 1px solid #121212;
+  padding: 0.3125rem;
+  margin-bottom: 1.0125rem;
+}
+
+.search-bar fieldset {
+  border-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-bar ol {
+  display: flex;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-bar li {
+  margin-right: 1.0125rem;
+}
+
+.search-bar li.reset {
+  flex-grow: 1;
+  text-align: right;
+  margin: 0 0 0 1.0125rem;
+}
+
+.search-bar input,
+.search-bar button,
+.search-bar select {
+  font-size: 18px;
+}
+
+.search-bar select {
+  height: 29px;
 }
 
 #footer {

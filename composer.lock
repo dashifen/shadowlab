@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32bce2e704c18126ad152a4d9152bafd",
+    "content-hash": "8499181ea2bc46f6e5f25526224e4921",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -217,45 +217,6 @@
             ],
             "description": "An object with read-only protected properties from which other objects can be extened.",
             "time": "2019-07-04T15:30:09+00:00"
-        },
-        {
-            "name": "dashifen/searchbar",
-            "version": "1.4.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dashifen/searchbar.git",
-                "reference": "3a0451f42a836823bf26439eea110be8836ff7f3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/searchbar/zipball/3a0451f42a836823bf26439eea110be8836ff7f3",
-                "reference": "3a0451f42a836823bf26439eea110be8836ff7f3",
-                "shasum": ""
-            },
-            "require": {
-                "dashifen/exception": "1.1.*",
-                "php": "7.3.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Dashifen\\Searchbar\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David Dashifen Kees",
-                    "role": "developer",
-                    "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com"
-                }
-            ],
-            "description": "a class which produces a search bar to search within on-screen data",
-            "time": "2019-08-11T15:38:11+00:00"
         },
         {
             "name": "dashifen/wp-handler",
