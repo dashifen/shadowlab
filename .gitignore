@@ -91,45 +91,18 @@ ehthumbs_vista.db
 # Folder config file
 Desktop.ini
 
-### Composer template
-/vendor
-
 *test*
 /.npmrc
 
 ### WordPress Stuff
 
-# first, we ignore the stuff at the root of our wordpress installation
+/wordpress
 
-docroot/*.php
-docroot/license.txt
-docroot/readme.html
+### Vendor Stuff
 
-# then, we can ignore sub-folders of our wordpress root that are not
-# ours.
-
-wp-admin
-wp-includes
-upgrade
-uploads
-advanced-custom-fields-pro
-custom-post-type-ui
-timber-library
-
-# finally, there are three index.php files that the above rules don't
-# catch that are a part of wordpress core.  we'll block those explicitly
-# now
-
-docroot/wp-content/index.php
-docroot/wp-content/plugins/index.php
-docroot/wp-content/themes/index.php
+/vendor
 
 # laravel valet makes .rnd files in its root folders.  that doesn't need
 # to go to the repo.
 
 .rnd
-
-# finally, we don't want to store any credentials in the repo.  they might
-# be different from install-to-install anyway.
-
-src/Config/Credentials/*
