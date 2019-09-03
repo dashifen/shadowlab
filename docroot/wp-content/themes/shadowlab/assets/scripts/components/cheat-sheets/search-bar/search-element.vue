@@ -14,7 +14,11 @@
 
     methods: {
       onChange(event) {
-
+        this.$store.commit("updateQuery", {
+          type: this.element.type,
+          name: this.element.name,
+          value: event.target.value,
+        });
       }
     }
   };

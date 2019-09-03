@@ -16,8 +16,12 @@
     props: ["element"],
 
     methods: {
-      onChange(event) {
-
+      onChange (event) {
+        this.$store.commit("updateQuery", {
+          type: this.element.type,
+          name: this.element.name,
+          value: event.target.options[event.target.selectedIndex].value,
+        });
       }
     }
   };
