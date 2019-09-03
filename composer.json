@@ -55,6 +55,7 @@
     "dashifen/repository": "1.0.*",
     "dashifen/wp-handler": "^4.0",
     "dashifen/wp-templates": "^1.0",
+    "icanboogie/inflector": "^1.5",
     "league/container": "^3.3.",
     "symfony/yaml": "^4.3",
     "wpackagist-plugin/timber-library": "^1.10"

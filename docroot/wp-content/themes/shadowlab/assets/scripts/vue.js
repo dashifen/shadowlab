@@ -1,11 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+// rather than use up the time to download the full CSS for font awesome,
+// we're using the Vue component and their library to load the specific icons
+// we need and only those.  this does inflate our JS a bit, but our it keeps
+// us from downloading scads of CSS so we're probably coming out ahead this
+// way.
+
 import {library} from "@fortawesome/fontawesome-svg-core";
-import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import {faWordpress} from "@fortawesome/free-brands-svg-icons";
 import {faCopyright} from "@fortawesome/pro-regular-svg-icons/faCopyright";
 
+// now we import the Vue components, including font awesome's, that we use
+// in our application.  this are added as components to the Vue instance we
+// construct at the bottom of this file.
+
+import {FontAwesomeIcon} from "@fortawesome/vue-fontawesome";
 import SiteNavigation from "./components/site-navigation/site-navigation.vue";
 import CheatSheet from "./components/cheat-sheets/cheat-sheet.vue";
 
@@ -16,10 +26,15 @@ export default {
   initialize () {
     library.add(faWordpress, faCopyright);
 
+    // the primary purpose of this initialize() script is to construct the Vuex
+    // store object that we can use to track the state of our Vue components
+    // and how they interact.  for example, the current state of the menu,
+    // i.e. opened or closed, is stored within.
+
     const store = new Vuex.Store({
       state: {
-        "menuOpen": false,
-        "query": [],
+        "menuOpen": false,        // the menu's current state
+        "query": [],              // a search bar query
       },
 
       getters: {

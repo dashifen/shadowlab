@@ -1,4 +1,4 @@
-import VueApp from "./VueApp.js";
+import VueApp from "./vue.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   Dashifen.initialize();

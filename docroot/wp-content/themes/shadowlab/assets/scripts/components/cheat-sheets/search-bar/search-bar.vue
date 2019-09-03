@@ -21,11 +21,7 @@
   export default {
     name: "search-bar",
     props: ["searchbar"],
-    components: {
-      FilterElement,
-      SearchElement,
-      ResetElement
-    },
+    components: {FilterElement, SearchElement, ResetElement},
 
     methods: {
       onSubmit () {

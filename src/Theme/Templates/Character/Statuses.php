@@ -2,7 +2,11 @@
 
 namespace Shadowlab\Theme\Templates\Character;
 
+use Dashifen\Repository\RepositoryException;
 use Shadowlab\Framework\Theme\AbstractCheatSheet;
+use Shadowlab\Repositories\SearchBarElements\ResetElement;
+use Shadowlab\Repositories\SearchBarElements\SearchElement;
+use Shadowlab\Repositories\SearchBarElements\FilterElement;
 
 class Statuses extends AbstractCheatSheet {
   /**
@@ -59,29 +63,18 @@ class Statuses extends AbstractCheatSheet {
    * @param array $entries
    *
    * @return array
+   * @throws RepositoryException
    */
   protected function getSearchbar (array $headers, array $entries): array {
 
-    // the sheet for statuses only needs the item and book filters.  this means
-    // that in this case we do not actually need our headers, only the book
-    // data in our entries.
+    // the sheet for statuses only needs the entry title and book filters.
+    // this means that in this case we do not actually need our headers, only
+    // the book data in our entries.
 
     return [
-      [
-        "type"   => "search",
-        "name"   => "status",
-        "label"  => "Status",
-        "plural" => "Statuses",
-      ], [
-        "type"    => "filter",
-        "name"    => "book",
-        "label"   => "Book",
-        "plural"  => "Books",
-        "options" => $this->extractBooksFromEntries($entries)
-      ], [
-        "type"  => "reset",
-        "label" => "Reset",
-      ]
+      new SearchElement("title", "Status"),
+      new FilterElement("book", "Book", $this->extractBooksFromEntries($entries)),
+      new ResetElement("Reset"),
     ];
   }
 }
