@@ -94,6 +94,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
       // already occurred at this point.  using 5 means that service should be
       // fine as long as we don't use priorities less than 6 within them.
 
+      $this->addAction("init", "forceSSL", 1);
       $this->addAction("init", "initializeServices", 5);
       $this->addAction("init", "flush", 20);
 
@@ -107,21 +108,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
           $this->addAction("save_post_" . $postType->type, "addEntryToSheet");
         }
       }
-    }
-  }
-
-  /**
-   * initializeServices
-   *
-   * Uses the ShadowlabServiceFactory object to initialize services.
-   *
-   * @return void
-   * @throws RepositoryException
-   * @throws Exception
-   */
-  protected function initializeServices () {
-    foreach ($this->serviceFactory->getServices($this) as $service) {
-      $service->initialize();
     }
   }
 
@@ -173,6 +159,36 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    */
   private function updateSheet (CheatSheet $sheet): void {
     update_post_meta($sheet->sheetId, "_entries", $sheet->entries);
+  }
+
+  /**
+   * forceSSL
+   *
+   * If we're not using SSL, here we start doing so.
+   *
+   * @return void
+   */
+  protected function forceSSL (): void {
+    if ($_SERVER["HTTPS"] !== "on") {
+      $secure = "https://" . $_SERVER["SERVER_NAME"] . "/" . $_SERVER["REQUEST_URI"];
+      wp_safe_redirect($secure);
+      die();
+    }
+  }
+
+  /**
+   * initializeServices
+   *
+   * Uses the ShadowlabServiceFactory object to initialize services.
+   *
+   * @return void
+   * @throws RepositoryException
+   * @throws Exception
+   */
+  protected function initializeServices () {
+    foreach ($this->serviceFactory->getServices($this) as $service) {
+      $service->initialize();
+    }
   }
 
   /**
