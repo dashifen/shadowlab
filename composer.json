@@ -30,7 +30,7 @@
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.8.3",
+        "version": "5.8.4",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -51,7 +51,7 @@
   "_comment": "ACF's version below means nothing; the version above is installed",
   "require": {
     "php": "^7.3",
-    "advanced-custom-fields/advanced-custom-fields-pro": "5.8.*",
+    "advanced-custom-fields/advanced-custom-fields-pro": "5.8.4",
     "dashifen/repository": "1.0.*",
     "dashifen/wp-handler": "^4.0",
     "dashifen/wp-templates": "^1.0",
@@ -68,7 +68,7 @@
     }
   },
   "scripts": {
-	"post-install-cmd": "composer dumpautoload --optimize",
-	"post-update-cmd": "composer dumpautoload --optimize"  
+    "post-install-cmd": "bash ./composer-optimize.sh",
+    "post-update-cmd": "bash ./composer-optimize.sh"
   }
 }
