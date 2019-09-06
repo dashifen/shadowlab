@@ -5,16 +5,21 @@ namespace Shadowlab\CheatSheets\Agents;
 use WP_Admin_Bar;
 use Timber\Timber;
 use Shadowlab\Framework\Controller;
-use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
+use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\WPHandler\Repositories\MenuItem;
 use Dashifen\WPHandler\Repositories\SubmenuItem;
 use Dashifen\WPHandler\Handlers\HandlerException;
 use Shadowlab\Repositories\CheatSheets\CheatSheet;
-use Shadowlab\Framework\Agents\AbstractShadowlabPluginAgent;
-use Dashifen\WPHandler\Hooks\Collection\HookCollectionException;
+use Dashifen\WPHandler\Agents\AbstractPluginAgent;
+use Dashifen\WPHandler\Repositories\MenuItemException;
 
-class MenuModifier extends AbstractShadowlabPluginAgent {
+class MenuModificationAgent extends AbstractPluginAgent {
+  /**
+   * @var CheatSheetsPlugin
+   */
+  protected $handler;
+
   /**
    * __call
    *
@@ -149,9 +154,9 @@ class MenuModifier extends AbstractShadowlabPluginAgent {
    * which provide access to Cheat Sheets and their entries.
    *
    * @return void
+   * @throws HandlerException
    * @throws RepositoryException
-   * @throws HookException
-   * @throws HookCollectionException
+   * @throws MenuItemException
    */
   protected function addCheatSheetMenus (): void {
     $config = $this->handler->getConfiguration();

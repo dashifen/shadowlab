@@ -2,10 +2,16 @@
 
 namespace Shadowlab\CheatSheets\Agents;
 
+use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\WPHandler\Handlers\HandlerException;
-use Shadowlab\Framework\Agents\AbstractShadowlabPluginAgent;
+use Dashifen\WPHandler\Agents\AbstractPluginAgent;
 
-class TypeRegistration extends AbstractShadowlabPluginAgent {
+class TypeRegistrationAgent extends AbstractPluginAgent {
+  /**
+   * @var CheatSheetsPlugin
+   */
+  protected $handler;
+
   /**
    * initialize
    *

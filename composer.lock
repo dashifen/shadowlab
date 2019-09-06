@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a708922ede9085ca0f404bd030e41e55",
+    "content-hash": "68b951ea15453c11253d161bac4556b7",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -171,9 +171,9 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
+                    "role": "developer",
                     "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com",
-                    "role": "developer"
+                    "homepage": "https://dashifen.com"
                 }
             ],
             "description": "a base class for exceptions in Dashifen's other work",
@@ -220,16 +220,16 @@
         },
         {
             "name": "dashifen/wp-handler",
-            "version": "5.0.2",
+            "version": "5.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/wp-handler.git",
-                "reference": "20b0dbc2c635125963238448dd3b469f0dd38815"
+                "reference": "9c46c71aa59638a776ce136288b1c63050e29c35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/20b0dbc2c635125963238448dd3b469f0dd38815",
-                "reference": "20b0dbc2c635125963238448dd3b469f0dd38815",
+                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/9c46c71aa59638a776ce136288b1c63050e29c35",
+                "reference": "9c46c71aa59638a776ce136288b1c63050e29c35",
                 "shasum": ""
             },
             "require": {
@@ -255,7 +255,7 @@
                 }
             ],
             "description": "An object to define handlers for various WordPress action and filter hooks using protected methods. ",
-            "time": "2019-09-06T00:12:05+00:00"
+            "time": "2019-09-06T18:26:00+00:00"
         },
         {
             "name": "dashifen/wp-templates",
@@ -288,8 +288,8 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "role": "developer"
+                    "role": "developer",
+                    "email": "dashifen@dashifen.com"
                 }
             ],
             "description": "A series of objects that encapsulate behaviors for WordPress templates.",

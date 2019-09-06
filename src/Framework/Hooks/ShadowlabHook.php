@@ -4,7 +4,7 @@ namespace Shadowlab\Framework\Hooks;
 
 use Dashifen\WPHandler\Hooks\Hook;
 use Dashifen\WPHandler\Hooks\HookException;
-use Shadowlab\CheatSheets\Agents\MenuModifier;
+use Shadowlab\CheatSheets\Agents\MenuModificationAgent;
 
 class ShadowlabHook extends Hook {
   /**
@@ -29,7 +29,7 @@ class ShadowlabHook extends Hook {
 
       if (
         $e->getCode() === HookException::METHOD_NOT_FOUND &&
-        $this->object instanceof MenuModifier &&
+        $this->object instanceof MenuModificationAgent &&
         substr($method, 0, 4) === "show"
       ) {
         $this->method = $method;

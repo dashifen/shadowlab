@@ -7,10 +7,10 @@ use Shadowlab\Framework\Exception;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Dashifen\WPHandler\Handlers\HandlerException;
+use Dashifen\WPHandler\Agents\AbstractPluginAgent;
 use Shadowlab\Repositories\Framework\ACFDefinition;
-use Shadowlab\Framework\Agents\AbstractShadowlabPluginAgent;
 
-class ACFModifier extends AbstractShadowlabPluginAgent {
+class ACFModificationAgent extends AbstractPluginAgent {
   /**
    * @var CheatSheetsPlugin
    */

@@ -7,10 +7,15 @@ use Shadowlab\Theme\Theme;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
+use Shadowlab\CheatSheets\Agents\ACFModificationAgent;
+use Shadowlab\CheatSheets\Agents\MenuModificationAgent;
+use Shadowlab\CheatSheets\Agents\TypeRegistrationAgent;
 use Shadowlab\Framework\Hooks\ShadowlabHookFactory;
 use Dashifen\WPTemplates\Templates\TemplateInterface;
-use Shadowlab\Framework\Agents\ShadowlabAgentFactory;
+use Shadowlab\Framework\Agents\ShadowlabAgentCollectionFactory;
+use Shadowlab\CheatSheets\Agents\CheatSheetAgentCollectionFactory;
 use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactory;
+use Dashifen\WPHandler\Agents\Collection\Factory\AgentCollectionFactory;
 
 class Shadowlab {
   /**
@@ -74,18 +79,29 @@ class Shadowlab {
 
     self::$container->share(Controller::class);
     self::$container->share(ShadowlabHookFactory::class);
-    self::$container->share(ShadowlabAgentFactory::class);
+    self::$container->share(CheatSheetAgentCollectionFactory::class)
+      ->addMethodCall("registerAgents");
+
+    // our Theme doesn't use Agents at this time.  so, it doesn't need an
+    // AgentCollectionFactory at all.  we can just skip that dependency here
+    // since it's nullable at the level of the AbstractHandler from which
+    // our Theme descends.
+
     self::$container->share(Theme::class)->addArguments([
         ShadowlabHookFactory::class,
         HookCollectionFactory::class,
         Controller::class,
       ]);
 
+    // our CheatSheetPlugin, on the other hand, does use agents and, therefore,
+    // needs an AgentCollectionFactory.  we've extended on for our use here,
+    // and we told our container how to construct it above.
+
     self::$container->share(CheatSheetsPlugin::class)->addArguments([
       ShadowlabHookFactory::class,
       HookCollectionFactory::class,
-      ShadowlabAgentFactory::class,
-      Controller::class,
+      CheatSheetAgentCollectionFactory::class,
+      Controller::class
     ]);
 
     // our Router actually needs a reference to this object; that's because

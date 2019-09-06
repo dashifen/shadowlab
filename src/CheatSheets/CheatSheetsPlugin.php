@@ -8,10 +8,11 @@ use Shadowlab\Traits\ConfigurationTrait;
 use Dashifen\Repository\RepositoryException;
 use Dashifen\WPHandler\Handlers\HandlerException;
 use Shadowlab\Repositories\CheatSheets\CheatSheet;
-use Shadowlab\Framework\Agents\ShadowlabAgentFactory;
+use Shadowlab\Framework\Agents\ShadowlabAgentCollectionFactory;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
 use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactoryInterface;
+use Dashifen\WPHandler\Agents\Collection\Factory\AgentCollectionFactoryInterface;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
   use ConfigurationTrait;
@@ -22,26 +23,20 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
   protected $controller;
 
   /**
-   * @var ShadowlabAgentFactory
-   */
-  protected $serviceFactory;
-
-  /**
    * CheatSheetsPlugin constructor.
    *
-   * @param HookFactoryInterface           $hookFactory
-   * @param HookCollectionFactoryInterface $hookCollectionFactory
-   * @param ShadowlabAgentFactory          $serviceFactory
-   * @param Controller                     $controller
+   * @param HookFactoryInterface            $hookFactory
+   * @param HookCollectionFactoryInterface  $hookCollectionFactory
+   * @param AgentCollectionFactoryInterface $agentCollectionFactory
+   * @param Controller                      $controller
    */
   public function __construct (
     HookFactoryInterface $hookFactory,
     HookCollectionFactoryInterface $hookCollectionFactory,
-    ShadowlabAgentFactory $serviceFactory,
+    AgentCollectionFactoryInterface $agentCollectionFactory,
     Controller $controller
   ) {
-    parent::__construct($hookFactory, $hookCollectionFactory);
-    $this->serviceFactory = $serviceFactory;
+    parent::__construct($hookFactory, $hookCollectionFactory, $agentCollectionFactory);
     $this->controller = $controller;
   }
 
@@ -88,18 +83,18 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    */
   public function initialize (): void {
     if (!$this->isInitialized()) {
-      $this->addAction("admin_init", "createSheets");
-
-      // we initialize our services at priority level five here so that they
-      // can use the default of ten and know that their priority level in the
-      // queue has not yet happened.  i.e., if a service X needs to hook
-      // something to priority 10, it's possible that some actions at 10 have
-      // already occurred at this point.  using 5 means that service should be
-      // fine as long as we don't use priorities less than 6 within them.
-
       $this->addAction("init", "forceSSL", 1);
-      $this->addAction("init", "initializeServices", 5);
+
+      // the initializeAgents method is defined by our parent.  doesn't mean
+      // we can't use it here as a callback though!  we run it at 5 so that the
+      // Agents it initializes can use the default priority of 10 knowing that
+      // it hasn't happened yet.  then we flush since those Agents might have
+      // messed with the permalinks (hint:  they definitely do).
+
+      $this->addAction("init", "initializeAgents", 5);
       $this->addAction("init", "flush", 20);
+
+      $this->addAction("admin_init", "createSheets");
 
       // whenever one of our types is saved, not counting the sheets themselves,
       // we want to link the entry we just made to the sheet on which it should
@@ -176,21 +171,6 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
       $secure = "https://" . $_SERVER["SERVER_NAME"] . "/" . $_SERVER["REQUEST_URI"];
       wp_safe_redirect($secure);
       die();
-    }
-  }
-
-  /**
-   * initializeServices
-   *
-   * Uses the ShadowlabServiceFactory object to initialize services.
-   *
-   * @return void
-   * @throws RepositoryException
-   * @throws Exception
-   */
-  protected function initializeServices () {
-    foreach ($this->serviceFactory->getServices($this) as $service) {
-      $service->initialize();
     }
   }
 
