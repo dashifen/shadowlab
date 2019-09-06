@@ -1,16 +1,16 @@
 <?php
 
-namespace Shadowlab\CheatSheets\Services;
+namespace Shadowlab\CheatSheets\Agents;
 
 use DirectoryIterator;
 use Shadowlab\Framework\Exception;
-use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
+use Dashifen\WPHandler\Handlers\HandlerException;
 use Shadowlab\Repositories\Framework\ACFDefinition;
-use Shadowlab\Framework\Services\AbstractShadowlabPluginService;
+use Shadowlab\Framework\Agents\AbstractShadowlabPluginAgent;
 
-class ACFModifier extends AbstractShadowlabPluginService {
+class ACFModifier extends AbstractShadowlabPluginAgent {
   /**
    * @var CheatSheetsPlugin
    */
@@ -42,7 +42,7 @@ class ACFModifier extends AbstractShadowlabPluginService {
    * of this object's child which are intended to be protected.
    *
    * @return void
-   * @throws HookException
+   * @throws HandlerException
    */
   public function initialize (): void {
     if (!$this->isInitialized()) {
@@ -51,11 +51,6 @@ class ACFModifier extends AbstractShadowlabPluginService {
       // (re)import field groups to be sure that this installation is up to
       // date.  since Dash is likely the only admin, this should only fire
       // when it's them logging in.
-
-
-      /*if (in_array("administrator", wp_get_current_user()->roles)) {
-        $this->addAction("admin_init", "importFieldGroups");
-      }*/
 
       $this->addAction("save_post_acf-field-group", "exportCustomFieldGroups", 1000);
     }

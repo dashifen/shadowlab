@@ -53,7 +53,7 @@
     "php": "^7.3",
     "advanced-custom-fields/advanced-custom-fields-pro": "5.8.4",
     "dashifen/repository": "1.0.*",
-    "dashifen/wp-handler": "^4.0",
+    "dashifen/wp-handler": "^5.0",
     "dashifen/wp-templates": "^1.0",
     "icanboogie/inflector": "^1.5",
     "league/container": "^3.3.",

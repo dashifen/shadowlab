@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72ba468981a891d07830c9909a940664",
+    "content-hash": "a708922ede9085ca0f404bd030e41e55",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -220,16 +220,16 @@
         },
         {
             "name": "dashifen/wp-handler",
-            "version": "4.1.0",
+            "version": "5.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/wp-handler.git",
-                "reference": "0bf3c33c65f348420ce78216a12d870d34888223"
+                "reference": "20b0dbc2c635125963238448dd3b469f0dd38815"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/0bf3c33c65f348420ce78216a12d870d34888223",
-                "reference": "0bf3c33c65f348420ce78216a12d870d34888223",
+                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/20b0dbc2c635125963238448dd3b469f0dd38815",
+                "reference": "20b0dbc2c635125963238448dd3b469f0dd38815",
                 "shasum": ""
             },
             "require": {
@@ -250,12 +250,12 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "role": "developer",
-                    "email": "dashifen@dashifen.com"
+                    "email": "dashifen@dashifen.com",
+                    "role": "developer"
                 }
             ],
             "description": "An object to define handlers for various WordPress action and filter hooks using protected methods. ",
-            "time": "2019-07-27T16:59:30+00:00"
+            "time": "2019-09-06T00:12:05+00:00"
         },
         {
             "name": "dashifen/wp-templates",

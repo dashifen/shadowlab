@@ -5,12 +5,13 @@ namespace Shadowlab\CheatSheets;
 use Shadowlab\Framework\Exception;
 use Shadowlab\Framework\Controller;
 use Shadowlab\Traits\ConfigurationTrait;
-use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\Repository\RepositoryException;
+use Dashifen\WPHandler\Handlers\HandlerException;
 use Shadowlab\Repositories\CheatSheets\CheatSheet;
-use Shadowlab\Framework\Services\ShadowlabServiceFactory;
+use Shadowlab\Framework\Agents\ShadowlabAgentFactory;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
+use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactoryInterface;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
   use ConfigurationTrait;
@@ -21,23 +22,25 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
   protected $controller;
 
   /**
-   * @var ShadowlabServiceFactory
+   * @var ShadowlabAgentFactory
    */
   protected $serviceFactory;
 
   /**
    * CheatSheetsPlugin constructor.
    *
-   * @param HookFactoryInterface    $hookFactory
-   * @param ShadowlabServiceFactory $serviceFactory
-   * @param Controller              $controller
+   * @param HookFactoryInterface           $hookFactory
+   * @param HookCollectionFactoryInterface $hookCollectionFactory
+   * @param ShadowlabAgentFactory          $serviceFactory
+   * @param Controller                     $controller
    */
   public function __construct (
     HookFactoryInterface $hookFactory,
-    ShadowlabServiceFactory $serviceFactory,
+    HookCollectionFactoryInterface $hookCollectionFactory,
+    ShadowlabAgentFactory $serviceFactory,
     Controller $controller
   ) {
-    parent::__construct($hookFactory);
+    parent::__construct($hookFactory, $hookCollectionFactory);
     $this->serviceFactory = $serviceFactory;
     $this->controller = $controller;
   }
@@ -81,7 +84,7 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    * of this object's child which are intended to be protected.
    *
    * @return void
-   * @throws HookException
+   * @throws HandlerException
    */
   public function initialize (): void {
     if (!$this->isInitialized()) {

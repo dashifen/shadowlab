@@ -9,7 +9,8 @@ use League\Container\ReflectionContainer;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
 use Shadowlab\Framework\Hooks\ShadowlabHookFactory;
 use Dashifen\WPTemplates\Templates\TemplateInterface;
-use Shadowlab\Framework\Services\ShadowlabServiceFactory;
+use Shadowlab\Framework\Agents\ShadowlabAgentFactory;
+use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactory;
 
 class Shadowlab {
   /**
@@ -73,15 +74,17 @@ class Shadowlab {
 
     self::$container->share(Controller::class);
     self::$container->share(ShadowlabHookFactory::class);
-    self::$container->share(ShadowlabServiceFactory::class);
+    self::$container->share(ShadowlabAgentFactory::class);
     self::$container->share(Theme::class)->addArguments([
         ShadowlabHookFactory::class,
+        HookCollectionFactory::class,
         Controller::class,
       ]);
 
     self::$container->share(CheatSheetsPlugin::class)->addArguments([
       ShadowlabHookFactory::class,
-      ShadowlabServiceFactory::class,
+      HookCollectionFactory::class,
+      ShadowlabAgentFactory::class,
       Controller::class,
     ]);
 

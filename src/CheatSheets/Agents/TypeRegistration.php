@@ -1,11 +1,11 @@
 <?php
 
-namespace Shadowlab\CheatSheets\Services;
+namespace Shadowlab\CheatSheets\Agents;
 
-use Dashifen\WPHandler\Hooks\HookException;
-use Shadowlab\Framework\Services\AbstractShadowlabPluginService;
+use Dashifen\WPHandler\Handlers\HandlerException;
+use Shadowlab\Framework\Agents\AbstractShadowlabPluginAgent;
 
-class TypeRegistration extends AbstractShadowlabPluginService {
+class TypeRegistration extends AbstractShadowlabPluginAgent {
   /**
    * initialize
    *
@@ -13,7 +13,7 @@ class TypeRegistration extends AbstractShadowlabPluginService {
    * of this object's child which are intended to be protected.
    *
    * @return void
-   * @throws HookException
+   * @throws HandlerException
    */
   public function initialize (): void {
     if (!$this->isInitialized()) {

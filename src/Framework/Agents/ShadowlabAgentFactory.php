@@ -1,20 +1,20 @@
 <?php
 
-namespace Shadowlab\Framework\Services;
+namespace Shadowlab\Framework\Agents;
 
-use Dashifen\Repository\RepositoryException;
-use Shadowlab\CheatSheets\CheatSheetsPlugin;
-use Shadowlab\CheatSheets\Services\ACFModifier;
-use Shadowlab\CheatSheets\Services\MenuModifier;
-use Shadowlab\CheatSheets\Services\TypeRegistration;
 use Shadowlab\Framework\Exception;
+use Shadowlab\CheatSheets\CheatSheetsPlugin;
+use Dashifen\Repository\RepositoryException;
+use Shadowlab\CheatSheets\Agents\ACFModifier;
+use Shadowlab\CheatSheets\Agents\MenuModifier;
+use Shadowlab\CheatSheets\Agents\TypeRegistration;
 
 /**
  * Class ShadowlabServiceFactory
  *
  * @package Shadowlab\CheatSheets\Services\Factory
  */
-class ShadowlabServiceFactory {
+class ShadowlabAgentFactory {
   /**
    * @var CheatSheetsPlugin
    */
@@ -27,7 +27,7 @@ class ShadowlabServiceFactory {
    *
    * @param CheatSheetsPlugin $handler
    *
-   * @return AbstractShadowlabPluginService[]
+   * @return AbstractShadowlabPluginAgent[]
    * @throws RepositoryException
    * @throws Exception
    */

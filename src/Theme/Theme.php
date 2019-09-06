@@ -6,9 +6,10 @@ use Twig_Environment;
 use Twig_SimpleFilter;
 use Shadowlab\Framework\Controller;
 use Shadowlab\Traits\ConfigurationTrait;
-use Dashifen\WPHandler\Hooks\HookException;
+use Dashifen\WPHandler\Handlers\HandlerException;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Themes\AbstractThemeHandler;
+use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactoryInterface;
 
 class Theme extends AbstractThemeHandler {
   use ConfigurationTrait;
@@ -21,11 +22,16 @@ class Theme extends AbstractThemeHandler {
   /**
    * Theme constructor.
    *
-   * @param HookFactoryInterface $hookFactory
-   * @param Controller           $controller
+   * @param HookFactoryInterface           $hookFactory
+   * @param HookCollectionFactoryInterface $hookCollectionFactory
+   * @param Controller                     $controller
    */
-  public function __construct (HookFactoryInterface $hookFactory, Controller $controller) {
-    parent::__construct($hookFactory);
+  public function __construct (
+    HookFactoryInterface $hookFactory,
+    HookCollectionFactoryInterface $hookCollectionFactory,
+    Controller $controller
+  ) {
+    parent::__construct($hookFactory, $hookCollectionFactory);
     $this->controller = $controller;
   }
 
@@ -46,7 +52,7 @@ class Theme extends AbstractThemeHandler {
    * Hooks methods of this object into the WordPress ecosystem
    *
    * @return void
-   * @throws HookException
+   * @throws HandlerException
    */
   public function initialize (): void {
     if (!$this->isInitialized()) {

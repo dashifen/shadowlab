@@ -1,9 +1,9 @@
 <?php
 
-namespace Shadowlab\Framework\Services;
+namespace Shadowlab\Framework\Agents;
 
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
-use Dashifen\WPHandler\Services\AbstractPluginService;
+use Dashifen\WPHandler\Agents\AbstractPluginAgent;
 
 /**
  * Class AbstractShadowlabPluginService
@@ -15,7 +15,7 @@ use Dashifen\WPHandler\Services\AbstractPluginService;
  *
  * @package Shadowlab\CheatSheets\Services
  */
-abstract class AbstractShadowlabPluginService extends AbstractPluginService {
+abstract class AbstractShadowlabPluginAgent extends AbstractPluginAgent {
   /**
    * @var CheatSheetsPlugin
    */

@@ -4,6 +4,7 @@ namespace Shadowlab\Framework\Hooks;
 
 use Dashifen\WPHandler\Hooks\HookException;
 use Dashifen\WPHandler\Hooks\HookInterface;
+use Dashifen\Repository\RepositoryException;
 use Dashifen\WPHandler\Handlers\HandlerInterface;
 use Dashifen\WPHandler\Hooks\Factory\HookFactory;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
@@ -22,6 +23,7 @@ class ShadowlabHookFactory extends HookFactory implements HookFactoryInterface {
    *
    * @return HookInterface
    * @throws HookException
+   * @throws RepositoryException
    */
   public function produceHook (string $hook, HandlerInterface $object, string $method, int $priority = 10, int $argumentCount = 1): HookInterface {
 

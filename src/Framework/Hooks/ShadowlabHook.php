@@ -4,7 +4,7 @@ namespace Shadowlab\Framework\Hooks;
 
 use Dashifen\WPHandler\Hooks\Hook;
 use Dashifen\WPHandler\Hooks\HookException;
-use Shadowlab\CheatSheets\Services\MenuModifier;
+use Shadowlab\CheatSheets\Agents\MenuModifier;
 
 class ShadowlabHook extends Hook {
   /**
@@ -17,7 +17,7 @@ class ShadowlabHook extends Hook {
    *
    * @throws HookException
    */
-  public function setMethod (string $method) {
+  public function setMethod (string $method): void {
     try {
       parent::setMethod($method);
     } catch (HookException $e) {
