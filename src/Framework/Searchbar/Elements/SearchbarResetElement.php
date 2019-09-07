@@ -1,11 +1,11 @@
 <?php
 
-namespace Shadowlab\Repositories\SearchBarElements;
+namespace Shadowlab\Framework\Searchbar\Elements;
 
 use Dashifen\Repository\Repository;
 use Dashifen\Repository\RepositoryException;
 
-class ResetElement extends Repository {
+class SearchbarResetElement extends Repository implements SearchbarElementInterface {
   /**
    * @var string
    */

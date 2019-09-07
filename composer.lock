@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "68b951ea15453c11253d161bac4556b7",
+    "content-hash": "fa577e7c8060e7f82a47c9b309ae2bb4",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -171,9 +171,9 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "role": "developer",
                     "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com"
+                    "homepage": "https://dashifen.com",
+                    "role": "developer"
                 }
             ],
             "description": "a base class for exceptions in Dashifen's other work",
@@ -288,8 +288,8 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "role": "developer",
-                    "email": "dashifen@dashifen.com"
+                    "email": "dashifen@dashifen.com",
+                    "role": "developer"
                 }
             ],
             "description": "A series of objects that encapsulate behaviors for WordPress templates.",

@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Framework\Theme;
+namespace Shadowlab\Framework\Templates;
 
 use Shadowlab\Theme\Theme;
 use Shadowlab\Framework\Exception;
@@ -8,21 +8,33 @@ use Shadowlab\Repositories\CheatSheets\Book;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\Repositories\CheatSheets\PostType;
 use Shadowlab\Repositories\CheatSheets\CheatSheetEntry;
+use Shadowlab\Framework\Searchbar\Elements\Factory\SearchbarElementFactoryInterface;
 
-abstract class AbstractCheatSheet extends AbstractShadowlabTemplate {
+abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
   /**
    * @var PostType
    */
   protected $postType;
 
   /**
+   * @var SearchbarElementFactoryInterface
+   */
+  protected $searchbarElementFactory;
+
+  /**
    * AbstractTemplate constructor.
    *
-   * @param Theme     $theme
-   * @param bool      $getTimberContext
+   * @param Theme                            $theme
+   * @param SearchbarElementFactoryInterface $searchbarElementFactory
+   * @param bool                             $getTimberContext
    */
-  public function __construct (Theme $theme, bool $getTimberContext = false) {
+  public function __construct (
+    Theme $theme,
+    SearchbarElementFactoryInterface $searchbarElementFactory,
+    bool $getTimberContext = false
+  ) {
     $this->postType = $theme->getPostType(get_post_type());
+    $this->searchbarElementFactory = $searchbarElementFactory;
     parent::__construct($theme, $getTimberContext);
   }
 

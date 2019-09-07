@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Framework\Theme;
+namespace Shadowlab\Framework\Templates;
 
 use Shadowlab\Theme\Theme;
 use Dashifen\WPTemplates\PostException;

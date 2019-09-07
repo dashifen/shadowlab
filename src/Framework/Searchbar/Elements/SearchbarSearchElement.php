@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Repositories\SearchBarElements;
+namespace Shadowlab\Framework\Searchbar\Elements;
 
 use ICanBoogie\Inflector;
 use Dashifen\Repository\Repository;
@@ -15,7 +15,7 @@ use Dashifen\Repository\RepositoryException;
  * @property-read string $plural
  * @package Shadowlab\Repositories\SearchBarElements
  */
-class SearchElement extends Repository {
+class SearchbarSearchElement extends Repository implements SearchbarElementInterface {
   /**
    * @var string
    */

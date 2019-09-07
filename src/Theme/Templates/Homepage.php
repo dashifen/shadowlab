@@ -2,7 +2,7 @@
 
 namespace Shadowlab\Theme\Templates;
 
-use Shadowlab\Framework\Theme\AbstractShadowlabTemplate;
+use Shadowlab\Framework\Templates\AbstractShadowlabTemplate;
 
 class Homepage extends AbstractShadowlabTemplate {
   /**

@@ -2,13 +2,10 @@
 
 namespace Shadowlab\Theme\Templates\Character;
 
-use Dashifen\Repository\RepositoryException;
-use Shadowlab\Framework\Theme\AbstractCheatSheet;
-use Shadowlab\Repositories\SearchBarElements\ResetElement;
-use Shadowlab\Repositories\SearchBarElements\SearchElement;
-use Shadowlab\Repositories\SearchBarElements\FilterElement;
+use Shadowlab\Framework\Templates\AbstractCheatSheetTemplate;
+use Shadowlab\Framework\Searchbar\Elements\Factory\SearchbarElementFactoryException;
 
-class Statuses extends AbstractCheatSheet {
+class Statuses extends AbstractCheatSheetTemplate {
   /**
    * transformContent
    *
@@ -63,7 +60,7 @@ class Statuses extends AbstractCheatSheet {
    * @param array $entries
    *
    * @return array
-   * @throws RepositoryException
+   * @throws SearchbarElementFactoryException
    */
   protected function getSearchbar (array $headers, array $entries): array {
 
@@ -72,9 +69,9 @@ class Statuses extends AbstractCheatSheet {
     // the book data in our entries.
 
     return [
-      new SearchElement("title", "Status"),
-      new FilterElement("book", "Book", $this->extractBooksFromEntries($entries)),
-      new ResetElement("Reset"),
+      $this->searchbarElementFactory->produceSearchElement("title", "Status"),
+      $this->searchbarElementFactory->produceFilterElement("book", "Book", $this->extractBooksFromEntries($entries)),
+      $this->searchbarElementFactory->produceResetElement("Reset"),
     ];
   }
 }

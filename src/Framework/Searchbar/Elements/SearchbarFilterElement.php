@@ -1,6 +1,6 @@
 <?php
 
-namespace Shadowlab\Repositories\SearchBarElements;
+namespace Shadowlab\Framework\Searchbar\Elements;
 
 use Dashifen\Repository\RepositoryException;
 
@@ -10,7 +10,7 @@ use Dashifen\Repository\RepositoryException;
  * @property-read array $options
  * @package Shadowlab\Repositories\SearchBarElements
  */
-class FilterElement extends SearchElement {
+class SearchbarFilterElement extends SearchbarSearchElement implements SearchbarElementInterface {
   /**
    * @var array
    */

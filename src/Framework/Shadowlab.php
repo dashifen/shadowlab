@@ -7,15 +7,10 @@ use Shadowlab\Theme\Theme;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
 use Shadowlab\CheatSheets\CheatSheetsPlugin;
-use Shadowlab\CheatSheets\Agents\ACFModificationAgent;
-use Shadowlab\CheatSheets\Agents\MenuModificationAgent;
-use Shadowlab\CheatSheets\Agents\TypeRegistrationAgent;
 use Shadowlab\Framework\Hooks\ShadowlabHookFactory;
 use Dashifen\WPTemplates\Templates\TemplateInterface;
-use Shadowlab\Framework\Agents\ShadowlabAgentCollectionFactory;
-use Shadowlab\CheatSheets\Agents\CheatSheetAgentCollectionFactory;
 use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactory;
-use Dashifen\WPHandler\Agents\Collection\Factory\AgentCollectionFactory;
+use Shadowlab\CheatSheets\Agents\CollectionFactory\CheatSheetAgentCollectionFactory;
 
 class Shadowlab {
   /**
@@ -88,10 +83,10 @@ class Shadowlab {
     // our Theme descends.
 
     self::$container->share(Theme::class)->addArguments([
-        ShadowlabHookFactory::class,
-        HookCollectionFactory::class,
-        Controller::class,
-      ]);
+      ShadowlabHookFactory::class,
+      HookCollectionFactory::class,
+      Controller::class,
+    ]);
 
     // our CheatSheetPlugin, on the other hand, does use agents and, therefore,
     // needs an AgentCollectionFactory.  we've extended on for our use here,
