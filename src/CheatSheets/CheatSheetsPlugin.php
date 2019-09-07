@@ -10,7 +10,6 @@ use Shadowlab\Repositories\CheatSheets\CheatSheet;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
 use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactoryInterface;
-use Dashifen\WPHandler\Agents\Collection\Factory\AgentCollectionFactoryInterface;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
   use ConfigurationTrait;
@@ -25,16 +24,14 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
    *
    * @param HookFactoryInterface            $hookFactory
    * @param HookCollectionFactoryInterface  $hookCollectionFactory
-   * @param AgentCollectionFactoryInterface $agentCollectionFactory
    * @param Controller                      $controller
    */
   public function __construct (
     HookFactoryInterface $hookFactory,
     HookCollectionFactoryInterface $hookCollectionFactory,
-    AgentCollectionFactoryInterface $agentCollectionFactory,
     Controller $controller
   ) {
-    parent::__construct($hookFactory, $hookCollectionFactory, $agentCollectionFactory);
+    parent::__construct($hookFactory, $hookCollectionFactory);
     $this->controller = $controller;
   }
 

@@ -220,16 +220,16 @@
         },
         {
             "name": "dashifen/wp-handler",
-            "version": "5.1.2",
+            "version": "5.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/wp-handler.git",
-                "reference": "9c46c71aa59638a776ce136288b1c63050e29c35"
+                "reference": "7cb5eff8df4519c27d61ab7a3de80b52fde82220"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/9c46c71aa59638a776ce136288b1c63050e29c35",
-                "reference": "9c46c71aa59638a776ce136288b1c63050e29c35",
+                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/7cb5eff8df4519c27d61ab7a3de80b52fde82220",
+                "reference": "7cb5eff8df4519c27d61ab7a3de80b52fde82220",
                 "shasum": ""
             },
             "require": {
@@ -255,7 +255,7 @@
                 }
             ],
             "description": "An object to define handlers for various WordPress action and filter hooks using protected methods. ",
-            "time": "2019-09-06T18:26:00+00:00"
+            "time": "2019-09-07T11:29:21+00:00"
         },
         {
             "name": "dashifen/wp-templates",

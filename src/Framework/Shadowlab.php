@@ -72,32 +72,30 @@ class Shadowlab {
     // and thus produce different objects rather than being different in and
     // of themselves.
 
-    self::$container->share(Controller::class);
-    self::$container->share(ShadowlabHookFactory::class);
-    self::$container->share(CheatSheetAgentCollectionFactory::class)
-      ->addMethodCall("registerAgents");
-
-    // our Theme doesn't use Agents at this time.  so, it doesn't need an
-    // AgentCollectionFactory at all.  we can just skip that dependency here
-    // since it's nullable at the level of the AbstractHandler from which
-    // our Theme descends.
-
-    self::$container->share(Theme::class)->addArguments([
+    $handlerArguments = [
       ShadowlabHookFactory::class,
       HookCollectionFactory::class,
       Controller::class,
-    ]);
+    ];
 
-    // our CheatSheetPlugin, on the other hand, does use agents and, therefore,
-    // needs an AgentCollectionFactory.  we've extended on for our use here,
-    // and we told our container how to construct it above.
 
-    self::$container->share(CheatSheetsPlugin::class)->addArguments([
-      ShadowlabHookFactory::class,
-      HookCollectionFactory::class,
-      CheatSheetAgentCollectionFactory::class,
-      Controller::class
-    ]);
+    self::$container->share(Controller::class);
+    self::$container->share(ShadowlabHookFactory::class);
+    self::$container->share(Theme::class)->addArguments($handlerArguments);
+
+    // our cheat sheet plugin uses agents, so we'll need to register those
+    // agents and then set the plugin's agent collection property.  we can
+    // handle the registration by making sure that when the cheat sheet
+    // agent collection factory is instantiated that its registerAgents()
+    // method is called.  then, we can tell our DI container to call the
+    // plugin's setAgentCollection() method with such a factory when it's
+    // constructed.
+
+    self::$container->share(CheatSheetAgentCollectionFactory::class)
+      ->addMethodCall("registerAgents");
+
+    self::$container->share(CheatSheetsPlugin::class)->addArguments($handlerArguments)
+      ->addMethodCall("setAgentCollection", [self::$container->get(CheatSheetAgentCollectionFactory::class)]);
 
     // our Router actually needs a reference to this object; that's because
     // it needs to know how to construct the various templates within this
