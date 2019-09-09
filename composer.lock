@@ -171,9 +171,9 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
+                    "role": "developer",
                     "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com",
-                    "role": "developer"
+                    "homepage": "https://dashifen.com"
                 }
             ],
             "description": "a base class for exceptions in Dashifen's other work",
@@ -220,16 +220,16 @@
         },
         {
             "name": "dashifen/wp-handler",
-            "version": "5.1.4",
+            "version": "5.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/wp-handler.git",
-                "reference": "87f700ed9fabbaed077c7cad82783fdbe60f32ee"
+                "reference": "e795583a1a593a8f010b8e9e2e27c0b35d3f3db5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/87f700ed9fabbaed077c7cad82783fdbe60f32ee",
-                "reference": "87f700ed9fabbaed077c7cad82783fdbe60f32ee",
+                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/e795583a1a593a8f010b8e9e2e27c0b35d3f3db5",
+                "reference": "e795583a1a593a8f010b8e9e2e27c0b35d3f3db5",
                 "shasum": ""
             },
             "require": {
@@ -255,7 +255,7 @@
                 }
             ],
             "description": "An object to define handlers for various WordPress action and filter hooks using protected methods. ",
-            "time": "2019-09-09T01:02:54+00:00"
+            "time": "2019-09-09T13:14:27+00:00"
         },
         {
             "name": "dashifen/wp-templates",
@@ -288,8 +288,8 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "role": "developer"
+                    "role": "developer",
+                    "email": "dashifen@dashifen.com"
                 }
             ],
             "description": "A series of objects that encapsulate behaviors for WordPress templates.",

@@ -8,7 +8,7 @@ use Shadowlab\Repositories\CheatSheets\Book;
 use Dashifen\Repository\RepositoryException;
 use Shadowlab\Repositories\CheatSheets\PostType;
 use Shadowlab\Repositories\CheatSheets\CheatSheetEntry;
-use Shadowlab\Framework\Searchbar\Elements\Factory\SearchbarElementFactoryInterface;
+use Shadowlab\Framework\Searchbar\Elements\Factory\SearchbarElementFactory;
 
 abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
   /**
@@ -17,20 +17,20 @@ abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
   protected $postType;
 
   /**
-   * @var SearchbarElementFactoryInterface
+   * @var SearchbarElementFactory
    */
   protected $searchbarElementFactory;
 
   /**
    * AbstractTemplate constructor.
    *
-   * @param Theme                            $theme
-   * @param SearchbarElementFactoryInterface $searchbarElementFactory
-   * @param bool                             $getTimberContext
+   * @param Theme                   $theme
+   * @param SearchbarElementFactory $searchbarElementFactory
+   * @param bool                    $getTimberContext
    */
   public function __construct (
     Theme $theme,
-    SearchbarElementFactoryInterface $searchbarElementFactory,
+    SearchbarElementFactory $searchbarElementFactory,
     bool $getTimberContext = false
   ) {
     $this->postType = $theme->getPostType(get_post_type());
