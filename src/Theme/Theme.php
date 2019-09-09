@@ -7,8 +7,10 @@ use Twig_SimpleFilter;
 use Shadowlab\Framework\Controller;
 use Shadowlab\Traits\ConfigurationTrait;
 use Dashifen\WPHandler\Handlers\HandlerException;
+use Shadowlab\Framework\Hooks\ShadowlabHookFactory;
 use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
 use Dashifen\WPHandler\Handlers\Themes\AbstractThemeHandler;
+use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactory;
 use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactoryInterface;
 
 class Theme extends AbstractThemeHandler {
@@ -22,13 +24,13 @@ class Theme extends AbstractThemeHandler {
   /**
    * Theme constructor.
    *
-   * @param HookFactoryInterface           $hookFactory
-   * @param HookCollectionFactoryInterface $hookCollectionFactory
-   * @param Controller                     $controller
+   * @param ShadowlabHookFactory  $hookFactory
+   * @param HookCollectionFactory $hookCollectionFactory
+   * @param Controller            $controller
    */
   public function __construct (
-    HookFactoryInterface $hookFactory,
-    HookCollectionFactoryInterface $hookCollectionFactory,
+    ShadowlabHookFactory $hookFactory,
+    HookCollectionFactory $hookCollectionFactory,
     Controller $controller
   ) {
     parent::__construct($hookFactory, $hookCollectionFactory);

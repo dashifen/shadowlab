@@ -63,25 +63,8 @@ class Shadowlab {
 
     self::$container = new Container();
     self::$container->delegate(new ReflectionContainer());
-
-    // realistically, using dependency injection here is overkill.  there's
-    // just not that many dependencies, but it's nice to have even our minimal
-    // dependency configuration all in one place.  the following ones can all
-    // be shared resources either because there should be only one of them
-    // (the Controller, Theme, and plugin objects) or because they're Factories
-    // and thus produce different objects rather than being different in and
-    // of themselves.
-
-    $handlerArguments = [
-      ShadowlabHookFactory::class,
-      HookCollectionFactory::class,
-      Controller::class,
-    ];
-
-
     self::$container->share(Controller::class);
-    self::$container->share(ShadowlabHookFactory::class);
-    self::$container->share(Theme::class)->addArguments($handlerArguments);
+    self::$container->share(Theme::class);
 
     // our cheat sheet plugin uses agents, so we'll need to register those
     // agents and then set the plugin's agent collection property.  we can
@@ -91,11 +74,10 @@ class Shadowlab {
     // plugin's setAgentCollection() method with such a factory when it's
     // constructed.
 
-    self::$container->share(CheatSheetAgentCollectionFactory::class)
-      ->addMethodCall("registerAgents");
-
-    self::$container->share(CheatSheetsPlugin::class)->addArguments($handlerArguments)
-      ->addMethodCall("setAgentCollection", [self::$container->get(CheatSheetAgentCollectionFactory::class)]);
+    self::$container->share(CheatSheetAgentCollectionFactory::class)->addMethodCall("registerAgents", [[]]);
+    self::$container->share(CheatSheetsPlugin::class)->addMethodCall("setAgentCollection", [
+      self::$container->get(CheatSheetAgentCollectionFactory::class)
+    ]);
 
     // our Router actually needs a reference to this object; that's because
     // it needs to know how to construct the various templates within this

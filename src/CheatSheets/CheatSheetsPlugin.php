@@ -7,9 +7,9 @@ use Shadowlab\Framework\Controller;
 use Shadowlab\Traits\ConfigurationTrait;
 use Dashifen\WPHandler\Handlers\HandlerException;
 use Shadowlab\Repositories\CheatSheets\CheatSheet;
-use Dashifen\WPHandler\Hooks\Factory\HookFactoryInterface;
+use Shadowlab\Framework\Hooks\ShadowlabHookFactory;
 use Dashifen\WPHandler\Handlers\Plugins\AbstractPluginHandler;
-use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactoryInterface;
+use Dashifen\WPHandler\Hooks\Collection\Factory\HookCollectionFactory;
 
 class CheatSheetsPlugin extends AbstractPluginHandler {
   use ConfigurationTrait;
@@ -22,13 +22,13 @@ class CheatSheetsPlugin extends AbstractPluginHandler {
   /**
    * CheatSheetsPlugin constructor.
    *
-   * @param HookFactoryInterface            $hookFactory
-   * @param HookCollectionFactoryInterface  $hookCollectionFactory
-   * @param Controller                      $controller
+   * @param ShadowlabHookFactory  $hookFactory
+   * @param HookCollectionFactory $hookCollectionFactory
+   * @param Controller            $controller
    */
   public function __construct (
-    HookFactoryInterface $hookFactory,
-    HookCollectionFactoryInterface $hookCollectionFactory,
+    ShadowlabHookFactory $hookFactory,
+    HookCollectionFactory $hookCollectionFactory,
     Controller $controller
   ) {
     parent::__construct($hookFactory, $hookCollectionFactory);

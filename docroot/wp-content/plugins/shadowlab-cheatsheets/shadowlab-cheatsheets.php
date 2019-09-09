@@ -9,6 +9,7 @@ Version: 0.0.3
 
 use Dashifen\Exception\Exception;
 use Shadowlab\Framework\Shadowlab;
+use Dashifen\WPHandler\Handlers\AbstractHandler;
 
 require ABSPATH . "../vendor/autoload.php";
 
@@ -17,5 +18,5 @@ try {
   $cheatSheets = $shadowlab->getCheatSheetsPlugin();
   $cheatSheets->initialize();
 } catch (Exception $e) {
-  $controller->catcher($e);
+  AbstractHandler::debug($e);
 }
