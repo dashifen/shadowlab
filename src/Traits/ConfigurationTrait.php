@@ -91,6 +91,30 @@ trait ConfigurationTrait {
    * @return PostType|null
    */
   public function getPostType(string $postType): ?PostType {
-    return $this->controller->configuration->getPostType($postType);
+    $postTypeObject = $this->controller->configuration->getPostType($postType);
+
+    if (!is_null($postTypeObject)) {
+      return $postTypeObject;
+    }
+
+    // if we couldn't find the object using our parameter, we'll try to do
+    // it the long way.  we're not sure why the parameter started becoming
+    // "post" recently, but until we figure that out, we'll grab the plural
+    // version of the post type off of the request URI and then we can use
+    // that to search.
+
+    $urlParts = array_filter(explode("/", $_SERVER["REQUEST_URI"]));
+    $pluralPostType = array_pop($urlParts);
+
+    foreach ($this->getPostTypes() as $potentialPostType) {
+      if ($pluralPostType === strtolower($potentialPostType->plural)) {
+        return $potentialPostType;
+      }
+    }
+
+    // if we still couldn't find it, we'll return null and hope the calling
+    // scope knows what to do.
+
+    return null;
   }
 }

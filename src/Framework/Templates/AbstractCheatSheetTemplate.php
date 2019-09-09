@@ -27,6 +27,8 @@ abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
    * @param Theme                   $theme
    * @param SearchbarElementFactory $searchbarElementFactory
    * @param bool                    $getTimberContext
+   *
+   * @throws ShadowlabTemplateException
    */
   public function __construct (
     Theme $theme,
@@ -34,6 +36,12 @@ abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
     bool $getTimberContext = false
   ) {
     $this->postType = $theme->getPostType(get_post_type());
+
+    if (is_null($this->postType)) {
+      throw new ShadowlabTemplateException("Unable to identify post type",
+        ShadowlabTemplateException::CANNOT_IDENTIFY_POST_TYPE);
+    }
+
     $this->searchbarElementFactory = $searchbarElementFactory;
     parent::__construct($theme, $getTimberContext);
   }
