@@ -171,9 +171,9 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "role": "developer",
                     "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com"
+                    "homepage": "https://dashifen.com",
+                    "role": "developer"
                 }
             ],
             "description": "a base class for exceptions in Dashifen's other work",
@@ -220,16 +220,16 @@
         },
         {
             "name": "dashifen/wp-handler",
-            "version": "5.1.8",
+            "version": "5.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/wp-handler.git",
-                "reference": "e795583a1a593a8f010b8e9e2e27c0b35d3f3db5"
+                "reference": "79f92f3ac8ecb3e09faffd9f95c52b3ddfa8edc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/e795583a1a593a8f010b8e9e2e27c0b35d3f3db5",
-                "reference": "e795583a1a593a8f010b8e9e2e27c0b35d3f3db5",
+                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/79f92f3ac8ecb3e09faffd9f95c52b3ddfa8edc9",
+                "reference": "79f92f3ac8ecb3e09faffd9f95c52b3ddfa8edc9",
                 "shasum": ""
             },
             "require": {
@@ -255,7 +255,7 @@
                 }
             ],
             "description": "An object to define handlers for various WordPress action and filter hooks using protected methods. ",
-            "time": "2019-09-09T13:14:27+00:00"
+            "time": "2019-09-10T15:47:05+00:00"
         },
         {
             "name": "dashifen/wp-templates",
@@ -288,8 +288,8 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "role": "developer",
-                    "email": "dashifen@dashifen.com"
+                    "email": "dashifen@dashifen.com",
+                    "role": "developer"
                 }
             ],
             "description": "A series of objects that encapsulate behaviors for WordPress templates.",
@@ -686,16 +686,16 @@
         },
         {
             "name": "vlucas/phpdotenv",
-            "version": "v3.5.0",
+            "version": "v3.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vlucas/phpdotenv.git",
-                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222"
+                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
-                "reference": "95cb0fa6c025f7f0db7fc60f81e9fb231eb2d222",
+                "url": "https://api.github.com/repos/vlucas/phpdotenv/zipball/1bdf24f065975594f6a117f0f1f6cabf1333b156",
+                "reference": "1bdf24f065975594f6a117f0f1f6cabf1333b156",
                 "shasum": ""
             },
             "require": {
@@ -704,12 +704,12 @@
                 "symfony/polyfill-ctype": "^1.9"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0"
+                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.5-dev"
+                    "dev-master": "3.6-dev"
                 }
             },
             "autoload": {
@@ -739,19 +739,19 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-08-27T17:00:38+00:00"
+            "time": "2019-09-10T21:37:39+00:00"
         },
         {
             "name": "wpackagist-plugin/timber-library",
-            "version": "1.10.0",
+            "version": "1.11.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/timber-library/",
-                "reference": "tags/1.10.0"
+                "reference": "tags/1.11.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/timber-library.1.10.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/timber-library.1.11.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
