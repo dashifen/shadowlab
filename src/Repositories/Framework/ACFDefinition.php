@@ -33,9 +33,9 @@ class ACFDefinition extends Repository {
    *
    * Sets the title property.
    *
-   * @param string $title
+   * @param string|null $title
    */
-  protected function setTitle (string $title): void {
+  protected function setTitle (?string $title): void {
     $this->title = $title;
   }
 
