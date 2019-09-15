@@ -1,0 +1,73 @@
+{
+    "key": "group_5d7eb0aa1fb5f",
+    "title": "Action",
+    "fields": [
+        {
+            "key": "field_5d7eb0b4c56db",
+            "label": "Action Type",
+            "name": "action_type",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "minor": "Minor Action",
+                "major": "Major Action"
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "array",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_5d7eb105c56dc",
+            "label": "Timing",
+            "name": "action_timing",
+            "type": "select",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "I": "Initiative Action",
+                "A": "Anytime"
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "array",
+            "ajax": 0,
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "action"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+}
