@@ -6,6 +6,9 @@ sheets:
     quality:
       singular: Quality
       plural: Qualities
+    edge-action:
+      singular: Edge Action
+      plural: Edge Actions
     action:
       singular: Action
       plural: Actions
