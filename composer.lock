@@ -171,9 +171,9 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
+                    "role": "developer",
                     "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com",
-                    "role": "developer"
+                    "homepage": "https://dashifen.com"
                 }
             ],
             "description": "a base class for exceptions in Dashifen's other work",
@@ -288,8 +288,8 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "email": "dashifen@dashifen.com",
-                    "role": "developer"
+                    "role": "developer",
+                    "email": "dashifen@dashifen.com"
                 }
             ],
             "description": "A series of objects that encapsulate behaviors for WordPress templates.",

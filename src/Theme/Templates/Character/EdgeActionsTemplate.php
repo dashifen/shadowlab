@@ -70,8 +70,8 @@ class EdgeActionsTemplate extends AbstractCheatSheetTemplate {
 
     return [
       $this->searchbarElementFactory->produceSearchElement("title", "Edge Action"),
-      $this->searchbarElementFactory->produceFilterElement("action_type", "Type", ["boost" => "Boost", "action" => "Action"]),
-      $this->searchbarElementFactory->produceFilterElement("edge_cost", "Cost", ["1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"]),
+      $this->searchbarElementFactory->produceFilterElement("edge_action_type", "Type", ["boost" => "Boost", "action" => "Action"]),
+      $this->searchbarElementFactory->produceFilterElement("cost", "Cost", ["1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"]),
       $this->searchbarElementFactory->produceFilterElement("book", "Book", $this->extractBooksFromEntries($entries)),
       $this->searchbarElementFactory->produceResetElement("Reset"),
     ];
