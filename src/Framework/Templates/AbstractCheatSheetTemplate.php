@@ -2,6 +2,7 @@
 
 namespace Shadowlab\Framework\Templates;
 
+use WP_Post;
 use Shadowlab\Theme\Theme;
 use Shadowlab\Framework\Exception;
 use Shadowlab\Repositories\CheatSheets\Book;
@@ -111,7 +112,13 @@ abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
     $acfObject = json_decode($contents);
 
     foreach ($acfObject->fields as $field) {
-      if ($field->required) {
+
+      // if a field is required and it's not a conditionally displayed based
+      // on the value of another field, then we'll want to display it in our
+      // table.  we skip conditionals, even if they're required, because they
+      // aren't _always_ required.
+
+      if ($field->required && !is_array($field->conditional_login)) {
         $transformedLabel = $this->transformFieldLabel($field->label);
         $headers[$transformedLabel] = $field->name;
       }
@@ -130,7 +137,9 @@ abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
    *
    * @return string
    */
-  abstract protected function transformFieldLabel (string $label): string;
+  protected function transformFieldLabel (string $label): string {
+    return $label;
+  }
 
   /**
    * getEntries
@@ -151,11 +160,12 @@ abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
 
     foreach ($posts as $post) {
       $content = apply_filters("the_content", $post->post_content);
+      $postMeta = get_post_meta($post->ID);
 
       $entries[] = new CheatSheetEntry([
-        "title"       => $post->post_title,
         "url"         => get_permalink($post->ID),
-        "description" => $this->transformContent($content),
+        "title"       => $this->transformTitle($post->post_title, $postMeta),
+        "description" => $this->transformContent($content, $postMeta),
         "fields"      => $this->getFields($headers, $post->ID),
         "book"        => new Book(get_field("book", $post->ID)),
         "page"        => (int) get_field("page", $post->ID),
@@ -166,16 +176,34 @@ abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
   }
 
   /**
+   * transformTitle
+   *
+   * Transforms the title for a CheatSheetEntry based on the post's title
+   * and the post meta for it.
+   *
+   * @param string $title
+   * @param array  $postMeta
+   *
+   * @return string
+   */
+  protected function transformTitle (string $title, array $postMeta): string {
+    return $title;
+  }
+
+  /**
    * transformContent
    *
    * Transforms the content of a post in case there's more to do to it for
    * our sheet than what WordPress can do via the the_content filter.
    *
    * @param string $content
+   * @param array  $postMeta
    *
    * @return string
    */
-  abstract protected function transformContent (string $content): string;
+  protected function transformContent (string $content, array $postMeta): string {
+    return $content;
+  }
 
   /**
    * getFields
@@ -208,7 +236,9 @@ abstract class AbstractCheatSheetTemplate extends AbstractShadowlabTemplate {
    *
    * @return mixed
    */
-  abstract protected function transformFieldValue ($value, string $label);
+  protected function transformFieldValue ($value, string $label) {
+    return $value;
+  }
 
   /**
    * getSearchbar
