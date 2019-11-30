@@ -7,47 +7,27 @@ use Shadowlab\Framework\Searchbar\Elements\Factory\SearchbarElementFactoryExcept
 
 class EdgeActionsTemplate extends AbstractCheatSheetTemplate {
   /**
-   * transformContent
+   * transformTitle
    *
-   * Transforms the content of a post in case there's more to do to it for
-   * our sheet than what WordPress can do via the the_content filter.
+   * Transforms the title for a CheatSheetEntry based on the post's title
+   * and the fields for it.
    *
-   * @param string $content
-   *
-   * @return string
-   */
-  protected function transformContent (string $content): string {
-    return $content;
-  }
-
-  /**
-   * transformFieldLabel
-   *
-   * Transforms the specified label based on the needs of a specific cheat
-   * sheet.
-   *
-   * @param string $label
+   * @param string $title
+   * @param array  $postMeta
    *
    * @return string
    */
-  protected function transformFieldLabel (string $label): string {
-    return $label;
-  }
+  protected function transformTitle (string $title, array $postMeta): string {
 
-  /**
-   * transformFieldValue
-   *
-   * Transforms an ACF field value based on the needs of a specific cheat
-   * sheet.  Since such values are of mixed type, we won't really know what
-   * types are transformed and returned here.
-   *
-   * @param mixed  $value
-   * @param string $label
-   *
-   * @return mixed
-   */
-  protected function transformFieldValue ($value, string $label) {
-    return $value;
+    // for edge actions, if we have an associated action, we want to add that
+    // to our title for the purposes of display.  this allows something like
+    // Knockout Blow (Melee Attack) to be constructed from separate information.
+
+    $associatedAction = $postMeta["associated_action"] ?? "";
+
+    return !empty($associatedAction)
+      ? "$title ($associatedAction)"
+      : $title;
   }
 
   /**
@@ -70,8 +50,8 @@ class EdgeActionsTemplate extends AbstractCheatSheetTemplate {
 
     return [
       $this->searchbarElementFactory->produceSearchElement("title", "Edge Action"),
-      $this->searchbarElementFactory->produceFilterElement("action_type", "Type", ["boost" => "Boost", "action" => "Action"]),
-      $this->searchbarElementFactory->produceFilterElement("edge_cost", "Cost", ["1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"]),
+      $this->searchbarElementFactory->produceFilterElement("edge_action_type", "Type", ["boost" => "Boost", "action" => "Action"]),
+      $this->searchbarElementFactory->produceFilterElement("cost", "Cost", ["1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5"]),
       $this->searchbarElementFactory->produceFilterElement("book", "Book", $this->extractBooksFromEntries($entries)),
       $this->searchbarElementFactory->produceResetElement("Reset"),
     ];

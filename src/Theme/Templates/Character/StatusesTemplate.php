@@ -2,24 +2,11 @@
 
 namespace Shadowlab\Theme\Templates\Character;
 
+use WP_Post;
 use Shadowlab\Framework\Templates\AbstractCheatSheetTemplate;
 use Shadowlab\Framework\Searchbar\Elements\Factory\SearchbarElementFactoryException;
 
 class Statuses extends AbstractCheatSheetTemplate {
-  /**
-   * transformContent
-   *
-   * Transforms the content of a post in case there's more to do to it for
-   * our sheet than what WordPress can do via the the_content filter.
-   *
-   * @param string $content
-   *
-   * @return string
-   */
-  protected function transformContent (string $content): string {
-    return $content;
-  }
-
   /**
    * transformFieldLabel
    *
