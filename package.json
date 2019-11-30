@@ -4,7 +4,7 @@
   "description": "an interface to my private shadowrun sixth edition databases.",
   "author": "David Dashifen Kees <dashifen@dashifen.com>",
   "version": "0.0.3",
-  "license": "The Hippocratic License",
+  "license": "MIT",
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
     "@fortawesome/free-brands-svg-icons": "^5.10.2",

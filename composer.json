@@ -1,5 +1,5 @@
 {
-  "license": "The Hippocratic License",
+  "license": "MIT",
   "version": "0.0.3",
   "name": "dashifen/shadowlab",
   "description": "an interface to my private shadowrun sixth edition databases.",
