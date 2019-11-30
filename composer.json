@@ -50,7 +50,7 @@
   },
   "_comment": "ACF's version below means nothing; the version above is installed",
   "require": {
-    "php": "^7.3",
+    "php": ">=7.3",
     "advanced-custom-fields/advanced-custom-fields-pro": "5.8.4",
     "dashifen/repository": "1.0.*",
     "dashifen/wp-handler": "^5.1",
