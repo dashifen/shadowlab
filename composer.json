@@ -52,13 +52,13 @@
   "require": {
     "php": ">=7.3",
     "advanced-custom-fields/advanced-custom-fields-pro": "5.8.4",
-    "dashifen/repository": "1.0.*",
-    "dashifen/wp-handler": "^5.1",
-    "dashifen/wp-templates": "^1.0",
-    "icanboogie/inflector": "^1.5",
-    "league/container": "^3.3.",
-    "symfony/yaml": "^4.3",
-    "wpackagist-plugin/timber-library": "^1.10"
+    "dashifen/repository": "^1",
+    "dashifen/wp-handler": "^6",
+    "dashifen/wp-templates": "^1",
+    "icanboogie/inflector": "^1",
+    "league/container": "^3.",
+    "symfony/yaml": "^4",
+    "wpackagist-plugin/timber-library": "^1"
   },
   "extra": {
     "installer-paths": {

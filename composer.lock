@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa577e7c8060e7f82a47c9b309ae2bb4",
+    "content-hash": "0b799d6896221bd9111e771a03d49bf3",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -143,20 +143,20 @@
         },
         {
             "name": "dashifen/exception",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/exception.git",
-                "reference": "7e388534a73e8021bf4cc49e8656fa42497da212"
+                "reference": "c900fdd58f4b50562810b9930d1f5c52b64da28b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/exception/zipball/7e388534a73e8021bf4cc49e8656fa42497da212",
-                "reference": "7e388534a73e8021bf4cc49e8656fa42497da212",
+                "url": "https://api.github.com/repos/dashifen/exception/zipball/c900fdd58f4b50562810b9930d1f5c52b64da28b",
+                "reference": "c900fdd58f4b50562810b9930d1f5c52b64da28b",
                 "shasum": ""
             },
             "require": {
-                "php": "7.3.*"
+                "php": ">=7.3"
             },
             "type": "library",
             "autoload": {
@@ -171,32 +171,32 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "role": "developer",
                     "email": "dashifen@dashifen.com",
-                    "homepage": "https://dashifen.com"
+                    "homepage": "https://dashifen.com",
+                    "role": "developer"
                 }
             ],
             "description": "a base class for exceptions in Dashifen's other work",
-            "time": "2019-06-15T02:55:25+00:00"
+            "time": "2019-11-30T20:08:44+00:00"
         },
         {
             "name": "dashifen/repository",
-            "version": "1.0.1",
+            "version": "1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/repository.git",
-                "reference": "30126ddd750a37d99978c6be9ba31869192aa71a"
+                "reference": "5d616ffbe9c6fdfe5bc45838238cf1af8e0e75ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/repository/zipball/30126ddd750a37d99978c6be9ba31869192aa71a",
-                "reference": "30126ddd750a37d99978c6be9ba31869192aa71a",
+                "url": "https://api.github.com/repos/dashifen/repository/zipball/5d616ffbe9c6fdfe5bc45838238cf1af8e0e75ea",
+                "reference": "5d616ffbe9c6fdfe5bc45838238cf1af8e0e75ea",
                 "shasum": ""
             },
             "require": {
-                "dashifen/exception": "1.1.*",
+                "dashifen/exception": "^1",
                 "ext-json": "*",
-                "php": "7.3.*"
+                "php": ">=7.3"
             },
             "type": "library",
             "autoload": {
@@ -216,26 +216,63 @@
                 }
             ],
             "description": "An object with read-only protected properties from which other objects can be extened.",
-            "time": "2019-07-04T15:30:09+00:00"
+            "time": "2019-11-30T20:27:08+00:00"
         },
         {
-            "name": "dashifen/wp-handler",
-            "version": "5.1.9",
+            "name": "dashifen/transformer",
+            "version": "2.0.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/dashifen/wp-handler.git",
-                "reference": "79f92f3ac8ecb3e09faffd9f95c52b3ddfa8edc9"
+                "url": "https://github.com/dashifen/transformer.git",
+                "reference": "b16471137b1d4e22ec97a6b939afb99d0511c3c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/79f92f3ac8ecb3e09faffd9f95c52b3ddfa8edc9",
-                "reference": "79f92f3ac8ecb3e09faffd9f95c52b3ddfa8edc9",
+                "url": "https://api.github.com/repos/dashifen/transformer/zipball/b16471137b1d4e22ec97a6b939afb99d0511c3c7",
+                "reference": "b16471137b1d4e22ec97a6b939afb99d0511c3c7",
                 "shasum": ""
             },
             "require": {
-                "dashifen/exception": "1.1.*",
-                "dashifen/repository": "1.0.*",
-                "php": "^7.2"
+                "php": ">=7.3"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Dashifen\\Transformer\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "David Dashifen Kees",
+                    "email": "dashifen@dashifen.com"
+                }
+            ],
+            "description": "An interface and abstract class useful for the production of objects which transform data.",
+            "time": "2019-11-30T19:46:41+00:00"
+        },
+        {
+            "name": "dashifen/wp-handler",
+            "version": "6.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dashifen/wp-handler.git",
+                "reference": "3f130332082a51a9399d62a258487dfd132f16c6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dashifen/wp-handler/zipball/3f130332082a51a9399d62a258487dfd132f16c6",
+                "reference": "3f130332082a51a9399d62a258487dfd132f16c6",
+                "shasum": ""
+            },
+            "require": {
+                "dashifen/exception": "^1",
+                "dashifen/repository": "^1",
+                "dashifen/transformer": "^2",
+                "php": ">=7.2"
             },
             "type": "project",
             "autoload": {
@@ -255,25 +292,25 @@
                 }
             ],
             "description": "An object to define handlers for various WordPress action and filter hooks using protected methods. ",
-            "time": "2019-09-10T15:47:05+00:00"
+            "time": "2019-11-30T19:45:20+00:00"
         },
         {
             "name": "dashifen/wp-templates",
-            "version": "1.0.1",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dashifen/wp-templates.git",
-                "reference": "958941cc912b277975aad428179c3822eeba37cd"
+                "reference": "e1a2091e55c60194b090eb629268c9560feaae4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dashifen/wp-templates/zipball/958941cc912b277975aad428179c3822eeba37cd",
-                "reference": "958941cc912b277975aad428179c3822eeba37cd",
+                "url": "https://api.github.com/repos/dashifen/wp-templates/zipball/e1a2091e55c60194b090eb629268c9560feaae4e",
+                "reference": "e1a2091e55c60194b090eb629268c9560feaae4e",
                 "shasum": ""
             },
             "require": {
                 "dashifen/exception": "1.1.*",
-                "php": "^7.2"
+                "php": ">=7.2"
             },
             "type": "project",
             "autoload": {
@@ -288,12 +325,12 @@
             "authors": [
                 {
                     "name": "David Dashifen Kees",
-                    "role": "developer",
-                    "email": "dashifen@dashifen.com"
+                    "email": "dashifen@dashifen.com",
+                    "role": "developer"
                 }
             ],
             "description": "A series of objects that encapsulate behaviors for WordPress templates.",
-            "time": "2018-11-22T18:06:50+00:00"
+            "time": "2019-11-30T19:51:41+00:00"
         },
         {
             "name": "ffraenz/private-composer-installer",
@@ -470,43 +507,47 @@
         },
         {
             "name": "phpoption/phpoption",
-            "version": "1.5.0",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/php-option.git",
-                "reference": "94e644f7d2051a5f0fcf77d81605f152eecff0ed"
+                "reference": "f4e7a6a1382183412246f0d361078c29fb85089e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/94e644f7d2051a5f0fcf77d81605f152eecff0ed",
-                "reference": "94e644f7d2051a5f0fcf77d81605f152eecff0ed",
+                "url": "https://api.github.com/repos/schmittjoh/php-option/zipball/f4e7a6a1382183412246f0d361078c29fb85089e",
+                "reference": "f4e7a6a1382183412246f0d361078c29fb85089e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": "^5.5.9 || ^7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.7.*"
+                "phpunit/phpunit": "^4.8.35 || ^5.0 || ^6.0 || ^7.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "PhpOption\\": "src/"
+                "psr-4": {
+                    "PhpOption\\": "src/PhpOption/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "Apache2"
+                "Apache-2.0"
             ],
             "authors": [
                 {
                     "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com"
+                },
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@alt-three.com"
                 }
             ],
             "description": "Option Type for PHP",
@@ -516,7 +557,7 @@
                 "php",
                 "type"
             ],
-            "time": "2015-07-25T16:39:46+00:00"
+            "time": "2019-11-30T20:20:49+00:00"
         },
         {
             "name": "psr/container",
@@ -569,16 +610,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.12.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "550ebaac289296ce228a706d0867afc34687e3f4"
+                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/550ebaac289296ce228a706d0867afc34687e3f4",
-                "reference": "550ebaac289296ce228a706d0867afc34687e3f4",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
+                "reference": "f8f0b461be3385e56d6de3dbb5a0df24c0c275e3",
                 "shasum": ""
             },
             "require": {
@@ -590,7 +631,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -623,20 +664,20 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-08-06T08:03:45+00:00"
+            "time": "2019-11-27T13:56:44+00:00"
         },
         {
             "name": "symfony/yaml",
-            "version": "v4.3.4",
+            "version": "v4.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "5a0b7c32dc3ec56fd4abae8a4a71b0cf05013686"
+                "reference": "76de473358fe802578a415d5bb43c296cf09d211"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/5a0b7c32dc3ec56fd4abae8a4a71b0cf05013686",
-                "reference": "5a0b7c32dc3ec56fd4abae8a4a71b0cf05013686",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/76de473358fe802578a415d5bb43c296cf09d211",
+                "reference": "76de473358fe802578a415d5bb43c296cf09d211",
                 "shasum": ""
             },
             "require": {
@@ -647,7 +688,7 @@
                 "symfony/console": "<3.4"
             },
             "require-dev": {
-                "symfony/console": "~3.4|~4.0"
+                "symfony/console": "^3.4|^4.0|^5.0"
             },
             "suggest": {
                 "symfony/console": "For validating YAML files using the lint command"
@@ -655,7 +696,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "4.3-dev"
+                    "dev-master": "4.4-dev"
                 }
             },
             "autoload": {
@@ -682,7 +723,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2019-08-20T14:27:59+00:00"
+            "time": "2019-11-12T14:51:11+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -743,15 +784,15 @@
         },
         {
             "name": "wpackagist-plugin/timber-library",
-            "version": "1.11.0",
+            "version": "1.13.0",
             "source": {
                 "type": "svn",
                 "url": "https://plugins.svn.wordpress.org/timber-library/",
-                "reference": "tags/1.11.0"
+                "reference": "tags/1.13.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://downloads.wordpress.org/plugin/timber-library.1.11.0.zip"
+                "url": "https://downloads.wordpress.org/plugin/timber-library.1.13.0.zip"
             },
             "require": {
                 "composer/installers": "~1.0"
@@ -767,7 +808,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3"
+        "php": ">=7.3"
     },
     "platform-dev": []
 }
